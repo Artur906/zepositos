@@ -22,6 +22,10 @@ git commit -m "aqui eu descrevo minhas modificações"
 ```bash 
 git push
 ```
+#### atualizando nossa branch local pegando do repositório no github
+```bash 
+git pull
+```
 
 ### MANIPULANDO BRANCHS
 
