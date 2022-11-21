@@ -48,7 +48,7 @@ git checkout -b nome-da-branch
 ```
 
 #### apagando branch 
-esqueci de falar no vídeo mas dá pra apagar as branchs também locais também 
+esqueci de falar no vídeo mas dá pra apagar as branchs locais também 
 ```bash 
 git branch -d nome-da-branch
 ``` 
