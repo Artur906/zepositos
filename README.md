@@ -46,4 +46,9 @@ podemos juntar os ultimos dois comandos em um só, no caso criamos e trocamos de
 ```bash
 git checkout -b nome-da-branch
 ```
-ahoejroiejofijeoijfr
+
+#### apagando branch 
+esqueci de falar no vídeo mas dá pra apagar as branchs também locais também 
+```bash 
+git branch -d nome-da-branch
+``` 
