@@ -1,6 +1,7 @@
 import './style.css'
 import javascriptLogo from './javascript.svg'
 import { setupCounter } from './counter.js'
+import axios from 'axios'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -20,24 +21,46 @@ document.querySelector('#app').innerHTML = `
     <button id="cadastro" rel="stylesheet">Página de cadastro</button>
   </div>
 `
-document.querySelector("#cadastro").addEventListener("click", () => {
+document.querySelector('#cadastro').addEventListener('click', e => {
+  
   document.querySelector('#app').innerHTML = `
   <h1>Cadastro</h1>
   <div>
-      <form action="" id="input-up">
-          <label for="name">Nome do cliente</label>
+      <form>
+          <label for="nome">Nome do cliente</label>
           <br>
-          <input type="text" id="name">
-      </form>
-      <form action="" id="input-down">
-          <label for="name">Telefone</label>
+          <input type="text" name="nome" required />
           <br>
-          <input type="text" id="name">
+          <label for="telefone">Telefone</label>
+          <br>
+          <input type="text" name="telefone" required />
+          <br>
+          <input type="submit" id="btnSalvar" class="btnSalvarGreen" value="SALVAR" />
+          <input type="button" id="btnCancelar" class="btnSalvarGreen" value="Cancelar" />
       </form>
-      <input type="button" id="btnSalvar" class="btnSalvarGreen" value="SALVAR" onclick="salvarForms()" />
-      <input type="button" id="btnCancelar" class="btnSalvarGreen" value="Cancelar" onclick="salvarForms()" />
   </div>
   `
+  document.querySelector('#btnSalvar').addEventListener('click', e => {
+    e.preventDefault()
+  
+    const form = document.querySelector('form')
+    salvarForms(form)
+  })
+
 })
+
+
+const salvarForms = (form) => {
+  const formData = new FormData(form) 
+
+  const dados = {
+    "nome": formData.get('nome'),
+    "telefone": formData.get('telefone')
+  }
+
+  console.log(dados)
+
+  //axios.post('url', dados)
+}
 
 setupCounter(document.querySelector('#counter'))
