@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        h1{
+            text-align: center;
+            width: 312px;
+            height: 47px;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 40px;
+            line-height: 47px;
+        }
+        div{
+            
+            display: grid;
+            grid-template-columns: 20% 20% 20%;
+            grid-template-rows: 20% 20% 20% 20%; 
+            padding: 44px 77px 0px;
+            gap: 36px;
+
+            width: 675px;
+            height: 374px;
+
+            background: #A5A8FF;
+
+        }
+        #input-up {
+            grid-row-start: 1;
+            margin: 10px;
+        }
+        #input-down {
+            grid-row-start: 2;
+            margin: 10px;
+        }
+        #btnSalvar{
+            grid-column-start: 3;
+            grid-row-start: 3;
+        }
+        #btnCancelar{
+            grid-column-start: 4;
+            grid-row-start: 3;
+        }
+        input{
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 11px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro</h1>
+    <div>
+        <form action="" id="input-up">
+            <label for="name">Nome do cliente</label>
+            <br>
+            <input type="text" id="name">
+        </form>
+        <form action="" id="input-down">
+            <label for="name">Telefone</label>
+            <br>
+            <input type="text" id="name">
+        </form>
+        <input type="button" id="btnSalvar" class="btnSalvarGreen" value="SALVAR" onclick="salvarForms()" />
+        <input type="button" id="btnCancelar" class="btnSalvarGreen" value="Cancelar" onclick="salvarForms()" />
+    </div>
+</body>
+</html>
