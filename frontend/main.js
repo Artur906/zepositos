@@ -17,6 +17,7 @@ document.querySelector('#app').innerHTML = `
     <p class="read-the-docs">
       Click on the Vite logo to learn more
     </p>
+    <a rel="stylesheet" href="src/cadastro-cliente.html">Página de cadastro</a>
   </div>
 `
 
