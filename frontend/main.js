@@ -17,8 +17,27 @@ document.querySelector('#app').innerHTML = `
     <p class="read-the-docs">
       Click on the Vite logo to learn more
     </p>
-    <a rel="stylesheet" href="src/cadastro-cliente.html">Página de cadastro</a>
+    <button id="cadastro" rel="stylesheet">Página de cadastro</button>
   </div>
 `
+document.querySelector("#cadastro").addEventListener("click", () => {
+  document.querySelector('#app').innerHTML = `
+  <h1>Cadastro</h1>
+  <div>
+      <form action="" id="input-up">
+          <label for="name">Nome do cliente</label>
+          <br>
+          <input type="text" id="name">
+      </form>
+      <form action="" id="input-down">
+          <label for="name">Telefone</label>
+          <br>
+          <input type="text" id="name">
+      </form>
+      <input type="button" id="btnSalvar" class="btnSalvarGreen" value="SALVAR" onclick="salvarForms()" />
+      <input type="button" id="btnCancelar" class="btnSalvarGreen" value="Cancelar" onclick="salvarForms()" />
+  </div>
+  `
+})
 
 setupCounter(document.querySelector('#counter'))
