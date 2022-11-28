@@ -1,6 +1,4 @@
-# teste
-
-## Alguns comandos do git 
+# Alguns comandos do git 
 
 ### COMANDOS BÁSICOS
 
