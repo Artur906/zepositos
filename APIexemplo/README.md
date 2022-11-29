@@ -39,12 +39,12 @@ Porém recomendo o uso da ferramenta POSTMAN para 'brincar' com a API, pois fica
 Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máquina.
 
 ## 5. Rotas da API
-* [URL]/
+* ### [URL]/
   - Rota principal da API. Retorna a mensagem "bem vindo a API!".
 
 <br>
 
-* [URL]/clientes
+* ### [URL]/clientes
   - **GET**: Retorna TODOS os clientes.
   - **POST**: Deve ser enviado a API um json de um novo cliente a ser ADICIONADO:
     - ```bash 
@@ -56,7 +56,7 @@ Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máq
     
 <br>
 
-* [URL]/clientes/<id>
+* ### [URL]/clientes/[id]
   - **GET**: Retorna o cliente com o id inserido.
   - **PUT**: Deve ser informado na URL o id do cliente a ser ATUALIZADO, como também um json das novas informações deste cliente
     - ```bash 
