@@ -1,4 +1,4 @@
-# Exemplo de API com Python+Flask que conecta-se com Postgres por meio do ORM peewee
+# Exemplo de uma API REST Python com banco PostgreSQL
 
 ### 0. Pré-requisitos:
 * Python instalado na máquina
