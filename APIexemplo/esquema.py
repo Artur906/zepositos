@@ -1,9 +1,5 @@
-
 from postgredb import *
 from peewee import Model, TextField, ForeignKeyField, DateTimeField
-
-
-
 
 class BaseModel(Model):
     class Meta:

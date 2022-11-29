@@ -2,6 +2,8 @@ import './style.css'
 import javascriptLogo from './javascript.svg'
 import { setupCounter } from './counter.js'
 import axios from 'axios'
+import { BASE_URL_API } from './variaveisAmbiente'
+
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -18,7 +20,9 @@ document.querySelector('#app').innerHTML = `
     <p class="read-the-docs">
       Click on the Vite logo to learn more
     </p>
-    <button id="cadastro" rel="stylesheet">Página de cadastro</button>
+    <button id="cadastro">Página de cadastro</button>
+    <button id="req">Requisição com axios</button>
+    
   </div>
 `
 document.querySelector('#cadastro').addEventListener('click', e => {
@@ -62,5 +66,14 @@ const salvarForms = (form) => {
 
   //axios.post('url', dados)
 }
+
+document.querySelector('#req').addEventListener('click', () => {
+  axios.get(`${BASE_URL_API}/clientes`)
+    .then(response => {
+      console.log(response.data)
+    })
+})
+
+
 
 setupCounter(document.querySelector('#counter'))
