@@ -64,7 +64,8 @@ const salvarForms = (form) => {
 
   console.log(dados)
 
-  //axios.post('url', dados)
+  axios.post(`${BASE_URL_API}/clientes`, dados)
+    .then(response => console.log(response.data))
 }
 
 document.querySelector('#req').addEventListener('click', () => {
