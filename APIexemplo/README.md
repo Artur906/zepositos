@@ -9,6 +9,7 @@
   - Peewee (pip install peewee)
   - Psycopg (pip install psycopg2-binary)
   - Flask (pip install flask)
+  - Flask-cors (pip install flask-cors)
 * Postman (opcional)
 
 
@@ -19,7 +20,7 @@ Edite o arquivo postgredb.py , inserindo as informações corretas relativo ao p
 
 ### 2. Deixando o banco de dados pronto para uso:
 Rode o arquivo esquema.py. Este script criará a tabela 'clientes' no seu postgre. Olhe no seu PgAdmim para confirmar que a tabela foi criada.<br>
-Rode o arquivo inserir-dados.py. Este script insere tres clientes an tabela.<br>
+Rode o arquivo inserir-dados.py. Este script insere tres clientes na tabela.<br>
 
 ### 3. Rodando a API:
 Agora chegou a hora de usar o arquivo backendAPI.py para de fato deixar a API funcionando localmente.<br>
