@@ -3,6 +3,7 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 from os import abort
+from flask_cors import CORS
 
 
 '''
@@ -13,9 +14,8 @@ export FLASK_DEBUG=1
 flask run
 '''
 
-
-
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():
