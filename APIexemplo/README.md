@@ -6,10 +6,10 @@
 * PostgreSQL rodando na máquina
 * Uma nova database criada no PGAdmim para o teste
 * Ambiente virtual python (venv) com:
-  - Peewee (pip install peewee)
-  - Psycopg (pip install psycopg2-binary)
-  - Flask (pip install flask)
-  - Flask-cors (pip install flask-cors)
+  - Peewee (`pip install peewee`)
+  - Psycopg (`pip install psycopg2-binary`)
+  - Flask (`pip install flask`)
+  - Flask-cors (`pip install flask-cors`)
 * Postman (opcional)
 
 
@@ -34,9 +34,9 @@ flask run
 Após isso, sua API está rodando! Observe no terminal se de fato tudo ocorreu bem. 
 
 ### 4. Consumindo a API:
-Com a API rodando com sucesso, no terminal voce verá que fora 'printado' uma URL de acesso a API. <br>
-Voce pode acessar-la com um navegador de internet, e verá a mensagem "Bem vindo a API!".<br>
-Porém recomendo o uso da ferramenta POSTMAN para 'brincar' com a API, pois fica mais fácil de realizar todas as operações CRUD.<br>
+Com a API rodando com sucesso, no terminal voce verá que fora _'printado'_ uma URL de acesso a API. <br>
+Voce pode acessar-la com um navegador de internet, e verá a mensagem _"Bem vindo a API!"_.<br>
+Porém recomendo o uso da ferramenta POSTMAN para _'brincar'_ com a API, pois fica mais fácil de realizar todas as operações _CRUD_.<br>
 Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máquina.
 
 ## 5. Rotas da API
