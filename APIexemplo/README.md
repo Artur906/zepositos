@@ -57,7 +57,7 @@ Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máq
 <br>
 
 * ### [URL]/clientes/[id]
-  - **GET**: Retorna o cliente com o id inserido.
+  - **GET**: Retorna o json do cliente dono do id.
   - **PUT**: Deve ser informado na URL o id do cliente a ser ATUALIZADO, como também um json das novas informações deste cliente
     - ```bash 
       {
