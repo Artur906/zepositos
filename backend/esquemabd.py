@@ -1,6 +1,6 @@
 from peewee import Model, TextField,ForeignKeyField, BooleanField, DateField, DecimalField, IntegerField
 from postgredb import *
-from datetime import date
+from datetime import datetime
 
 '''
 CLIENTE(id, nome, telefone)
@@ -26,7 +26,7 @@ class Cliente(BaseModel):
 
 class Embarque(BaseModel):
     id_cliente      = ForeignKeyField(Cliente, backref='embarque')
-    data_chegada    = DateField(default = date.now)
+    data_chegada    = DateField(default = datetime.now)
     com_nota_fiscal = BooleanField(default = False)
     registrado      = BooleanField(default = False)
     pago            = BooleanField(default = False)

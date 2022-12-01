@@ -4,3 +4,5 @@ Scripts/**
 Include/**
 __pycache__/**
 pyvenv.cfg
+
+# Ignorar a configuração do banco de dados postgre, já que cada integrante tem usuario e senha diferentes.

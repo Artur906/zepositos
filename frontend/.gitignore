@@ -25,3 +25,6 @@ dist-ssr
 
 # variaveis de ambiente 
 variaveisAmbiente.js
+
+# package-lock
+package-lock.json
