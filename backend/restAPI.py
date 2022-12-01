@@ -44,3 +44,11 @@ def get_clientes():
         res.status_code = 404
 
     return res
+
+
+#POST
+@app.route('/clientes', methods=['POST'])
+def add_cliente():
+    cliente = Cliente(nome=request.json['nome'], telefone=request.json['telefone'])
+    cliente.save()
+    return {'id':cliente.get_id()}
