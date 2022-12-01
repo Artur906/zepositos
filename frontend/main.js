@@ -1,28 +1,16 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import { setupCounter } from './counter.js'
+import './public/styles/style.css'
 import axios from 'axios'
 import { BASE_URL_API } from './variaveisAmbiente'
 
 
 document.querySelector('#app').innerHTML = `
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
+    <h2> páginas </h2>
+    <a href="src/cadastro-cliente.html">cadastro cliente</a>
+    <a href="src/manipular-cliente.html">manipular cliente</a>
+    <h2> testes </h2>
     <button id="cadastro">Página de cadastro</button>
     <button id="req">Requisição com axios</button>
-    
   </div>
 `
 document.querySelector('#cadastro').addEventListener('click', e => {
@@ -75,6 +63,3 @@ document.querySelector('#req').addEventListener('click', () => {
     })
 })
 
-
-
-setupCounter(document.querySelector('#counter'))
