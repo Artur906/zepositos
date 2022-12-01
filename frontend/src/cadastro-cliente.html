@@ -80,7 +80,7 @@
 
             document.querySelector('#status').innerHTML = "<p>Carregando...</p>"
 
-            axios.post(`${BASE_URL_API}`, data)
+            axios.post(`${BASE_URL_API}/clientes`, data)
                 .then(res => {
                     document.querySelector('#status').innerHTML = "<p style='color: green'>Cliente cadastrado!</p>"
                     setTimeout(() => window.location.href = "./cadastro-cliente.html", 5000)
