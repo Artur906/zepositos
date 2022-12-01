@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,71 +11,91 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <style>
-        #linha{
+        #linha {
             background-color: #A5A8FF;
             padding: 50px;
-        
+
         }
-        
-        .form-control{
+
+        .form-control {
             border-radius: 11px;
         }
-        .btn{
+
+        .btn {
             border-radius: 29px;
             margin-left: 10px;
             background-color: #ffff;
             color: black;
         }
-        #botoes{
+
+        #botoes {
             margin-top: 50px;
-            
+
         }
-        
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="row justify-content-md-center">
-                <div class="col-6" id="linha">
-                    <h1>Cadastro</h1>
-                    <form action="submit" id="form">
-                    
-                        <div class="form-group">
-                            <label for="nome">Nome:</label>
-                            <input class="form-control" type="text" name="nome" id="nome" required="required" placeholder="Digite o nome...">
-                        </div>
-                        <div class=col-8 class="form-group"  >
-                            <label for="telefone">Telefone:</label>
-                            <input class="form-control" type="text" name="telefone" id="telefone"  placeholder="Digite o telefone..." >
-                        </div>
-                        <div  class="form-group" id="botoes" style="text-align: end;">
-                            <button type="submit" class="btn btn-primary">Salvar</button>
-                            <button type="submit" class="btn btn-primary">Cancelar</button>
-                        </div>
-                    </form>
-                </div>
+            <div class="col-6" id="linha">
+                <h1>Cadastro</h1>
+                <form id="form">
+
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome..."
+                            required>
+                    </div>
+                    <div class=col-8 class="form-group">
+                        <label for="telefone">Telefone:</label>
+                        <input class="form-control" type="text" name="telefone" id="telefone"
+                            placeholder="Digite o telefone..." required>
+                    </div>
+                    <div class="form-group" id="botoes" style="text-align: end;">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="reset" class="btn btn-primary">Cancelar</button>
+                    </div>
+                </form>
+                <div id="status"></div>
+            </div>
         </div>
-        
+
     </div>
-    <script>
+    <script type="module">
+        import axios from 'axios'
+        import { BASE_URL_API } from './variaveisAmbiente.js'
 
         const form = document.getElementById("form");
-    
-        form.addEventListener('submit', function(e){
+
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
 
             const formData = new FormData(form);
-            formData.append('nome', document.getElementById('nome').value)
-            formData.append('telefone', document.getElementById('telefone').value)
-            formData.append('id', 123)
-            
-            console.log([...formData])
-            axios.post('https//httpbin.org/post', formData)
-                .then(res => console.log(res))
-                .catch(err => console.log(err))
+
+            const data = {
+                nome: formData.get('nome'),
+                telefone: formData.get('telefone'),
+            }
+
+            document.querySelector('#status').innerHTML = "<p>Carregando...</p>"
+
+            axios.post(`${BASE_URL_API}`, data)
+                .then(res => {
+                    document.querySelector('#status').innerHTML = "<p style='color: green'>Cliente cadastrado!</p>"
+                    setTimeout(() => window.location.href = "./cadastro-cliente.html", 5000)
+                })
+                .catch(err => {
+                    document.querySelector('#status').innerHTML = "<p style='color: red'>Não foi possível cadastrar o cliente :(</p>"
+                    setTimeout(() => window.location.href = "./cadastro-cliente.html", 5000)
+                })
         })
 
+        form.addEventListener('reset', function (e) {
+            window.location.href = "../index.html"
+        })
 
     </script>
 </body>
+
 </html>
