@@ -22,7 +22,16 @@ class BaseModel(Model):
 
 class Cliente(BaseModel):
     nome     = TextField(null=False)
-    telefone = TextField()
+    telefone = TextField(unique=True, null=False)
+
+    @property
+    def serialize(self):
+        data = {
+            'id': self.id,
+            'nome': self.nome,
+            'telefone': self.telefone
+        }
+        return data
 
 class Embarque(BaseModel):
     id_cliente      = ForeignKeyField(Cliente, backref='embarque')
@@ -31,6 +40,20 @@ class Embarque(BaseModel):
     registrado      = BooleanField(default = False)
     pago            = BooleanField(default = False)
     embarcado       = BooleanField(default = False)
+
+
+    @property
+    def serialize(self):
+        data = {
+            'id': self.id,
+            'id_cliente': self.id_cliente,
+            'data_chegada': self.data_chegada,
+            'com_nota_fiscal': self.com_nota_fiscal,
+            'registrado': self.registrado,
+            'pago': self.pago,
+            'embarcado': self.embarcado
+        }
+        return data
     
 class Volume(BaseModel):
     id_embarque = ForeignKeyField(Embarque, backref='volume')
@@ -38,6 +61,18 @@ class Volume(BaseModel):
     comprimento = DecimalField(null=False)
     altura      = DecimalField(null=False)
     peso        = DecimalField(null=False)
+
+    @property
+    def serialize(self):
+        data = {
+            'id': self.id,
+            'id_embarque': self.id_embarque,
+            'largura': self.largura,
+            'comprimento': self.comprimento,
+            'altura': self.altura,
+            'peso': self.peso
+        }
+        return data
     
 
 lista_tabelas = [
