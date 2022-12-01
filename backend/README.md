@@ -19,7 +19,7 @@ Abra-a no VSCode.<br>
 Edite o arquivo `postgredb.py` , inserindo as informações corretas relativo ao postgre rodando na sua máquina (senha, usuário, nome da database que voce criou).<br>
 
 ### 2. Deixando o banco de dados pronto para uso:
-Rode o arquivo `esquema.py`. Este script criará a tabela 'clientes' no seu postgre. Olhe no seu PgAdmim para confirmar que a tabela foi criada.<br>
+Rode o arquivo `esquemabd.py`. Este script criará a tabela 'clientes' no seu postgre. Olhe no seu PgAdmim para confirmar que a tabela foi criada.<br>
 Rode o arquivo `inserir-dados.py`. Este script insere tres clientes na tabela.<br>
 
 ### 3. Rodando a API:
