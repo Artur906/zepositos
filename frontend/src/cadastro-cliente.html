@@ -7,6 +7,8 @@
     <title>Cadastro</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/js/">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <style>
         #linha{
             background-color: #A5A8FF;
@@ -35,15 +37,15 @@
         <div class="row justify-content-md-center">
                 <div class="col-6" id="linha">
                     <h1>Cadastro</h1>
-                    <form action="">
+                    <form action="submit" id="form">
                     
                         <div class="form-group">
                             <label for="nome">Nome:</label>
-                            <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome...">
+                            <input class="form-control" type="text" name="nome" id="nome" required="required" placeholder="Digite o nome...">
                         </div>
                         <div class=col-8 class="form-group"  >
                             <label for="telefone">Telefone:</label>
-                            <input class="form-control" type="text" name="telefone" id="telefone" placeholder="Digite o telefone...">
+                            <input class="form-control" type="text" name="telefone" id="telefone"  placeholder="Digite o telefone..." >
                         </div>
                         <div  class="form-group" id="botoes" style="text-align: end;">
                             <button type="submit" class="btn btn-primary">Salvar</button>
@@ -54,6 +56,25 @@
         </div>
         
     </div>
-    <script src = "bootstrap/js/bootstrap.min.js"></script>
+    <script>
+
+        const form = document.getElementById("form");
+    
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            formData.append('nome', document.getElementById('nome').value)
+            formData.append('telefone', document.getElementById('telefone').value)
+            formData.append('id', 123)
+            
+            console.log([...formData])
+            axios.post('https//httpbin.org/post', formData)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+        })
+
+
+    </script>
 </body>
 </html>
