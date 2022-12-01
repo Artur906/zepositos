@@ -39,3 +39,11 @@ class Volume(BaseModel):
     altura      = DecimalField(null=False)
     peso        = DecimalField(null=False)
     
+
+lista_tabelas = [
+    Cliente, Embarque, Volume
+]
+
+db.connect()
+db.create_tables(lista_tabelas)
+db.close()
