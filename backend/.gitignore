@@ -5,4 +5,10 @@ Include/**
 __pycache__/**
 pyvenv.cfg
 
+lib/**
+lib64/**
+share/**
+bin/**
 # Ignorar a configuração do banco de dados postgre, já que cada integrante tem usuario e senha diferentes.
+postgredb.py
+
