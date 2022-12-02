@@ -39,6 +39,7 @@ class Embarque(BaseModel):
     com_nota_fiscal = BooleanField(default = False)
     registrado      = BooleanField(default = False)
     pago            = BooleanField(default = False)
+    urgente         = BooleanField(default = False)
     embarcado       = BooleanField(default = False)
 
 
@@ -48,13 +49,28 @@ class Embarque(BaseModel):
             'id': self.id,
             'id_cliente': self.id_cliente,
             'data_chegada': self.data_chegada,
+            'quant_volumes': self.quant_volumes,
+            'peso_total': self.peso_total,
             'com_nota_fiscal': self.com_nota_fiscal,
             'registrado': self.registrado,
             'pago': self.pago,
+            'urgente': self.urgente,
             'embarcado': self.embarcado
         }
         return data
     
+    @property
+    def peso_total():
+        #to-do
+        #make query that sums every 'volume' weight of this 'embarque'
+        pass
+    
+    @property
+    def quant_volumes():
+        #to-do
+        #query that counts every 'volume' of this 'embarque'
+        pass
+
 class Volume(BaseModel):
     id_embarque = ForeignKeyField(Embarque, backref='volume')
     largura     = DecimalField(null=False)
