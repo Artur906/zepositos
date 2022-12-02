@@ -1,3 +1,4 @@
+
 from peewee import Model, TextField,ForeignKeyField, BooleanField, DateField, DecimalField, IntegerField
 from postgredb import *
 from datetime import datetime
@@ -22,7 +23,7 @@ class BaseModel(Model):
 
 class Cliente(BaseModel):
     nome     = TextField(null=False)
-    telefone = TextField(unique=True, null=False)
+    telefone = TextField(unique=True, null=True)
 
     @property
     def serialize(self):
@@ -34,7 +35,8 @@ class Cliente(BaseModel):
         return data
 
 class Embarque(BaseModel):
-    id_cliente      = ForeignKeyField(Cliente, backref='embarque')
+    id_cliente      = ForeignKeyField(Cliente, backref='embarque', null=True)
+    descricao       = TextField()
     data_chegada    = DateField(default = datetime.now)
     com_nota_fiscal = BooleanField(default = False)
     registrado      = BooleanField(default = False)
@@ -47,6 +49,7 @@ class Embarque(BaseModel):
     def serialize(self):
         data = {
             'id': self.id,
+            'descricao': self.descricao,
             'id_cliente': self.id_cliente,
             'data_chegada': self.data_chegada,
             'quant_volumes': self.quant_volumes,
@@ -60,23 +63,35 @@ class Embarque(BaseModel):
         return data
     
     @property
-    def peso_total():
-        #to-do
-        #make query that sums every 'volume' weight of this 'embarque'
-        pass
-    
+    def quant_volumes(self):
+        q = (
+            Volume
+            .select()
+            .where(Volume.id_embarque == self.id)
+            .count()
+        )
+        return q
+
     @property
-    def quant_volumes():
-        #to-do
-        #query that counts every 'volume' of this 'embarque'
-        pass
+    def peso_total(self):
+        q = (
+            Volume
+            .select(Volume.peso)
+            .where(Volume.id_embarque == 1)
+        )
+        total = 0
+        for row in q:
+            total += row.peso
+        return total
+    
+    
 
 class Volume(BaseModel):
     id_embarque = ForeignKeyField(Embarque, backref='volume')
-    largura     = DecimalField(null=False)
-    comprimento = DecimalField(null=False)
-    altura      = DecimalField(null=False)
-    peso        = DecimalField(null=False)
+    largura     = DecimalField(null=False)#centimetros
+    comprimento = DecimalField(null=False)#centimetros
+    altura      = DecimalField(null=False)#centimetros
+    peso        = DecimalField(null=False)#quilogramas
 
     @property
     def serialize(self):
