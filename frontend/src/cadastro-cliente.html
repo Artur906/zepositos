@@ -49,8 +49,9 @@
                     </div>
                     <div class=col-8 class="form-group">
                         <label for="telefone">Telefone:</label>
-                        <input class="form-control" type="text" name="telefone" id="telefone"
-                            placeholder="Digite o telefone..." required>
+                        <input class="form-control" pattern="^[1-9]{2} 9[1-9]{4} [1-9]{4}$"
+                            data-pattern="xx xxxxx xxxx" type="text" name="telefone"
+                            id="telefone" placeholder="Digite o telefone..." required>
                     </div>
                     <div class="form-group" id="botoes" style="text-align: end;">
                         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -65,6 +66,7 @@
     <script type="module">
         import axios from 'axios'
         import { BASE_URL_API } from './variaveisAmbiente.js'
+        import { textMarshal } from 'text-marshal'
 
         const form = document.getElementById("form");
 
@@ -83,10 +85,11 @@
             axios.post(`${BASE_URL_API}/clientes`, data)
                 .then(res => {
                     document.querySelector('#status').innerHTML = "<p style='color: green'>Cliente cadastrado!</p>"
-                    setTimeout(() => window.location.href = "./cadastro-cliente.html", 5000)
                 })
                 .catch(err => {
                     document.querySelector('#status').innerHTML = "<p style='color: red'>Não foi possível cadastrar o cliente :(</p>"
+                })
+                .then(res => {
                     setTimeout(() => window.location.href = "./cadastro-cliente.html", 5000)
                 })
         })
@@ -94,6 +97,18 @@
         form.addEventListener('reset', function (e) {
             window.location.href = "../index.html"
         })
+
+        const cardnumber = document.getElementById('telefone');
+
+        cardnumber.oninput = function (e) {
+            let data = textMarshal({
+                input: e.target.value,
+                template: cardnumber.getAttribute('data-pattern'),
+                disallowCharacters: [/[a-z]/],
+            });
+
+            cardnumber.value = data.marshaltext;
+        };
 
     </script>
 </body>
