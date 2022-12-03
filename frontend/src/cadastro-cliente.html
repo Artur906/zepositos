@@ -11,11 +11,11 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <style>
-
-#linha {
+        #formulario{
             background-color: #A5A8FF;
-            padding: 50px;
-
+            padding: 25px;
+            width: 50%;
+            height: 100%;
         }
 
         .form-control {
@@ -31,18 +31,53 @@
 
         #botoes {
             margin-top: 50px;
-
+        }
+        #header{
+            background-color: #515475;
+            height: 83px;
+        }
+        h1{
+            font-weight: bolder;
+            /* text-align: center; */
+        }
+        input{
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin-bottom: 25px;
+        }
+        label{
+            margin-bottom: 5px;
+            font-weight: bolder;
+        }
+        .container-fluid{
+            height: 100%;
+            background-color: rebeccapurple;
+        }
+        #titulo{
+            background-color: rgb(236, 109, 109);
+            text-align: center;
         }
 
+        
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col-6" id="linha">
-                <h1>Cadastro</h1>
-                <form id="form">
+    
+    <div class="container-fluid">
+        <div class="row" id="header">
+
+        </div>
+        <div class="row justify-content-sm-center" id="titulo">
+            <h1 class="col-sm-4">
+               <h1>Cadastro de Cliente</h1>     
+            </h1>
+        </div>
+
+        <div class="row justify-content-sm-center ">
+            
+                <div class="col-sm-6" id="formulario">
+                    
+                    <form action="">
                     
                     <div class="form-group">
                         <label for="nome">Nome:</label>
