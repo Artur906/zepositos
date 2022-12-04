@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/js/">
+    <style>
+        #formulario{
+            background-color: #A5A8FF;
+            padding: 25px;
+            width: 50%;
+            height: 100%;
+        }
+        
+        .form-control{
+            border-radius: 11px;
+        }
+        .btn{
+            border-radius: 29px;
+            margin-left: 10px;
+            background-color: #ffff;
+            color: black;
+        }
+        #botoes{
+            margin-top: 50px;
+        }
+        #header{
+            background-color: #515475;
+            height: 83px;
+        }
+        h1{
+            font-weight: bolder;
+            /* text-align: center; */
+        }
+        input{
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin-bottom: 25px;
+        }
+        label{
+            margin-bottom: 5px;
+            font-weight: bolder;
+        }
+        .container-fluid{
+            height: 100%;
+        }
+        #titulo{
+            text-align: center;
+            padding: 25px;
+        }
+        #medidas{
+            margin-bottom: 25px;
+            margin-left: 0px;
+        }
+        
+
+        
+    </style>
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row" id="header">
+
+        </div>
+        <div class="row justify-content-sm-center" id="titulo">
+            <h1 class="col-sm-4">
+               <h1>Criar embarque</h1>     
+            </h1>
+        </div>
+
+        <div class="row justify-content-sm-center inline ">
+
+            <div class="col-sm-6" id="formulario">
+                <form action="">
+                    
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="">Nota Fiscal</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                  Possui nota fiscal
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4" >
+                            <label for="">Data e Hora</label>
+                            <input type="date" class="form-control" required >
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-10" >
+                        <label for="nome">Descrição:</label>
+                        <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome...">
+                    </div>
+                    
+                    <div>
+                        <label for="comp">Adicionar volume</label>
+                    </div>
+                    <div class="row form-group align-items-center"  >
+                        <div class="col-2" >
+                            <label for="comp">comp</label>
+                            <input class=" form-control " type="text" name="comp" id="comp">
+                            <label for="comp">cm</label>
+                        </div>
+                        <div class="col-2">
+                            <label for="alt" >alt</label>
+                            <input type="text" class="form-control" name="alt" id="alt">
+                        </div>
+                        <div class="col-2">
+                            <label for="larg" >larg</label>
+                            <input type="text" class="form-control" name="larg" id="larg">
+                        </div>
+                        <div class="col-2">
+                            <label for="peso" >peso</label>
+                            <input type="text" class="form-control" name="peso" id="peso">
+                            
+                        </div>
+                        <div class="col-2" >
+                            <button type="submit" class="btn btn-primary">+</button>
+                        </div>
+                        
+                    </div>
+
+                    <div  class="form-group" id="botoes" style="text-align: end;">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="submit" class="btn btn-primary">Cancelar</button>
+                    </div>
+                    
+                </form>
+
+                
+                
+            </div>
+    </div>
+
+    <script src = "bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
