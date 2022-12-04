@@ -50,8 +50,8 @@ class Embarque(BaseModel):
             int_id_cliente = None
         data = {
             'id': self.id,
-            'descricao': self.descricao,
             'id_cliente': int_id_cliente,
+            'descricao': self.descricao,
             'data_chegada': self.data_chegada,
             'quant_volumes': self.quant_volumes,
             'peso_total': self.peso_total,
