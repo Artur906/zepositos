@@ -1,4 +1,4 @@
-# Exemplo de uma API REST Python com banco PostgreSQL
+# Zé Pósitos: API REST em Python com banco PostgreSQL
 
 ### 0. Pré-requisitos:
 * Python instalado na máquina;
