@@ -6,21 +6,22 @@ from flask import request
 from os import abort
 from flask_cors import CORS
 
-'''rode este arquivo, e a API estará funcionando!'''
+''' Rode este arquivo, e a API estará funcionando! '''
 
 
 app = Flask(__name__)
+app.config['JSON_SORT_KEYS'] = False
 CORS(app)
 
 @app.route('/')
 def index():
-    return 'Bem vindo a API!'
+    return 'Bem vindo(a) a API do Zé Pósitos!'
 
 
 # ________ROTAS CLIENTES_________
 
 #GET
-@app.route('/clientes')
+@app.route('/clientes', methods=['GET'])
 def get_clientes():
     query = Cliente.select()
     dados = [i.serialize for i in query]
@@ -31,11 +32,7 @@ def get_clientes():
         })
         res.status_code = 200
     else:
-        output = {
-            "error": "Sem resultados encontrados. Cheque a URL e tente outra vez.",
-            "url": request.url
-        }
-        res = jsonify(output)
+        res = jsonify(error = 'Sem resultados encontrados. Cheque a URL e tente outra vez.', url = request.url)
         res.status_code = 404
 
     return res
@@ -43,7 +40,7 @@ def get_clientes():
 
 
 #GET
-@app.route('/clientes/<id>')
+@app.route('/clientes/<id>', methods=['GET'])
 def get_cliente(id):
     try:
         cliente = Cliente.get_by_id(id)
@@ -53,11 +50,8 @@ def get_cliente(id):
         res = jsonify(cliente.serialize)
         res.status_code = 200
     else:
-        output = {
-            "error": "Sem resultados encontrados. Cheque a URL e tente outra vez.",
-            "url": request.url
-        }
-        res = jsonify(output)
+        res = jsonify(error = 'Sem resultados encontrados. Cheque a URL e tente outra vez.', url = request.url
+        )
         res.status_code = 404
     return res
 
@@ -66,57 +60,36 @@ def get_cliente(id):
 #POST (criar)
 @app.route('/clientes', methods=['POST'])
 def add_cliente():
-    cliente = Cliente()
-    cliente.nome = request.json['nome']
     try:
-        cliente.telefone = request.json['telefone']
+        request.json['nome']
     except:
-        pass#gambiarra para deixar o telefone como parametro opicional do json.
-    cliente.save()
-    return {'id':cliente.get_id()}
-
-
-
-
-#PUT (atualizar)
-@app.route('/clientes/<id>', methods=['PUT'])
-def update_cliente(id):
-    try:
-        if (type(request.json['nome']) != str):
-            abort(400)
-    except:
-        pass
+        res = jsonify(message = 'Campo obrigatório (nome) em falta.')
+        res.status_code = 400
+        return res
+        
     
-    try:
-        if (type(request.json['telefone']) != str):
-            abort(400)
-    except:
-        pass
+    cliente = Cliente(**(request.get_json()))
+    cliente.save()
+    res = jsonify(message = 'Cliente criado.', id = cliente.get_id())
+    res.status_code = 201
+    return res
 
+
+#PATCH (atualizar)
+@app.route('/clientes/<id>', methods=['PATCH'])
+def update_cliente(id):
     try:
         cliente = Cliente.get_by_id(id)
     except:
         cliente = None
 
     if cliente:
-        try:
-            cliente.nome = request.json['nome']
-        except:
-            pass#gambiarra
+        Cliente.update( **(request.get_json()) ).where(Cliente.id == id).execute()
         
-        try:
-            cliente.telefone = request.json['telefone']
-        except:
-            pass#gambiarra
-        cliente.save()
-        res = jsonify({"message": "Atualizado!"})
+        res = jsonify(message = "Atualizado!", cliente = Cliente.get_by_id(id).serialize)
         res.status_code = 200
     else:
-        output = {
-            "error": "Não encontrado.",
-            "url": request.url
-        }
-        res = jsonify(output)
+        res = jsonify(error = 'Não encontrado.', url = request.url)
         res.status_code = 404
     return res
 
@@ -127,41 +100,32 @@ def delete_cliente(id):
     cliente = Cliente.select().where(Cliente.id == id)[0]
     if(cliente):
         cliente.delete_instance()
-        res = jsonify({"message": "Deletado!"})
+        res = jsonify(message = "Deletado!")
         res.status_code = 200
     else:
-        output = {
-            "error": "Não encontrado.",
-            "url": request.url
-        }
-        res = jsonify(output)
+        res = jsonify( error = 'Não encontrado.', url = request.url)
         res.status_code = 404
     return res
+
 
 
 # ________ROTAS EMBARQUES_________
 
-@app.route('/embarques')
+@app.route('/embarques', methods=['GET'])
 def get_embarques():
     query = Embarque.select()
     dados = [i.serialize for i in query]
     if dados:
-        res = jsonify({
-            'embarques': dados
-        })
+        res = jsonify(embarques = dados)
         res.status_code = 200
     else:
-        output = {
-            "error": "Sem resultados encontrados. Cheque a URL e tente outra vez.",
-            "url": request.url
-        }
-        res = jsonify(output)
+        res = jsonify(error = 'Sem resultados encontrados. Cheque a URL e tente outra vez.', url = request.url)
         res.status_code = 404
     return res
 
 
 
-@app.route('/embarques/<id>')
+@app.route('/embarques/<id>', methods=['GET'])
 def get_embarque(id):
     try:
         embarque = Embarque.get_by_id(id)
@@ -171,120 +135,46 @@ def get_embarque(id):
         res = jsonify(embarque.serialize)
         res.status_code = 200
     else:
-        output = {
-            "error": "Sem resultados encontrados. Cheque a URL e tente outra vez.",
-            "url": request.url
-        }
-        res = jsonify(output)
+        res = jsonify(error = 'Sem resultados encontrados. Cheque a URL e tente outra vez.', url = request.url)
         res.status_code = 404
     return res
-
-
 
 
 #POST (criar)
 @app.route('/embarques', methods=['POST'])
 def add_embarque():
-    embarque = Embarque()
-    embarque.descricao = request.json['descricao']
-
-    # gambiarra das feias abaixo:
-    # nos trys abaixo estao os parametros opicionais do json
     try:
-        embarque.id_cliente = request.json['id_cliente']
+        request.json['descricao']
     except:
-        pass
-
-    try:
-        embarque.data_chegada = request.json['data_chegada']
-    except:
-        pass
-
-    try:
-        embarque.nota_fiscal = request.json['nota_fiscal']
-    except:
-        pass
-
-    try:
-        embarque.registrado = request.json['registrado']
-    except:
-        pass
-
-    try:
-        embarque.pago = request.json['pago']
-    except:
-        pass
-
-    try:
-        embarque.urgente = request.json['urgente']
-    except:
-        pass
-
-    try:
-        embarque.embarcado = request.json['embarcado']
-    except:
-        pass
-
+        res = jsonify(message = 'Campo obrigatório (descricao) em falta.')
+        res.status_code = 400
+        return res
     
+    embarque = Embarque(**(request.get_json()))
     embarque.save()
-    return {'id':embarque.get_id()}
+    res = jsonify(
+        message = 'Embarque criado.',
+        id = embarque.get_id()
+    )
+    res.status_code = 201
+    return res 
 
-#PUT (atualizar)
-@app.route('/embarques/<id>', methods=['PUT'])
+
+
+#PATCH (atualizar)
+@app.route('/embarques/<id>', methods=['PATCH'])
 def update_embarque(id):
-    #to-do: check types
-
     try:
         embarque = Embarque.get_by_id(id)
     except:
         embarque = None
 
     if embarque:
-        # gambiarra das feias abaixo:
-        try:
-            embarque.id_cliente = request.json['id_cliente']
-        except:
-            pass
-        
-        try:
-            embarque.descricao = request.json['descricao']
-        except:
-            pass
-        
-        try:
-            embarque.com_nota_fiscal = request.json['com_nota_fiscal']
-        except:
-            pass
-
-        try:
-            embarque.registrado = request.json['registrado']
-        except:
-            pass
-
-        try:
-            embarque.pago = request.json['pago']
-        except:
-            pass
-
-        try:
-            embarque.urgente = request.json['urgente']
-        except:
-            pass
-
-        try:
-            embarque.embarcado = request.json['embarcado']
-        except:
-            pass
-
-        embarque.save()
-        res = jsonify({"message": "Atualizado!"})
+        Embarque.update( **(request.get_json()) ).where(Embarque.id == id).execute()
+        res = jsonify(message = "Atualizado!", embarque = Embarque.get_by_id(id).serialize)
         res.status_code = 200
     else:
-        output = {
-            "error": "Não encontrado.",
-            "url": request.url
-        }
-        res = jsonify(output)
+        res = jsonify(error = 'Não encontrado.', url = request.url)
         res.status_code = 404
     return res
 
@@ -292,19 +182,17 @@ def update_embarque(id):
 #DELETE
 @app.route('/embarques/<id>', methods=['DELETE'])
 def delete_embarque(id):
-    embarque = embarque.select().where(embarque.id == id)[0]
+    embarque = Embarque.get_by_id(id)
     if(embarque):
         embarque.delete_instance()
-        res = jsonify({"message": "Deletado!"})
+        res = jsonify(message = "Deletado!")
         res.status_code = 200
     else:
-        output = {
-            "error": "Não encontrado.",
-            "url": request.url
-        }
-        res = jsonify(output)
+        res = jsonify(error = 'Não encontrado.', url = request.url)
         res.status_code = 404
     return res
+
+
 
 
 app.run()
