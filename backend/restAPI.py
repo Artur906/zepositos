@@ -293,4 +293,103 @@ def delete_volume(id):
     return res
 
 
+
+''' ][________________ROTAS CUSTOMIZADAS_________________]['''
+
+# ________ROTAS EMBARQUES DE CLIENTE_________
+
+@app.route('/clientes/<id_cliente>/embarques', methods=['GET'])
+def get_embarques_of_cliente(id_cliente):
+    query = Embarque.select().where(Embarque.id_cliente == id_cliente)
+    dados = [i.serialize for i in query]
+    if dados:
+        res = jsonify(embarques = dados)
+        res.status_code = 200
+    else:
+        res = jsonify(error = 'Sem resultados encontrados. Cheque a URL e tente outra vez.', url = request.url)
+        res.status_code = 404
+    return res
+
+
+
+#POST (criar)
+@app.route('/clientes/<id_cliente>/embarques', methods=['POST'])
+def add_embarque_of_cliente(id_cliente):
+
+    try:
+        request.json['id_cliente']
+        res = jsonify(error = 'Não é possível usar um id_cliente que não o da URL.')
+        res.status_code = 400
+        return res
+    except:
+        pass
+
+    try:
+        request.json['descricao']
+    except:
+        res = jsonify(message = 'Campo obrigatório (descricao) em falta.')
+        res.status_code = 400
+        return res
+    
+    embarque = Embarque(**(request.get_json()))
+    embarque.id_cliente = id_cliente
+    embarque.save()
+    res = jsonify(
+        message = 'Embarque criado.',
+        id = embarque.get_id()
+    )
+    res.status_code = 201
+    return res 
+
+
+
+# ________ROTAS VOLUMES DE EMBARQUE_________
+
+
+@app.route('/embarques/<id_embarque>/volumes', methods=['GET'])
+def get_volumes_of_embarque(id_embarque):
+    query = Volume.select().where(Volume.id_embarque == id_embarque)
+    try:
+        dados = [i.serialize for i in query]
+    except:
+        dados = None
+    if dados:
+        res = jsonify(volumes = dados)
+        res.status_code = 200
+    else:
+        res = jsonify(error = 'Sem resultados encontrados. Cheque a URL e tente outra vez.', url = request.url)
+        res.status_code = 404
+    return res
+
+
+@app.route('/embarques/<id_embarque>/volumes', methods=['POST'])
+def add_volume_of_embarque(id_embarque):
+    try:
+        request.json['id_embarque']
+        res = jsonify(error = 'Não é possível usar um id_embarque que não o da URL.')
+        res.status_code = 400
+        return res
+    except:
+        pass
+
+    try:
+        request.json['largura']
+        request.json['comprimento']
+        request.json['altura']
+        request.json['peso']
+    except:
+        res = jsonify(message = 'Campo(s) obrigatório(s) em falta.')
+        res.status_code = 400
+        return res
+    
+    volume = Volume(**(request.get_json()))
+    volume.id_embarque = id_embarque
+    volume.save()
+    res = jsonify(
+        message = 'Volume criado.',
+        id = volume.get_id()
+    )
+    res.status_code = 201
+    return res 
+
 app.run()
