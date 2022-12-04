@@ -89,15 +89,29 @@ def add_cliente():
 #PUT (atualizar)
 @app.route('/clientes/<id>', methods=['PUT'])
 def update_cliente(id):
-    if (type(request.json['nome']) != str) or (type(request.json['telefone']) != str):
-        abort(400)
+    try:
+        if (type(request.json['nome']) != str):
+            abort(400)
+    except:
+        pass
+    
+    try:
+        if (type(request.json['telefone']) != str):
+            abort(400)
+    except:
+        pass
+
     try:
         cliente = Cliente.get_by_id(id)
     except:
         cliente = None
 
     if cliente:
-        cliente.nome = request.json['nome']
+        try:
+            cliente.nome = request.json['nome']
+        except:
+            pass#gambiarra
+        
         try:
             cliente.telefone = request.json['telefone']
         except:
