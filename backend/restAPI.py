@@ -193,6 +193,104 @@ def delete_embarque(id):
     return res
 
 
+# ________ROTAS VOLUMES_________
+
+
+@app.route('/volumes', methods=['GET'])
+def get_volumes():
+    query = Volume.select()
+    try:
+        dados = [i.serialize for i in query]
+    except:
+        dados = None
+    if dados:
+        res = jsonify(volumes = dados)
+        res.status_code = 200
+    else:
+        res = jsonify(error = 'Sem resultados encontrados. Cheque a URL e tente outra vez.', url = request.url)
+        res.status_code = 404
+    return res
+
+
+
+@app.route('/volumes/<id>', methods=['GET'])
+def get_volume(id):
+    try:
+        volume = Volume.get_by_id(id)
+    except:
+        volume = None
+    if(volume):
+        res = jsonify(volume.serialize)
+        res.status_code = 200
+    else:
+        res = jsonify(error = 'Sem resultados encontrados. Cheque a URL e tente outra vez.', url = request.url)
+        res.status_code = 404
+    return res
+
+
+#POST (criar)
+@app.route('/volumes', methods=['POST'])
+def add_volume():
+    try:
+        request.json['id_embarque']
+        request.json['largura']
+        request.json['comprimento']
+        request.json['altura']
+        request.json['peso']
+    except:
+        res = jsonify(message = 'Campo(s) obrigatório(s) em falta.')
+        res.status_code = 400
+        return res
+    
+    volume = Volume(**(request.get_json()))
+    volume.save()
+    res = jsonify(
+        message = 'Volume criado.',
+        id = volume.get_id()
+    )
+    res.status_code = 201
+    return res 
+
+
+
+#PATCH (atualizar)
+@app.route('/volumes/<id>', methods=['PATCH'])
+def update_volume(id):
+    try:
+        request.json['id_embarque']
+        res = jsonify(error = 'Em volumes não é permitida a mudança de id_embarque.')
+        res.status_code = 400
+        return res
+    except:
+        pass
+    
+    try:
+        volume = Volume.get_by_id(id)
+    except:
+        volume = None
+
+    if volume:
+        Volume.update( **(request.get_json()) ).where(Volume.id == id).execute()
+        res = jsonify(message = "Atualizado!", embarque = Volume.get_by_id(id).serialize)
+        res.status_code = 200
+    else:
+        res = jsonify(error = 'Não encontrado.', url = request.url)
+        res.status_code = 404
+    return res
+
+
+#DELETE
+@app.route('/volumes/<id>', methods=['DELETE'])
+def delete_volume(id):
+    volume = Volume.get_by_id(id)
+    if(volume):
+        volume.delete_instance()
+        res = jsonify(message = "Deletado!")
+        res.status_code = 200
+    else:
+        res = jsonify(error = 'Não encontrado.', url = request.url)
+        res.status_code = 404
+    return res
 
 
 app.run()
