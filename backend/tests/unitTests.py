@@ -1,7 +1,7 @@
-from decimal import Decimal
-from testingPostgreDB import *
-
 import unittest
+from testingPostgreDB import *
+from decimal import Decimal
+
 
 def clear_test_data():
     Volume.delete().execute()
@@ -32,7 +32,7 @@ class TestEmbarquesMethods(unittest.TestCase):
         Volume.insert_many(volumesEmb2).execute()
 
         
-
+    #testa se o calculo de peso total funciona corretamente
     def test_peso_total(self):
         self.create_test_data()
         emb1 = Embarque.get_by_id(1)
@@ -50,7 +50,7 @@ class TestEmbarquesMethods(unittest.TestCase):
         
     
 
-    
+    #testa se a contagem de volumes de um embarque funciona corretamente
     def test_quant_volumes(self):
         
         self.create_test_data()
