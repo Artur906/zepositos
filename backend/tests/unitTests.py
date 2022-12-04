@@ -1,6 +1,12 @@
 import unittest
-from testingPostgreDB import *
+from testPostgreDB import *
 from decimal import Decimal
+
+''' Rode este arquivo para executar os testes.
+    Antes certifique-se que seu postgre está rodando, e que nele há
+    uma database chamada "zepositosTEST".
+    Certifique-se que no arquivo "testPostgreDB.py" está informado seu usuário e senha.
+'''
 
 
 def clear_test_data():
