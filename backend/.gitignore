@@ -12,3 +12,6 @@
 
 # Ignorar a configuração do banco de dados postgre, já que cada integrante tem usuario e senha diferentes.
 postgredb.py
+
+#arquivo que eu (andre) crio para testar de forma rudimentar:
+testando.py

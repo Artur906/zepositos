@@ -1,4 +1,5 @@
-from esquemabd import *
+from postgredb import *
+
 from flask import Flask
 from flask import jsonify
 from flask import request

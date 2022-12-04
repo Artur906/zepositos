@@ -1,6 +1,5 @@
 
 from peewee import Model, TextField,ForeignKeyField, BooleanField, DateField, DecimalField, IntegerField
-from postgredb import *
 from datetime import datetime
 
 '''
@@ -12,9 +11,6 @@ VOLUME(id, id_embarque, largura, comprimento, altura, peso)
 '''
 
 class BaseModel(Model):
-    class Meta:
-        database = db
-
     @property
     def serialize(self):# to-do: make it abstract, so children classes MUST implement it.
         # MUST return self in dict format. ex: {'key1': self.value1, 'key2': self.value2, ...}
@@ -82,7 +78,7 @@ class Embarque(BaseModel):
         q = (
             Volume
             .select(Volume.peso)
-            .where(Volume.id_embarque == 1)
+            .where(Volume.id_embarque == self.id)
         )
         total = 0
         for row in q:
@@ -111,10 +107,3 @@ class Volume(BaseModel):
         return data
     
 
-lista_tabelas = [
-    Cliente, Embarque, Volume
-]
-
-db.connect()
-db.create_tables(lista_tabelas)
-db.close()
