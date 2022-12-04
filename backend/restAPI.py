@@ -6,15 +6,7 @@ from flask import request
 from os import abort
 from flask_cors import CORS
 
-
-'''
-Para rodar este arquivo, execute os seguintes comandos no terminal (do vscode):
-
-export FLASK_APP=restAPI.py
-export FLASK_DEBUG=1
-flask run
-
-'''
+'''rode este arquivo, e a API estará funcionando!'''
 
 
 app = Flask(__name__)
@@ -313,3 +305,6 @@ def delete_embarque(id):
         res = jsonify(output)
         res.status_code = 404
     return res
+
+
+app.run()
