@@ -15,15 +15,15 @@ Edite o arquivo `postgredb.py` , inserindo as informações corretas relativo ao
 
 ### 2. Instalando dependencias:
 Crie um ambiente virtual (venv) na pasta 'backend'.<br>
-Instale as seguintes dependencias:
+Nele, instale as seguintes dependencias:
   - Peewee (`pip install peewee`)
   - Psycopg (`pip install psycopg2-binary`)
   - Flask (`pip install flask`)
   - Flask-cors (`pip install flask-cors`)
 
 ### 3. Deixando o banco de dados pronto para uso:
-Rode o arquivo `postgredb.py`. Este script criará as tabelas 'Cliente', 'Embarque' e 'Volume' no seu banco de dados postgres.<br>
-Olhe no seu PgAdmim para confirmar que as tabelas foram criadas.<br>
+Rode o arquivo `postgredb.py`. Este script criará as tabelas **Cliente**, **Embarque** e **Volume** no seu banco de dados postgres.<br>
+Olhe no seu PgAdmim na database **zepositos** para confirmar que as tabelas foram criadas.<br>
 
 ### 4. Rodando a API:
 Rode o arquivo `restAPI.py`<br>
