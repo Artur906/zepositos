@@ -31,7 +31,7 @@ class Cliente(BaseModel):
         return data
 
 class Embarque(BaseModel):
-    id_cliente      = ForeignKeyField(Cliente, backref='embarque', null=True)
+    id_cliente      = ForeignKeyField(Cliente, backref='embarque', null=True, on_delete='CASCADE')
     descricao       = TextField()
     data_chegada    = DateField(default = datetime.now)
     com_nota_fiscal = BooleanField(default = False)
@@ -88,7 +88,7 @@ class Embarque(BaseModel):
     
 
 class Volume(BaseModel):
-    id_embarque = ForeignKeyField(Embarque, backref='volume')
+    id_embarque = ForeignKeyField(Embarque, backref='volume', on_delete='CASCADE')
     largura     = DecimalField(null=False)#centimetros
     comprimento = DecimalField(null=False)#centimetros
     altura      = DecimalField(null=False)#centimetros
@@ -96,9 +96,15 @@ class Volume(BaseModel):
 
     @property
     def serialize(self):
+        try:
+            #gambiarra para nao retornar o tipo <Model>
+            int_id_embarque = (Embarque.select().where(Embarque.id == self.id_embarque).get()).id
+        except:
+            int_id_embarque = None
+
         data = {
             'id': self.id,
-            'id_embarque': self.id_embarque,
+            'id_embarque': int_id_embarque,
             'largura': self.largura,
             'comprimento': self.comprimento,
             'altura': self.altura,
