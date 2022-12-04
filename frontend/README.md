@@ -1,6 +1,6 @@
 ## Instruções 
 
-Precisamos do node instalado! 
+Precisamos do node instalado! Assegure-se que sua máquina tem a versão mais recente do NodeJS e do npm.
 
 #### primeiros passos 
 instalando as dependências

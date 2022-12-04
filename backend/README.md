@@ -19,15 +19,15 @@ Abra-a no VSCode.<br>
 Edite o arquivo `postgredb.py` , inserindo as informações corretas relativo ao postgre rodando na sua máquina (senha, usuário, nome da database que voce criou).<br>
 
 ### 2. Deixando o banco de dados pronto para uso:
-Rode o arquivo `esquema.py`. Este script criará a tabela 'clientes' no seu postgre. Olhe no seu PgAdmim para confirmar que a tabela foi criada.<br>
+Rode o arquivo `esquemabd.py`. Este script criará a tabela 'clientes' no seu postgre. Olhe no seu PgAdmim para confirmar que a tabela foi criada.<br>
 Rode o arquivo `inserir-dados.py`. Este script insere tres clientes na tabela.<br>
 
 ### 3. Rodando a API:
-Agora chegou a hora de usar o arquivo `backendAPI.py` para de fato deixar a API funcionando localmente.<br>
+Agora chegou a hora de usar o arquivo `restAPI.py` para de fato deixar a API funcionando localmente.<br>
 Para tal, é necessário rodar os seguintes comandos no terminal do VsCode:
 
 ```bash 
-export FLASK_APP=backendAPI.py
+export FLASK_APP=restAPI.py
 export FLASK_DEBUG=1
 flask run
 ```
@@ -50,7 +50,8 @@ Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máq
   - **POST**: Deve ser enviado a API um json de um novo cliente a ser ADICIONADO:
     - ```bash 
       {
-        "nome": "Meujarel"
+        "nome": "Meujarel", 
+        "telefone": 111111111
       }
       ```
     - Se a operação ocorrer com sucesso, retorna o id do novo cliente inserido no banco.
@@ -62,14 +63,13 @@ Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máq
   - **PUT**: Deve ser informado na URL o id do cliente a ser ATUALIZADO, como também um json das novas informações deste cliente
     - ```bash 
       {
-        "nome": "Meljael"
+        "nome": "Meljael", 
+        "telefone": 111111111
       }
       ```
     - Retorna uma mensagem de sucesso (código 200) caso ocorra tudo bem.
   
    - **DELETE**:  Deve ser informado na URL o id do cliente a ser DELETADO.
      - Retorna uma mensagem de sucesso (código 200) caso ocorra tudo bem.
-
-
 
 

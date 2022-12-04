@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,8 @@
     <title>Cadastro</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/js/">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <style>
         #formulario{
             background-color: #A5A8FF;
@@ -14,17 +17,19 @@
             width: 50%;
             height: 100%;
         }
-        
-        .form-control{
+
+        .form-control {
             border-radius: 11px;
         }
-        .btn{
+
+        .btn {
             border-radius: 29px;
             margin-left: 10px;
             background-color: #ffff;
             color: black;
         }
-        #botoes{
+
+        #botoes {
             margin-top: 50px;
         }
         #header{
@@ -55,6 +60,7 @@
         
     </style>
 </head>
+
 <body>
     
     <div class="container-fluid">
@@ -68,30 +74,88 @@
         </div>
 
         <div class="row justify-content-sm-center ">
-
-            <div class="col-sm-6" id="formulario">
-                <form action="">
-
+            
+                <div class="col-sm-6" id="formulario">
+                    
+                    <form id="form">
+                    
                     <div class="form-group">
                         <label for="nome">Nome:</label>
-                        <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome...">
+                        <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome..."
+                        required>
                     </div>
-
-                    <div class=col-8 class="form-group"  >
+                    <div class=col-8 class="form-group">
                         <label for="telefone">Telefone:</label>
-                        <input class="form-control" type="text" name="telefone" id="telefone" placeholder="Digite o telefone...">
+                        <input class="form-control" pattern="^[0-9]{2} 9[0-9]{4} [0-9]{4}$" data-pattern="xx xxxxx xxxx"
+                        type="tel" name="telefone" id="telefone" placeholder="Digite o telefone..." required>
                     </div>
-
-                    <div  class="form-group" id="botoes" style="text-align: end;">
+                    <div class="form-group" id="botoes" style="text-align: end;">
                         <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type="submit" class="btn btn-primary">Cancelar</button>
+                        <button type="reset" class="btn btn-primary">Cancelar</button>
                     </div>
-                    
                 </form>
+                
+                <div id="status" class="col-6"></div>
             </div>
-            </div>
+        </div>
     </div>
+    <script type="module">
+        import axios from 'axios'
+        import { BASE_URL_API } from './variaveisAmbiente.js'
+        import { textMarshal } from 'text-marshal'
 
-    <script src = "bootstrap/js/bootstrap.min.js"></script>
+        const form = document.getElementById("form");
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            const data = {
+                nome: formData.get('nome'),
+                telefone: formData.get('telefone'),
+            }
+
+            document.querySelector('#status').innerHTML =
+                `<div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                </div>`
+
+            axios.post(`${BASE_URL_API}/clientes`, data)
+                .then(res => {
+                    document.querySelector('#status').innerHTML =
+                        `<div class="alert alert-success" role="alert">
+                        Cliente Cadastrado!
+                    </div>`
+                })
+                .catch(err => {
+                    document.querySelector('#status').innerHTML =
+                        `<div class="alert alert-danger" role="alert">
+                        Não foi possível cadastrar o cliente!
+                    </div>`
+                })
+                .then(res => {
+                    setTimeout(() => window.location.href = "./cadastro-cliente.html", 5000)
+                })
+        })
+
+        form.addEventListener('reset', function (e) {
+            window.location.href = "../index.html"
+        })
+
+        const cardnumber = document.getElementById('telefone');
+
+        cardnumber.oninput = function (e) {
+            let data = textMarshal({
+                input: e.target.value,
+                template: cardnumber.getAttribute('data-pattern'),
+                disallowCharacters: [/[a-z]/],
+            });
+
+            cardnumber.value = data.marshaltext;
+        };
+
+    </script>
 </body>
+
 </html>

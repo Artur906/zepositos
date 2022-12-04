@@ -1,4 +1,4 @@
-nomeDatabase = 'bluze'
+nomeDatabase = 'zepositos'
 usuario      = 'postgres'
 senha        = '1234'
 

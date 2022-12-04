@@ -1,4 +1,4 @@
-from esquema import *
+from esquemabd import *
 from flask import Flask
 from flask import jsonify
 from flask import request
@@ -9,10 +9,11 @@ from flask_cors import CORS
 '''
 Para rodar este arquivo, execute os seguintes comandos no terminal (do vscode):
 
-export FLASK_APP=backendAPI.py
+export FLASK_APP=restAPI.py
 export FLASK_DEBUG=1
 flask run
 '''
+
 
 app = Flask(__name__)
 CORS(app)
@@ -26,7 +27,7 @@ def index():
 @app.route('/clientes')
 def get_clientes():
 
-    query = Clientes.select()
+    query = Cliente.select()
     dados = [i.serialize for i in query]
 
     if dados:
@@ -45,11 +46,12 @@ def get_clientes():
     return res
 
 
+
 #GET
 @app.route('/clientes/<id>')
 def get_cliente(id):
     try:
-        cliente = Clientes.get_by_id(id)
+        cliente = Cliente.get_by_id(id)
     except:
         cliente = None
     if(cliente):
@@ -64,25 +66,31 @@ def get_cliente(id):
         res.status_code = 404
     return res
 
+
+
 #POST
 @app.route('/clientes', methods=['POST'])
 def add_cliente():
-    cliente = Clientes(nome=request.json['nome'])
+    cliente = Cliente(nome=request.json['nome'], telefone=request.json['telefone'])
     cliente.save()
     return {'id':cliente.get_id()}
+
+
+
 
 #PUT
 @app.route('/clientes/<id>', methods=['PUT'])
 def update_cliente(id):
-    if type(request.json['nome']) != str:
+    if (type(request.json['nome']) != str) or (type(request.json['telefone']) != str):
         abort(400)
     try:
-        cliente = Clientes.get_by_id(id)
+        cliente = Cliente.get_by_id(id)
     except:
         cliente = None
 
     if cliente:
         cliente.nome = request.json['nome']
+        cliente.telefone = request.json['telefone']
         cliente.save()
         res = jsonify({"message": "Atualizado!"})
         res.status_code = 200
@@ -99,7 +107,7 @@ def update_cliente(id):
 #DELETE
 @app.route('/clientes/<id>', methods=['DELETE'])
 def delete_cliente(id):
-    cliente = Clientes.select().where(Clientes.id == id)[0]
+    cliente = Cliente.select().where(Cliente.id == id)[0]
     if(cliente):
         cliente.delete_instance()
         res = jsonify({"message": "Deletado!"})
@@ -114,5 +122,3 @@ def delete_cliente(id):
     return res
 
 
-
-#https://docs.peewee-orm.com/en/latest/peewee/querying.html
