@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Embarques</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/js/">
+    <style>
+        #formulario{
+            background-color: #A5A8FF;
+            padding: 25px;
+            width: 50%;
+            height: 100%;
+        }
+        .btn{
+            border-radius: 11px;
+            background-color: #ffff;
+            color: black;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        #header{
+            background-color: #515475;
+            height: 83px;
+        }
+        h1{
+            font-weight: bolder;
+        }
+        label{
+            font-weight: bolder;
+        }
+        #container-clientes{
+            margin-top: 50px;
+            min-height: 200px;
+            background-color: white;
+        }
+
+        
+    </style>
+</head>
+<body>
+    
+    <div class="container-fluid ">
+        <!-- cabeçalho -->
+        <div class="row" id="header">
+        </div>
+        
+        <!-- titulo -->
+        <div class="d-flex justify-content-center ">
+            <h1>Lista de Embarques</h1>
+        </div>
+       
+        <!-- linha do formulario -->
+        <div class="row justify-content-sm-center" >
+            <!-- formulario propriamente dito -->
+            <div class=" col-sm-6" id="formulario">
+                <div class="row">
+                    <form action="" class="form-group">
+                        
+                        <div class="row">
+                            <div class="col-4" >
+
+                                <a class="btn btn-primary" href="\src\embarque.html" role="button">Novo Embarque</a>
+
+                            </div>
+                            <div class="row col">
+                                <div class="col-2" >
+                                   <label class="col order-2" for="pwd">Cliente:</label>
+                                </div>
+                                <div class="col form-group">
+                                    <input type="password" class="form-control" id="pwd" placeholder="Buscar cliente">
+                                </div>
+                                <div class="form-group col">
+                                    <a class="btn btn-primary" href="\src\cadastro-cliente.html" role="button">Novo Cliente</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                
+                <div class="container" id="container-clientes"  >
+                    <div class="row">
+                        <div class="button col-2" style="background-color: red;">Meljael(2)</div>
+                        <div class="buttton col-2"  style="background-color: blue;">kg</div>
+                        <div class="buttton col-2"  style="background-color: yellow;">status</div>
+                    </div>
+                    
+                </div>
+                
+                
+            </div>
+            
+        </div>    
+    </div>
+
+    <script src = "bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
