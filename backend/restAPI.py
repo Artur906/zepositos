@@ -313,7 +313,10 @@ def delete_volume(id):
 @app.route('/clientes/<id_cliente>/embarques', methods=['GET'])
 def get_embarques_of_cliente(id_cliente):
     query = Embarque.select().where(Embarque.id_cliente == id_cliente)
-    dados = [i.serialize for i in query]
+    try:
+        dados = [i.serialize for i in query]
+    except:
+        dados = None
     if dados:
         res = jsonify(embarques = dados)
         res.status_code = 200
