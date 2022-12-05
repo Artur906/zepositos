@@ -97,12 +97,12 @@
         import { BASE_URL_API } from './variaveisAmbiente.js'
         import { textMarshal } from 'text-marshal'
 
-        const form = document.getElementById("form");
+        const form = document.querySelector('#form')
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const formData = new FormData(form);
+            const formData = new FormData(form)
 
             const data = {
                 nome: formData.get('nome'),

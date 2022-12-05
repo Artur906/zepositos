@@ -79,7 +79,7 @@
 
                     <div class="form-group col-11">
                         <label for="clientes-disponiveis">Cliente</label>
-                        <select class="custom-select form-control" id="clientes-disponiveis">
+                        <select class="custom-select form-control" id="clientes-disponiveis" name="cliente">
                             <option value="null" selected>Sem cliente</option>
                         </select>
                     </div>
@@ -88,21 +88,22 @@
                         <div class="col-6">
                             <label for="flexCheckDefault">Nota Fiscal</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault"
+                                    name="nota-fiscal">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Possui nota fiscal
                                 </label>
                             </div>
                         </div>
                         <div class="col-3 offset-md-2">
-                            <label for="">Data e Hora</label>
-                            <input type="date" class="form-control" id="data">
+                            <label for="data">Data e Hora</label>
+                            <input type="date" class="form-control" id="data" name="data">
                         </div>
                     </div>
 
                     <div class="form-group col-11">
-                        <label for="nome">Descrição:</label>
-                        <input class="form-control" type="text" name="nome" id="nome"
+                        <label for="descricao">Descrição:</label>
+                        <input class="form-control" type="text" name="descricao" id="descricao"
                             placeholder="Digite a descrição..." required>
                     </div>
 
@@ -147,12 +148,12 @@
                     </div>
 
                     <div class="form-group col-md-6 offset-md-8" id="botoes">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
                         <button type="reset" class="btn btn-primary">Cancelar</button>
                     </div>
                 </form>
 
-
+                <div id="status" class="col-6"></div>
 
             </div>
         </div>
@@ -164,16 +165,18 @@
             import axios from 'axios'
             import { BASE_URL_API } from './variaveisAmbiente.js'
 
-            const dadosClientes = axios.get(`${BASE_URL_API}/clientes`).then(response => response.data)
+            //buscando clientes cadastrados
+            axios.get(`${BASE_URL_API}/clientes`).then(response => {
+                // adicionando clientes
+                const selectCliente = document.querySelector('#clientes-disponiveis')
 
-            // adicionando clientes
-            const selectCliente = document.querySelector('#clientes-disponiveis')
+                response.data.clientes.forEach(cliente => {
+                    let option = `
+                        <option value=${cliente.id}>${cliente.nome}</option>
+                    `
+                    selectCliente.innerHTML += option
+                })
 
-            dadosClientes.clientes.forEach(cliente => {
-                let option = `
-                    <option value=${cliente.id}>${cliente.nome}</option>
-                `
-                selectCliente.innerHTML += option
             })
 
             // colocando a data default igual a data atual!
@@ -224,19 +227,66 @@
 
         <!-- Persistência de dados -->
         <script type="module">
-            const embarque = {
+            import axios from 'axios'
+            import { BASE_URL_API } from './variaveisAmbiente.js'
 
-            }
+            const form = document.querySelector('#form')
 
-            const id_embarque = axios.post("url", embarque)
-                .then(response => {
-                    return response.id_embarque
-                })
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
 
-            volume = {
-                id_embarque: id_embarque,
+                const formData = new FormData(form)
 
-            }
+                document.querySelector('.btn-salvar').disabled = true
+
+                document.querySelector('#status').innerHTML =
+                    `<div class="spinner-border" role="status">
+                        <span class="sr-only"></span>
+                    </div>`
+
+                const data = {
+                    id_cliente: formData.get('cliente'),
+                    descricao: formData.get('descricao'),
+                    data_chegada: formData.get('data'),
+                    com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true
+                }
+
+                axios.post(`${BASE_URL_API}/embarques`, data)
+                    .then(response => {
+                        const volumes = []
+                        let elemento = 1
+                        do {
+                            volumes.push({
+                                largura: formData.get(`larg${elemento}`),
+                                comprimento: formData.get(`comp${elemento}`),
+                                altura: formData.get(`alt${elemento}`),
+                                peso: formData.get(`peso${elemento}`)
+                            })
+                            elemento++
+                        } while (formData.get(`comp${elemento}`))
+
+                        volumes.forEach(volume => {
+                            axios.post(`${BASE_URL_API}/embarques/${response.data.id}/volumes`, volume)
+                        })
+
+                        document.querySelector('#status').innerHTML =
+                            `<div class="alert alert-success" role="alert">
+                                Embarque cadastrado com sucesso!
+                            </div>`
+                    })
+                    .catch(resp => {
+                        document.querySelector('#status').innerHTML =
+                            `<div class="alert alert-danger" role="alert">
+                                Não foi possível cadastrar o embarque!
+                            </div>`
+                    })
+
+            })
+
+
+
+
+
         </script>
 </body>
 
