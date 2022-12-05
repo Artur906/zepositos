@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embarque</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/js/">
+    <style>
+        #formulario {
+            background-color: #A5A8FF;
+            padding: 25px;
+            height: 100%;
+            border-radius: 11px;
+
+        }
+
+        .form-control {
+            border-radius: 11px;
+        }
+
+        .btn {
+            border-radius: 11px;
+            background-color: #ffff;
+            color: black;
+        }
+
+        #header {
+            background-color: #515475;
+            height: 83px;
+        }
+
+        h1 {
+            font-weight: bolder;
+            /* text-align: center; */
+        }
+
+        input {
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 11px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bolder;
+        }
+
+        #titulo {
+            text-align: center;
+            padding: 25px;
+        }
+
+        #medidas {
+            margin-bottom: 25px;
+            margin-left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row" id="header">
+
+        </div>
+        <div class="row" id="titulo">
+            <h1 class="col-sm-4">
+                <h1>Criar embarque</h1>
+            </h1>
+        </div>
+
+        <div class="row justify-content-sm-center ">
+
+            <div class="col-sm-6 " id="formulario">
+                <form id="form">
+
+                    <div class="form-group col-11">
+                        <label for="clientes-disponiveis">Cliente</label>
+                        <select class="custom-select form-control" id="clientes-disponiveis">
+                            <option value="null" selected>Sem cliente</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="flexCheckDefault">Nota Fiscal</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Possui nota fiscal
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-3 offset-md-2">
+                            <label for="">Data e Hora</label>
+                            <input type="date" class="form-control" id="data">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-11">
+                        <label for="nome">Descrição:</label>
+                        <input class="form-control" type="text" name="nome" id="nome"
+                            placeholder="Digite a descrição..." required>
+                    </div>
+
+                    <div class="col position-relative">
+                        <label>Adicionar volume</label>
+                        <table id="my_table_1" data-toggle="table" data-sort-stable="true" class="table table-light">
+                            <thead>
+                                <tr>
+                                    <th>comprimento</th>
+                                    <th>altura</th>
+                                    <th>largura</th>
+                                    <th>peso</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body">
+                                <tr class="linha">
+                                    <td>
+                                        <input class="form-control" type="text" name="comp1" id="comp" placeholder="Cm"
+                                            required>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="alt1" id="alt" placeholder="Cm"
+                                            required>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="larg1" id="larg" placeholder="Cm"
+                                            required>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="peso1" id="peso" placeholder="Kg"
+                                            required>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-2">
+                            <button type="button"
+                                class="btn btn-primary add-row position-absolute top-0 end-0">+</button>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-md-6 offset-md-8" id="botoes">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="reset" class="btn btn-primary">Cancelar</button>
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- manipulação de DOM -->
+        <script type="module">
+            import axios from 'axios'
+            import { BASE_URL_API } from './variaveisAmbiente.js'
+
+            const dadosClientes = axios.get(`${BASE_URL_API}/clientes`).then(response => response.data)
+
+            // adicionando clientes
+            const selectCliente = document.querySelector('#clientes-disponiveis')
+
+            dadosClientes.clientes.forEach(cliente => {
+                let option = `
+                    <option value=${cliente.id}>${cliente.nome}</option>
+                `
+                selectCliente.innerHTML += option
+            })
+
+            // colocando a data default igual a data atual!
+            const date = new Date();
+
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            let today = year + "-" + month + "-" + day;
+            document.getElementById("data").value = today;
+
+
+            // Adicionando elementos na tabela
+            const tabela = document.querySelector('.table-body')
+            let numeroElemento = 1
+
+            document.querySelector('.add-row').addEventListener('click', e => {
+                e.preventDefault()
+                numeroElemento++
+
+                const novaLinha =
+                    `
+                    <td>
+                        <input class="form-control" type="text" name="comp${numeroElemento}"  placeholder="Cm" required>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="alt${numeroElemento}" placeholder="Cm" required>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="larg${numeroElemento}"  placeholder="Cm" required>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="peso${numeroElemento}"  placeholder="Kg" required>
+                    </td>       
+                
+                `
+                const novoElemento = document.createElement('tr')
+                novoElemento.className = 'linha'
+                novoElemento.innerHTML = novaLinha
+
+                tabela.append(novoElemento)
+            })
+        </script>
+
+        <!-- Persistência de dados -->
+        <script type="module">
+            const embarque = {
+
+            }
+
+            const id_embarque = axios.post("url", embarque)
+                .then(response => {
+                    return response.id_embarque
+                })
+
+            volume = {
+                id_embarque: id_embarque,
+
+            }
+        </script>
+</body>
+
+</html>
