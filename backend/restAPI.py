@@ -24,7 +24,10 @@ def index():
 @app.route('/clientes', methods=['GET'])
 def get_clientes():
     query = Cliente.select()
-    dados = [i.serialize for i in query]
+    try:
+        dados = [i.serialize for i in query]
+    except:
+        dados = None
 
     if dados:
         res = jsonify({
@@ -97,7 +100,10 @@ def update_cliente(id):
 #DELETE
 @app.route('/clientes/<id>', methods=['DELETE'])
 def delete_cliente(id):
-    cliente = Cliente.select().where(Cliente.id == id)[0]
+    try:
+        cliente = Cliente.get_by_id(id)
+    except:
+        cliente = None
     if(cliente):
         cliente.delete_instance()
         res = jsonify(message = "Deletado!")
@@ -185,7 +191,10 @@ def update_embarque(id):
 #DELETE
 @app.route('/embarques/<id>', methods=['DELETE'])
 def delete_embarque(id):
-    embarque = Embarque.get_by_id(id)
+    try:
+        embarque = Embarque.get_by_id(id)
+    except:
+        embarque = None
     if(embarque):
         embarque.delete_instance()
         res = jsonify(message = "Deletado!")
