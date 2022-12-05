@@ -172,8 +172,13 @@
 
                 response.data.clientes.forEach(cliente => {
                     let option = `
-                        <option value=${cliente.id}>${cliente.nome}</option>
+                    <option value=${cliente.id}>${cliente.nome}</option>
                     `
+                    if(JSON.parse(localStorage.getItem('cliente-selecionado')) === cliente.id){
+                        option = `
+                        <option value=${cliente.id} selected>${cliente.nome}</option>
+                        `
+                    }
                     selectCliente.innerHTML += option
                 })
 
@@ -251,6 +256,9 @@
                     com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true
                 }
 
+                // armazenando o id do cliente para selecioná-lo automáticamente quando a página recarregar
+                localStorage.setItem('cliente-selecionado', data.id_cliente)
+
                 axios.post(`${BASE_URL_API}/embarques`, data)
                     .then(response => {
                         const volumes = []
@@ -279,6 +287,9 @@
                             `<div class="alert alert-danger" role="alert">
                                 Não foi possível cadastrar o embarque!
                             </div>`
+                    })
+                    .then(resp => {
+                        setTimeout(() => window.location.href = './embarque.html', 5000)
                     })
 
             })
