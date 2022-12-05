@@ -294,7 +294,10 @@ def update_volume(id):
 #DELETE
 @app.route('/volumes/<id>', methods=['DELETE'])
 def delete_volume(id):
-    volume = Volume.get_by_id(id)
+    try:
+        volume = Volume.get_by_id(id)
+    except:
+        volume = None
     if(volume):
         volume.delete_instance()
         res = jsonify(message = "Deletado!")
