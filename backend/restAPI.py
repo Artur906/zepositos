@@ -114,7 +114,10 @@ def delete_cliente(id):
 @app.route('/embarques', methods=['GET'])
 def get_embarques():
     query = Embarque.select()
-    dados = [i.serialize for i in query]
+    try:
+        dados = [i.serialize for i in query]
+    except:
+        dados = None
     if dados:
         res = jsonify(embarques = dados)
         res.status_code = 200
