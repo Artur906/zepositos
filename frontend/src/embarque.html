@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/js/">
     <style>
+
+        body{
+            background-color: #121214;
+        }
+
         #formulario {
             background-color: #A5A8FF;
             padding: 25px;
@@ -33,8 +38,8 @@
         }
 
         h1 {
+            color: aliceblue;
             font-weight: bolder;
-            /* text-align: center; */
         }
 
         input {
@@ -227,6 +232,13 @@
                 novoElemento.innerHTML = novaLinha
 
                 tabela.append(novoElemento)
+
+
+                
+            })
+
+            form.addEventListener('reset', function (e) {
+                window.location.href = "lista-embarques.html"
             })
         </script>
 

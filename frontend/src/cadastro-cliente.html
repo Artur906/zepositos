@@ -11,14 +11,17 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <style>
+
+        body{
+            background-color: #121214;
+        }
+
         #formulario{
             background-color: #A5A8FF;
             padding: 25px;
             width: 50%;
             height: 100%;
             border-radius: 11px;
-
-            
         }
 
         .form-control {
@@ -35,6 +38,7 @@
             height: 83px;
         }
         h1{
+            color: aliceblue;
             font-weight: bolder;
         }
         input{
@@ -133,7 +137,7 @@
         })
 
         form.addEventListener('reset', function (e) {
-            window.location.href = "../index.html"
+            window.location.href = "lista-embarques.html"
         })
 
         const cardnumber = document.getElementById('telefone');

@@ -1,0 +1,187 @@
+
+/* If the screen size is 1601px wide or more, set the font-size of root to 22px (default was 16px).
+   Makes the page more responsible to bigger screens (like 1980p).
+*/
+@media screen and (min-width: 1601px) {
+    :root {
+        font-size: 21px;
+    }
+}
+
+
+* {/* reset css */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+
+:root {
+    --body-bg-color: #121214;
+    --text-color: #E1E1E6;
+    --title-color: #04D361;
+    --form-color: #A8A8A8;
+    --bg-button-color: #8257e5;
+}
+
+body{
+
+    font-family: 'League Spartan', sans-serif;
+    
+    background-color: var(--body-bg-color);
+    height: 100vh;
+}
+
+main{
+    float: left;
+    width: 50%;
+    
+    padding-top: 3.125rem; /* 50/16px */
+    margin-bottom: 1.875rem;
+    padding-left: 1.875rem;/* 30/16px */
+    padding-right: 2rem;
+}
+
+.container-man-reading{
+    z-index: -1;
+    position: absolute;
+    left: 50vw;
+    
+    width: 50%;
+    height: 100%;
+    display: flex;  
+}
+
+/* Use a media query to add a breakpoint at 800px: */
+@media screen and (max-width: 800px) {
+    main{
+        width: 100%;    
+    }
+    .container-man-reading {
+        position: static;
+        width: 100%;
+        height: 50%;
+    }
+}
+
+.img-man-reading{
+    z-index: -1;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% 0;
+    
+}
+
+.img-logo{
+    width: 60%;/* 390/16px */
+    margin-bottom: 0.75rem;/* 92/16px */
+}
+
+h2{
+    color: var(--title-color);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: bold;
+    
+    font-size: 1.5rem;/* 24/16px */
+}
+
+.text-content{    
+    margin-bottom: 2.5rem;/* 50/16px */
+}
+
+p{
+    font-family: 'League Spartan', sans-serif;
+    font-size: 1.062rem;/* 17/16px*/
+    letter-spacing: 0.015rem; 
+
+    font-weight: lighter;
+    color: var(--text-color);
+    margin-top: 0.563rem;/* 9/16px*/   
+}
+
+label{
+    font-family: 'League Spartan', sans-serif;
+    font-size: 1.062rem;/* 17/16px*/
+    letter-spacing: 0.015rem;
+
+    font-weight: bold;
+    color: var(--form-color);
+}
+
+#form-login{
+    margin-top: 1rem;
+    margin-bottom: 3.125rem;
+    display: flex;
+
+    resize: horizontal;
+    width: 56vw;
+
+    resize: vertical;
+    height: 3rem;/* 48/16px */
+}
+
+input[type=email], select{
+    width: 100%;
+    border: none;
+    border-left: solid 0.3125rem var(--title-color);
+    padding: 0.6rem;
+}
+
+input[type=password], select{
+    
+    border: none;
+    border-left: solid 0.3125rem var(--title-color);
+    padding: 0.6rem;
+}
+
+::placeholder{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.75rem; /* 12/16px */
+}
+
+#arrow-right-svg{
+    /* transforms black to purple*/
+    filter: invert(39%) sepia(40%) saturate(6810%) hue-rotate(242deg) brightness(98%) contrast(84%);
+}
+
+button[type=submit] {
+    background-color: var(--bg-button-color);
+    padding: 0.2rem;
+    
+    border: none;
+}
+
+#send-svg{
+    /* transforms black to white*/
+    filter: invert(100%);
+}
+
+#registrar{
+    color: var(--bg-button-color);
+    font-family: 'League Spartan', sans-serif;
+    font-size: 1.062rem;/* 17/16px*/
+    letter-spacing: 0.015rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    
+}
+
+#acessar{
+    color: var(--title-color);
+    opacity: 0.7;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 2rem;
+    margin-top: 2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+#acessar:hover{
+    opacity: 1;
+}
+
