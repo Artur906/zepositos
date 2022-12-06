@@ -1,32 +1,73 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
-    <link rel="stylesheet" href="./public/styles/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zé Pósitos - Página Inicial</title>
-  </head>
-  <body>
-    <div id="app">
-
-      <h2> Funcionalidades </h2>
-      
-      <ul>
-        <li>
-          <a href="src/cadastro-cliente.html">Cadastrar Cliente</a>
-        </li>
-        <li>
-          <a href="src/embarque.html">Novo Embarque</a>
-        </li>
-        <li>
-          <a href="src/lista-embarques.html">Lista de Embarques</a>
-        </li>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZePositos - Pagina Inicial</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/ico" href="assets/icon.png"/>
 
 
-      </ul>
+    <!-- Worksans and League Spartan -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+
+
+<body>
+    <main>
+        <img class="img-logo" src="assets/logo.png" alt="logo RocketNews">
+        
+
+        <div class="text-content">
+            <h2>gerencie seu depósito de forma eficiente.</h2>
+            <p><b></b></p>
+            <p>O ZéPósitos tem tudo o que voce precisa para agilizar o controle de embarques.
+                <br>Acesse agora mesmo 📦</p>
+        </div>
+        
+        <label for="login">Realize o login:</label>
+        <br>
+        <form action="" id="login">
+            <input type="email" name="email" id="email"
+            required
+            maxlength="100"
+            placeholder="oi@zemail.com">
+
+            <input type="password" name="password" id="password"
+            required
+            maxlength="30"
+            placeholder="senha">
+
+            <button type="submit">
+                <img id="send-svg" src="assets/send.svg" alt="">
+            </button>
+        </form>
+
+
+        <a id="registrar" href="">
+            ainda não cadastrado?
+            <img id="arrow-right-svg" src="assets/arrow-right.svg" alt="">
+        </a>
+
+        <a id="acessar" href="src/lista-embarques.html">Acesse o Zé Pósitos</a>
+
+    </main>
+    
+    <div class="container-man-reading">
+        <img class="img-man-reading" src="assets/holding-box.jpg" alt="man smilling and holding cardboad box">
 
     </div>
     
-  </body>
+
+
+</body>
 </html>
+
