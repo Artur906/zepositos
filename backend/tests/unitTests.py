@@ -74,7 +74,44 @@ class TestEmbarquesMethods(unittest.TestCase):
             clear_test_data()
         
     
+class TestClienteMethods(unittest.TestCase):
+    def create_test_data(self):
+        clear_test_data()
+        clientes = [
+            {'id':'1', 'nome': 'Cliente-1'},
+            {'id':'2', 'nome': 'Cliente-2'},
+            {'id':'3', 'nome': 'Cliente-3'},
+        ]
+        Cliente.insert_many(clientes).execute()
 
+        embarquesC1 = [
+            {'id': '1', 'id_cliente':'1', 'descricao': 'embarque-1'},
+            {'id': '2', 'id_cliente':'1', 'descricao': 'embarque-2'},
+            {'id': '3', 'id_cliente':'1', 'descricao': 'embarque-3'}
+        ]
+        Embarque.insert_many(embarquesC1).execute()
+
+        embarquesC2 = [
+            {'id': '4', 'id_cliente':'2', 'descricao': 'embarque-4'}
+        ]
+        Embarque.insert_many(embarquesC2).execute()
+
+
+
+    def test_quant_embarques(self):
+
+        self.create_test_data()
+        c1 = Cliente.get_by_id(1)
+        c2 = Cliente.get_by_id(2)
+        c3 = Cliente.get_by_id(3)
+        try:
+            self.assertEqual(c1.quant_embarques, 3)
+            self.assertEqual(c2.quant_embarques, 1)
+            self.assertEqual(c3.quant_embarques, 0)
+        except AssertionError:
+            raise
+        finally:
+            clear_test_data()
 
 if __name__ == '__main__':
     unittest.main()

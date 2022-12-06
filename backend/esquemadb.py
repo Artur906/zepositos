@@ -26,9 +26,20 @@ class Cliente(BaseModel):
         data = {
             'id': self.id,
             'nome': self.nome,
-            'telefone': self.telefone
+            'telefone': self.telefone,
+            'quant_embarques': self.quant_embarques
         }
         return data
+    
+    @property
+    def quant_embarques(self):
+        q = (
+            Embarque
+            .select()
+            .where(Embarque.id_cliente == self.id)
+            .count()
+        )
+        return q
 
 class Embarque(BaseModel):
     id_cliente      = ForeignKeyField(Cliente, backref='embarque', null=True, on_delete='CASCADE')
