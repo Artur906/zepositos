@@ -27,7 +27,7 @@ class Cliente(BaseModel):
             'id': self.id,
             'nome': self.nome,
             'telefone': self.telefone,
-            'quant_embarques': self.quant_emabarques
+            'quant_embarques': self.quant_embarques
         }
         return data
     
