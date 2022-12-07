@@ -16,7 +16,7 @@ a gente pode colocar um arquivo específico, mas eu sempre adiciono todos de uma
 ```bash 
 git commit -m -a "aqui eu descrevo minhas modificações"
 ```
-o -a serve para adicioanr todos os arquivos modificados automaticamente para o commit, sem a necessidade de `git add ,`
+o `-a` serve para adicioanr todos os arquivos modificados automaticamente para o commit, sem a necessidade de `git add .`
 #### subindo as modificações para o repositório na web
 ```bash 
 git push
