@@ -72,7 +72,7 @@ document.querySelector('.add-row').addEventListener('click', e => {
 })
 
 form.addEventListener('reset', function (e) {
-    window.location.href = "../lista-embarques.html"
+    window.location.href = "../listar-clientes/listar-clientes.html"
 })
 
 

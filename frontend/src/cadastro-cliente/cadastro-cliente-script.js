@@ -42,7 +42,7 @@ form.addEventListener('submit', function (e) {
 
 
 form.addEventListener('reset', function (e) {
-    window.location.href = "../lista-embarques.html"
+    window.location.href = "../listar-clientes/listar-clientes.html"
 })
 
 const cardnumber = document.getElementById('telefone');
