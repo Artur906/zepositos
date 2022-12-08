@@ -3,15 +3,13 @@ import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 const form = document.querySelector('#form')
 
-
-
 //manipulação de DOM 
 //buscando clientes cadastrados
-axios.get(`${BASE_URL_API}/clientes`).then(response => {
+axios.get(`${BASE_URL_API}/clientes`).then(res => {
     // adicionando clientes
     const selectCliente = document.querySelector('#clientes-disponiveis')
 
-    response.data.clientes.forEach(cliente => {
+    res.data.clientes.forEach(cliente => {
         let option = `
         <option value=${cliente.id}>${cliente.nome}</option>
         `
@@ -36,7 +34,7 @@ if (month < 10) month = "0" + month;
 if (day < 10) day = "0" + day;
 
 let today = year + "-" + month + "-" + day;
-document.getElementById("data").value = today;
+document.getElementById('data').value = today;
 
 
 // Adicionando elementos na tabela
@@ -80,12 +78,6 @@ form.addEventListener('reset', function (e) {
 
 
 
-
-
-
-
-
-
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -109,7 +101,7 @@ form.addEventListener('submit', function (e) {
     localStorage.setItem('cliente-selecionado', data.id_cliente)
 
     axios.post(`${BASE_URL_API}/embarques`, data)
-        .then(response => {
+        .then(res => {
             const volumes = []
             let elemento = 1
             do {
@@ -123,7 +115,7 @@ form.addEventListener('submit', function (e) {
             } while (formData.get(`comp${elemento}`))
 
             volumes.forEach(volume => {
-                axios.post(`${BASE_URL_API}/embarques/${response.data.id}/volumes`, volume)
+                axios.post(`${BASE_URL_API}/embarques/${res.data.id}/volumes`, volume)
             })
 
             document.querySelector('#status').innerHTML =
@@ -131,13 +123,13 @@ form.addEventListener('submit', function (e) {
                     Embarque cadastrado com sucesso!
                 </div>`
         })
-        .catch(resp => {
+        .catch(err => {
             document.querySelector('#status').innerHTML =
                 `<div class="alert alert-danger" role="alert">
                     Não foi possível cadastrar o embarque!
                 </div>`
         })
-        .then(resp => {
+        .then(res => {
             setTimeout(() => window.location.href = './cadastro-embarque.html', 5000)
         })
 
