@@ -1,4 +1,4 @@
-from src.server.instance import server
-from src.controllers.clientes import *
+from server.instance import server
+from controllers.clientes import *
 
 server.run()
