@@ -5,44 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Embarques</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap/js/">
-    <style>
-        body{
-            background-color:  #121214;
-            
-        }
-        #formulario{
-            background-color: #A5A8FF;
-            padding: 25px;
-            width: 50%;
-            height: 100%;
-        }
-        .btn{
-            border-radius: 11px;
-            background-color: #ffff;
-            color: black;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        }
-        #header{
-            background-color: #515475;
-            height: 83px;
-        }
-        h1{
-            font-weight: bolder;
-            color:aliceblue;
-        }
-        label{
-            font-weight: bolder;
-        }
-        #container-clientes{
-            margin-top: 50px;
-            min-height: 200px;
-            background-color: white;
-        }
+    <link rel="stylesheet" href="listar-cliente-style.css">
+    <script type = "module" src = "listar-clientes-script.js"></script>
 
-        
-    </style>
 </head>
 <body>
     
@@ -86,20 +51,26 @@
                 </div>
                 
                 <div class="container" id="container-clientes"  >
-                    <div class="row">
-                        <div class="button col-2" style="background-color: red;">Meljael(2)</div>
-                        <div class="buttton col-2"  style="background-color: blue;">kg</div>
-                        <div class="buttton col-2"  style="background-color: yellow;">status</div>
-                    </div>
-                    
-                </div>
-                
-                
-            </div>
-            
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>Cliente </td>
+                                <td>Quantidade</td>
+                            </tr>                           
+                        </thead>
+                        <tbody class="table-body">
+                            <tr>
+                                <td>Andre</td>
+                                <td>10</td>
+                            </tr>
+                        </tbody>
+
+                    </table>               
+                </div>              
+            </div>            
         </div>    
     </div>
 
-    <script src = "bootstrap/js/bootstrap.min.js"></script>
+    
 </body>
 </html>
