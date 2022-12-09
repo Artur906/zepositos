@@ -99,9 +99,9 @@ class Embarque(BaseModel):
 
 class Volume(BaseModel):
     id_embarque = ForeignKeyField(Embarque, backref='volume', on_delete='CASCADE')
-    largura     = DecimalField(null=False)#centimetros
-    comprimento = DecimalField(null=False)#centimetros
-    altura      = DecimalField(null=False)#centimetros
+    largura     = IntegerField(null=False)#centimetros
+    comprimento = IntegerField(null=False)#centimetros
+    altura      = IntegerField(null=False)#centimetros
     peso        = DecimalField(null=False)#quilogramas
 
     @property
