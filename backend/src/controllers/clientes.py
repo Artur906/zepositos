@@ -4,34 +4,33 @@ from flask import request
 
 from server.postgredb import *
 from server.instance import server
-from models.clientes import cliente
+from models.clientes import cliente_model
 app, api = server.app, server.api
 
 ITEM_NOT_FOUND = 'Cliente não encontrado'
-
+NO_ITEMS_FOUND = 'Nenhum cliente encontrado'
 
 
 @api.route('/clientes')
 class ClientesList(Resource):
 
     @api.doc('get_clientes')
-    @api.marshal_list_with(cliente, envelope="clientes", code=200)
-    @api.doc(responses={404: 'Sem clientes registrados.'})
+    @api.marshal_list_with(cliente_model, envelope="clientes", code=200)
+    @api.doc(responses={404: NO_ITEMS_FOUND})
     def get(self):
         query = Cliente.select()
         try:
             dados = [i.serialize for i in query]
         except:
-            dados = None
-        if dados:
-            return dados, 200
-        else:
-            abort(404, 'Sem clientes registrados.')
+            abort(404, NO_ITEMS_FOUND)
+        return dados, 200
+
+            
 
 
     @api.doc('create_cliente')
-    @api.expect(cliente, validate=True)
-    @api.marshal_with(cliente, code=201)
+    @api.expect(cliente_model, validate=True)
+    @api.marshal_with(cliente_model, code=201)
     @api.doc(responses={404: 'Campo id é de leitura apenas.'})
     def post(self):
         payload = api.payload
@@ -39,15 +38,13 @@ class ClientesList(Resource):
         payloadHasIdField = True
         try:
             payload['id']
-            
         except:
             payloadHasIdField = False
-
         if(payloadHasIdField):
             abort(400, "Campo id é de leitura apenas.")
 
-        cliente = Cliente(**payload)
         try:
+            cliente = Cliente(**payload)
             cliente.save()
             return cliente.serialize, 201
         except Exception as e:
@@ -59,18 +56,16 @@ class ClientesList(Resource):
 @api.route('/clientes/<int:id>')
 class Clientes(Resource):
 
-    @api.marshal_with(cliente, code=200)
+    @api.doc('get_cliente')
+    @api.marshal_with(cliente_model, code=200)
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def get(self, id):
         try:
             cliente = Cliente.get_by_id(id)
         except:
-            cliente = None
-        if(cliente):
-            return cliente.serialize, 200
-            
-        else:
             abort(404, ITEM_NOT_FOUND)
+        return cliente.serialize, 200
+            
 
 
     #to do
