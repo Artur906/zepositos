@@ -1,9 +1,9 @@
 from peewee import PostgresqlDatabase
-from server.esquemadb import *
+from src.server.esquemadb import *
 
 databaseName = 'zepositos'
 user         = 'postgres'
-password     = 'senhasegura'
+password     = '1423'
 
 
 db = PostgresqlDatabase(databaseName, host='localhost', port=5432, user=user, password=password)
