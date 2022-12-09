@@ -8,7 +8,7 @@
 
 
 ### 1. Instalando dependencias:
-Crie um ambiente virtual (venv) na pasta 'backend'. [Como criar ambiente virtual python?](https://www.youtube.com/watch?v=hA2l0TgaZhM) <br>
+Crie um ambiente virtual (venv) na pasta 'venv'. [Como criar ambiente virtual python?](https://www.youtube.com/watch?v=hA2l0TgaZhM) <br>
 Nele, serão instaladas as seguintes dependencias:
   - Peewee
   - Psycopg
