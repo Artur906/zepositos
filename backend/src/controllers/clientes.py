@@ -5,10 +5,14 @@ from flask import request
 from server.postgredb import *
 from server.instance import server
 from models.clientes import cliente_model
+from controllers.handyFunctions import has_id
+
 app, api = server.app, server.api
 
 ITEM_NOT_FOUND = 'Cliente não encontrado'
 NO_ITEMS_FOUND = 'Nenhum cliente encontrado'
+
+
 
 
 @api.route('/clientes')
@@ -26,7 +30,7 @@ class ClientesList(Resource):
         return dados, 200
 
             
-
+    
 
     @api.doc('create_cliente')
     @api.expect(cliente_model, validate=True)
@@ -34,15 +38,8 @@ class ClientesList(Resource):
     @api.doc(responses={404: 'Campo id é de leitura apenas.'})
     def post(self):
         payload = api.payload
-
-        payloadHasIdField = True
-        try:
-            payload['id']
-        except:
-            payloadHasIdField = False
-        if(payloadHasIdField):
+        if(has_id(payload)):
             abort(400, "Campo id é de leitura apenas.")
-
         try:
             cliente = Cliente(**payload)
             cliente.save()

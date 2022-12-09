@@ -5,6 +5,7 @@ from flask import request
 from server.postgredb import *
 from server.instance import server
 from models.embarques import embarque_model
+from controllers.handyFunctions import has_id
 app, api = server.app, server.api
 
 ITEM_NOT_FOUND = 'Embarque não encontrado'
@@ -36,15 +37,8 @@ class EmbarquesList(Resource):
     @api.doc(responses={404: 'Campo id é de leitura apenas.'})
     def post(self):
         payload = api.payload
-
-        payloadHasIdField = True
-        try:
-            payload['id']
-        except:
-            payloadHasIdField = False
-        if(payloadHasIdField):
+        if(has_id(payload)):
             abort(400, "Campo id é de leitura apenas.")
-
         try:
             embarque = Embarque(**payload)
             embarque.save()
