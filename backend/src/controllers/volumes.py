@@ -7,8 +7,8 @@ from controllers.handyFunctions import has_id
 
 app, api = server.app, server.api
 
-ITEM_NOT_FOUND = 'Volume não encontrado'
-NO_ITEMS_FOUND = 'Nenhum volume encontrado'
+
+ITEM_NOT_FOUND = 'Nenhum volume encontrado'
 
 
 
@@ -18,13 +18,13 @@ class VolumesList(Resource):
 
     @api.doc('get_volumes')
     @api.marshal_list_with(volume_model, envelope="volumes", code=200)
-    @api.doc(responses={404: NO_ITEMS_FOUND})
+    @api.doc(responses={404: ITEM_NOT_FOUND})
     def get(self):
         query = Volume.select()
         try:
             dados = [i.serialize for i in query]
         except:
-            abort(404, NO_ITEMS_FOUND)
+            abort(404, ITEM_NOT_FOUND)
         return dados, 200
 
             

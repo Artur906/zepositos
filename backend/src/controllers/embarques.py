@@ -6,8 +6,8 @@ from models.embarques import embarque_model
 from controllers.handyFunctions import has_id
 app, api = server.app, server.api
 
-ITEM_NOT_FOUND = 'Embarque não encontrado'
-NO_ITEMS_FOUND = 'Nenhum embarque encontrado'
+
+ITEM_NOT_FOUND = 'Nenhum embarque encontrado'
 
 
 @api.route('/embarques')
@@ -16,13 +16,13 @@ class EmbarquesList(Resource):
 
     @api.doc('get_embarques')
     @api.marshal_list_with(embarque_model, envelope="embarques", code=200)
-    @api.doc(responses={404: NO_ITEMS_FOUND})
+    @api.doc(responses={404: ITEM_NOT_FOUND})
     def get(self):
         query = Embarque.select()
         try:
             dados = [i.serialize for i in query]
         except:
-            abort(404, NO_ITEMS_FOUND)
+            abort(404, ITEM_NOT_FOUND)
         return dados, 200
     
             

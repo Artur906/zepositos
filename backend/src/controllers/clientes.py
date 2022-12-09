@@ -7,8 +7,8 @@ from controllers.handyFunctions import has_id
 
 app, api = server.app, server.api
 
-ITEM_NOT_FOUND = 'Cliente não encontrado'
-NO_ITEMS_FOUND = 'Nenhum cliente encontrado'
+ITEM_NOT_FOUND = 'Nenhum cliente não encontrado'
+
 
 
 
@@ -18,13 +18,13 @@ class ClientesList(Resource):
 
     @api.doc('get_clientes')
     @api.marshal_list_with(cliente_model, envelope="clientes", code=200)
-    @api.doc(responses={404: NO_ITEMS_FOUND})
+    @api.doc(responses={404: ITEM_NOT_FOUND})
     def get(self):
         query = Cliente.select()
         try:
             dados = [i.serialize for i in query]
         except:
-            abort(404, NO_ITEMS_FOUND)
+            abort(404, ITEM_NOT_FOUND)
         return dados, 200
 
             
