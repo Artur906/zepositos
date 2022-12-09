@@ -4,8 +4,7 @@
 * Python instalado na máquina;
 * PostgreSQL rodando na máquina;
 * Uma database postgres chamada de 'zepositos' (pode ser criada por meio do PgAdmim);
-* VSCode (opcional);
-* Postman (opcional).
+* VsCode (opcicional)
 
 
 ### 1. Instalando dependencias:
@@ -22,8 +21,8 @@ Para instalar TODAS as dependencias, execute o comando `pip install -r requireme
 
 
 ### 2. Configurando os arquivos:
-Baixe este repositório na sua máquina.
-Abra-o no VSCode.<br>
+Baixe este repositório e salve em alguma pasta no seu computador.<br>
+Abra-a no VSCode.<br>
 Edite o arquivo `postgredb.py` , inserindo as informações corretas relativo ao postgres rodando na sua máquina (seu usuário e senha).<br>
 
 ### 3. Deixando o banco de dados pronto para uso:
@@ -36,11 +35,12 @@ Após isso, sua API está rodando! Observe no terminal se de fato tudo ocorreu b
 
 ### 5. Consumindo a API:
 Com a API rodando com sucesso, no terminal voce verá que fora _'printado'_ uma URL de acesso a API, que provavelmente se parecerá com `http://127.0.0.1:5000`. <br>
-Voce pode acessar-la com um navegador de internet, e verá a mensagem _"Bem vindo a API!"_.<br>
-Porém recomendo o uso da ferramenta POSTMAN para _'brincar'_ com a API, pois fica mais fácil de realizar todas as operações _CRUD_.<br>
+Voce pode acessar-la por meio de um navegador de internet, e verá a mensagem _"Bem vindo a API!"_.<br>
 Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máquina.
 
 ## 6. Documentação SWAGGER da API:
-Certifique-se que a API está rodando na sua máquina. Se sim, a documentação poderá ser acessada na rota /docs ex: `http://127.0.0.1:5000/docs`
+Certifique-se que a API já está rodando na sua máquina. Se sim, a documentação poderá ser acessada em uma págnina localizada na rota /docs <br>
+ex: `http://127.0.0.1:5000/docs`<br>
+Esta página, além de servir de documentação, pode ser usada para testar a API, sem necessidade de ferramentas externas como o Postman.
 
 
