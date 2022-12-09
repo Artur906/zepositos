@@ -1,6 +1,4 @@
 from flask_restx import Resource, abort
-from flask import jsonify
-from flask import request
 
 from server.postgredb import *
 from server.instance import server
