@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Embarques</title>
-    <link rel="stylesheet" href="listar-cliente-style.css">
+    <link rel="stylesheet" href="./listar-cliente-style.css">
 </head>
 
 <body>
@@ -59,7 +59,7 @@
                                 <td>Quantidade</td>
                             </tr>
                         </thead>
-                        <tbody class="table-body"></tbody>
+                        <tbody class="table-clientes"></tbody>
                     </table>
                 </div>
             </div>
@@ -67,7 +67,7 @@
     </div>
     <div>
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -78,6 +78,20 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>descricao</td>
+                                    <td>quantidade volumes</td>
+                                    <td>peso total</td>
+                                    <td>com nota fiscal</td>
+                                    <td>data chegada</td>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body table-embarques">
+
+                            </tbody>
+                        </table>
                         
                     </div>
                 </div>
