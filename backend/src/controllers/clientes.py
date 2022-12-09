@@ -62,7 +62,7 @@ class Clientes(Resource):
         return cliente.serialize, 200
             
 
-
+    '''
     #to do
     def patch(self, id):
         payload = api.payload
@@ -78,4 +78,4 @@ class Clientes(Resource):
             
         else:
             abort(404, ITEM_NOT_FOUND)
-        
+    '''
