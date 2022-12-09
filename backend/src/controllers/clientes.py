@@ -2,9 +2,9 @@ from flask_restx import Resource, abort
 from flask import jsonify
 from flask import request
 
-from src.server.postgredb import *
-from src.server.instance import server
-from src.models.clientes import cliente
+from server.postgredb import *
+from server.instance import server
+from models.clientes import cliente
 app, api = server.app, server.api
 
 ITEM_NOT_FOUND = 'Cliente não encontrado'
