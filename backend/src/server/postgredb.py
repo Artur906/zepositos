@@ -3,7 +3,7 @@ from server.esquemadb import *
 
 databaseName = 'zepositos'
 user         = 'postgres'
-password     = 'senhasegura'
+password     = '123456'
 
 
 db = PostgresqlDatabase(databaseName, host='localhost', port=5432, user=user, password=password)
