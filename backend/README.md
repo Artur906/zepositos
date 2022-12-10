@@ -8,16 +8,16 @@
 
 
 ### 1. Instalando dependencias:
-Crie um ambiente virtual (venv) na pasta 'venv'. [Como criar ambiente virtual python?](https://www.youtube.com/watch?v=hA2l0TgaZhM) <br>
+Por meio do terminal, crie um ambiente virtual (venv) na pasta 'venv'. [Como criar ambiente virtual python?](https://www.youtube.com/watch?v=hA2l0TgaZhM)<br>
+Entre no ambiente virtual.<br>
 Nele, serão instaladas as seguintes dependencias:
-  - Peewee
-  - Psycopg
-  - Flask
-  - Flask-cors
-  - Flask_restx
-  - Werkzeug<br>
-  
-Para instalar TODAS as dependencias, execute o comando `pip install -r requirements.txt`.
+  - Peewee (ORM)
+  - Psycopg2 (Adaptador Postgres)
+  - Flask (para rotas da API)
+  - Flask-cors (para Cross-Origin)
+  - Flask_restx (para documentação Swagger)
+  - Werkzeug (WSGI) <br>
+Para instalar-las, execute o comando `pip install -r requirements.txt`.
 
 
 ### 2. Configurando os arquivos:
