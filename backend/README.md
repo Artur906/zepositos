@@ -29,9 +29,10 @@ Insira no arquivo `postgredb.py` (localizado em src/server) as informações do 
 Rode o arquivo `main.py` (localizado em src) <br>
 Após isso, sua API está rodando! Observe no terminal se de fato tudo ocorreu bem. 
 
-### 4. Documentação SWAGGER: Como consumir a API:
+### 4. Documentação SWAGGER: Como consumir a API?
 Com a API rodando com sucesso, no terminal voce verá que fora _'printado'_ uma URI de acesso a API, que provavelmente se parecerá com `http://127.0.0.1:5000`. <br>
-Voce pode acessar-la por meio de um navegador de internet, e entrará na documentação da API.<br>
+Voce pode acessar-la por meio de um navegador de internet, e será redirecionado a documentação Swagger da API.<br>
+Lá são especificadas todas as rotas da API, quais métodos HTTP que podem ser usados e como, além dos modelos de dados.<br>
 Esta página, além de servir de documentação, pode ser usada para testar a API, sem necessidade de ferramentas externas como o Postman.<br>
 Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máquina.
 
