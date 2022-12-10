@@ -16,7 +16,9 @@ Nele, serão instaladas as seguintes dependencias:
   - Flask (para rotas da API)
   - Flask-cors (para Cross-Origin)
   - Flask_restx (para documentação Swagger)
-  - Werkzeug (WSGI) <br>
+  - Werkzeug (WSGI)
+  - Unittest (para Testes Unitarios)
+  
 Para instalar-las, execute o comando `pip install -r requirements.txt`.
 
 
