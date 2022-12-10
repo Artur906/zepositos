@@ -8,7 +8,8 @@
 
 
 ### 1. Instalando dependencias:
-Por meio do terminal, crie um ambiente virtual (venv) na pasta 'venv'. [Como criar ambiente virtual python?](https://www.youtube.com/watch?v=hA2l0TgaZhM)<br>
+Baixe este repositório e salve em alguma pasta no seu computador.<br>
+Por meio do terminal, crie um ambiente virtual python na pasta 'zepositos/backend/venv'. [Como criar ambiente virtual python?](https://www.youtube.com/watch?v=hA2l0TgaZhM)<br>
 Entre no ambiente virtual.<br>
 Nele, serão instaladas as seguintes dependencias:
   - Peewee (ORM)
@@ -23,8 +24,7 @@ Para instalar-las, execute o comando `pip install -r requirements.txt`.
 
 
 ### 2. Configurando os arquivos:
-Baixe este repositório e salve em alguma pasta no seu computador.<br>
-Abra-a no VSCode.<br>
+Abra a pasta 'zepositos/backend' no seu VSCode.<br>
 Insira no arquivo `postgredb.py` (localizado em src/server) as informações do postgres rodando na sua máquina (seu usuário e senha).<br>
 
 ### 3. Rodando a API:
