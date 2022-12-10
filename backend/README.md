@@ -23,10 +23,10 @@ Para instalar TODAS as dependencias, execute o comando `pip install -r requireme
 ### 2. Configurando os arquivos:
 Baixe este repositório e salve em alguma pasta no seu computador.<br>
 Abra-a no VSCode.<br>
-Edite o arquivo `postgredb.py` , inserindo as informações corretas relativo ao postgres rodando na sua máquina (seu usuário e senha).<br>
+Insira no arquivo `postgredb.py` (localizado em src/server) as informações do postgres rodando na sua máquina (seu usuário e senha).<br>
 
 ### 3. Rodando a API:
-Rode o arquivo `main.py`<br>
+Rode o arquivo `main.py` (localizado em src) <br>
 Após isso, sua API está rodando! Observe no terminal se de fato tudo ocorreu bem. 
 
 ### 4. Consumindo a API:
