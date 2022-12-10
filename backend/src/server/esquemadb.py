@@ -1,4 +1,3 @@
-
 from peewee import Model, TextField,ForeignKeyField, BooleanField, DateField, DecimalField, IntegerField
 from datetime import datetime
 
@@ -13,7 +12,7 @@ VOLUME(id, id_embarque, largura, comprimento, altura, peso)
 class BaseModel(Model):
     @property
     def serialize(self):# to-do: make it abstract, so children classes MUST implement it.
-        # MUST return self in dict format. ex: {'key1': self.value1, 'key2': self.value2, ...}
+        # MUST return self in dict (json) format. ex: {'key1': self.value1, 'key2': self.value2, ...}
         pass
    
 
@@ -100,9 +99,9 @@ class Embarque(BaseModel):
 
 class Volume(BaseModel):
     id_embarque = ForeignKeyField(Embarque, backref='volume', on_delete='CASCADE')
-    largura     = DecimalField(null=False)#centimetros
-    comprimento = DecimalField(null=False)#centimetros
-    altura      = DecimalField(null=False)#centimetros
+    largura     = IntegerField(null=False)#centimetros
+    comprimento = IntegerField(null=False)#centimetros
+    altura      = IntegerField(null=False)#centimetros
     peso        = DecimalField(null=False)#quilogramas
 
     @property
