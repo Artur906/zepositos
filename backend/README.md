@@ -35,12 +35,12 @@ Após isso, sua API está rodando! Observe no terminal se de fato tudo ocorreu b
 
 ### 5. Consumindo a API:
 Com a API rodando com sucesso, no terminal voce verá que fora _'printado'_ uma URL de acesso a API, que provavelmente se parecerá com `http://127.0.0.1:5000`. <br>
-Voce pode acessar-la por meio de um navegador de internet, e verá a mensagem _"Bem vindo a API!"_.<br>
+Voce pode acessar-la por meio de um navegador de internet, e entrará na documentação da API.<br>
 Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máquina.
 
 ## 6. Documentação SWAGGER da API:
-Certifique-se que a API já está rodando na sua máquina. Se sim, a documentação poderá ser acessada em uma págnina localizada na rota /docs <br>
-ex: `http://127.0.0.1:5000/docs`<br>
+Certifique-se que a API já está rodando na sua máquina. Se sim, a documentação poderá ser acessada em uma págnina localizada na rota / <br>
+ex: `http://127.0.0.1:5000`<br>
 Esta página, além de servir de documentação, pode ser usada para testar a API, sem necessidade de ferramentas externas como o Postman.
 
 
