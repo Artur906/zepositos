@@ -1,7 +1,7 @@
 
-def has_id(payload):
+def has_field(payload, field):
     try:
-        payload['id']
+        payload[field]
     except:
         return False
     return True

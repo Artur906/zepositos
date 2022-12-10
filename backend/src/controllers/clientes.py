@@ -3,11 +3,11 @@ from flask_restx import Resource, abort
 from server.postgredb import *
 from server.instance import server
 from models.clientes import cliente_model
-from controllers.handyFunctions import has_id
+from controllers.handyFunctions import has_field
 
 app, api = server.app, server.api
 
-ITEM_NOT_FOUND = 'Nenhum cliente não encontrado'
+ITEM_NOT_FOUND = 'Nenhum cliente encontrado'
 
 
 
@@ -33,10 +33,10 @@ class ClientesList(Resource):
     @api.doc('create_cliente')
     @api.expect(cliente_model, validate=True)
     @api.marshal_with(cliente_model, code=201)
-    @api.doc(responses={404: 'Campo id é de leitura apenas.'})
+    @api.doc(responses={400: 'Campo id é de leitura apenas.'})
     def post(self):
         payload = api.payload
-        if(has_id(payload)):
+        if(has_field(payload, 'id')):
             abort(400, "Campo id é de leitura apenas.")
         try:
             cliente = Cliente(**payload)
@@ -62,20 +62,28 @@ class Clientes(Resource):
         return cliente.serialize, 200
             
 
-    '''
-    #to do
+    
+    @api.doc('update_cliente')
+    @api.marshal_with(cliente_model, code=200)
+    @api.expect(cliente_model)
+    @api.doc(responses={404: ITEM_NOT_FOUND})
     def patch(self, id):
         payload = api.payload
-        try:
-            cliente = Cliente.get_by_id(id)
-        except:
-            cliente = None
+        if(has_field(payload, 'id')):
+            abort(400,"Campo id é de leitura apenas.")
 
-        if cliente:
+        try:
+            Cliente.get_by_id(id)
+        except:
+            abort(404, ITEM_NOT_FOUND)
+
+        try:
             Cliente.update(**payload).where(Cliente.id == id).execute()
             updatedCliente = Cliente.get_by_id(id)
             return updatedCliente.serialize, 200
+        except Exception as e:
+            abort(400, e)
             
-        else:
-            abort(404, ITEM_NOT_FOUND)
-    '''
+        
+            
+    

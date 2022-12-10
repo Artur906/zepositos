@@ -3,7 +3,7 @@ from flask_restx import Resource, abort
 from server.postgredb import *
 from server.instance import server
 from models.embarques import embarque_model
-from controllers.handyFunctions import has_id
+from controllers.handyFunctions import has_field
 app, api = server.app, server.api
 
 
@@ -32,10 +32,10 @@ class EmbarquesList(Resource):
     @api.doc('create_embarque')
     @api.expect(embarque_model, validate=True)
     @api.marshal_with(embarque_model, code=201)
-    @api.doc(responses={404: 'Campo id é de leitura apenas.'})
+    @api.doc(responses={400: 'Campo id é de leitura apenas.'})
     def post(self):
         payload = api.payload
-        if(has_id(payload)):
+        if(has_field(payload, 'id')):
             abort(400, "Campo id é de leitura apenas.")
         try:
             embarque = Embarque(**payload)
@@ -61,3 +61,22 @@ class Embarques(Resource):
         
             
 
+    @api.doc('update_embarque')
+    @api.marshal_with(embarque_model, code=200)
+    @api.expect(embarque_model)
+    @api.doc(responses={404: ITEM_NOT_FOUND})
+    def patch(self, id):
+        payload = api.payload
+        if(has_field(payload, 'id')):
+            abort(400,"Campo id é de leitura apenas.")
+        try:
+            Embarque.get_by_id(id)
+        except:
+            abort(404, ITEM_NOT_FOUND)
+
+        try:
+            Embarque.update(**payload).where(Embarque.id == id).execute()
+            updatedEmbarque = Embarque.get_by_id(id)
+            return updatedEmbarque.serialize, 200
+        except Exception as e:
+            abort(400, e)

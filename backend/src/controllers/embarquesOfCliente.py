@@ -3,8 +3,6 @@ from flask_restx import Resource, abort
 from server.postgredb import *
 from server.instance import server
 from models.embarques import embarque_model
-from controllers.handyFunctions import has_id
-
 
 app, api = server.app, server.api
 
