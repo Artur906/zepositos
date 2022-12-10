@@ -62,20 +62,28 @@ class Clientes(Resource):
         return cliente.serialize, 200
             
 
-    '''
-    #to do
+    
+    @api.doc('update_cliente')
+    @api.marshal_with(cliente_model, code=200)
+    @api.expect(cliente_model)
+    @api.doc(responses={404: ITEM_NOT_FOUND})
     def patch(self, id):
         payload = api.payload
-        try:
-            cliente = Cliente.get_by_id(id)
-        except:
-            cliente = None
+        if(has_id(payload)):
+            abort(400,"Campo id é de leitura apenas.")
 
-        if cliente:
+        try:
+            Cliente.get_by_id(id)
+        except:
+            abort(404, ITEM_NOT_FOUND)
+
+        try:
             Cliente.update(**payload).where(Cliente.id == id).execute()
             updatedCliente = Cliente.get_by_id(id)
             return updatedCliente.serialize, 200
+        except Exception as e:
+            abort(400, e)
             
-        else:
-            abort(404, ITEM_NOT_FOUND)
-    '''
+        
+            
+    

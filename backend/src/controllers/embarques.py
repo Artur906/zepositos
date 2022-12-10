@@ -61,3 +61,20 @@ class Embarques(Resource):
         
             
 
+    @api.doc('update_embarque')
+    @api.marshal_with(embarque_model, code=200)
+    @api.expect(embarque_model)
+    @api.doc(responses={404: ITEM_NOT_FOUND})
+    def patch(self, id):
+        payload = api.payload
+        try:
+            Embarque.get_by_id(id)
+        except:
+            abort(404, ITEM_NOT_FOUND)
+
+        try:
+            Embarque.update(**payload).where(Embarque.id == id).execute()
+            updatedEmbarque = Embarque.get_by_id(id)
+            return updatedEmbarque.serialize, 200
+        except Exception as e:
+            abort(400, e)
