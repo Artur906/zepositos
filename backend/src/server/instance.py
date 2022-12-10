@@ -11,7 +11,7 @@ class Server():
             version='1.0',
             title='ZePositos API',
             description='API para o sistema de gerenciamento de embarques ZePositos',
-            doc='/docs'
+            doc='/'
         )
     
     def run(self):
