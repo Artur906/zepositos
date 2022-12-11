@@ -1,4 +1,4 @@
-from peewee import Model, TextField,ForeignKeyField, BooleanField, DateField, DecimalField, IntegerField
+from peewee import Model, TextField,ForeignKeyField, BooleanField, DateField, DecimalField, IntegerField, CharField
 from datetime import datetime
 
 '''
@@ -17,8 +17,8 @@ class BaseModel(Model):
    
 
 class Cliente(BaseModel):
-    nome     = TextField(null=False)
-    telefone = TextField(unique=True, null=True)
+    nome     = CharField(max_length=150)
+    telefone = CharField(max_length=13, unique=True, null=True)# ex: 83 92646 2141 or 83 0800 2141
 
     @property
     def serialize(self):
@@ -42,7 +42,7 @@ class Cliente(BaseModel):
 
 class Embarque(BaseModel):
     id_cliente      = ForeignKeyField(Cliente, backref='embarque', null=True, on_delete='CASCADE')
-    descricao       = TextField()
+    descricao       = CharField(max_length=200)
     data_chegada    = DateField(default = datetime.now)
     com_nota_fiscal = BooleanField(default = False)
     registrado      = BooleanField(default = False)
