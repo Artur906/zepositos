@@ -3,7 +3,7 @@ from flask_restx import Resource, abort
 from server.postgredb import *
 from server.instance import server
 from models.clientes import cliente_model
-from controllers.handyFunctions import has_field
+from controllers.handyFunctions import has_field, brazilian_phone_number_validation_check
 
 app, api = server.app, server.api
 
@@ -38,6 +38,9 @@ class ClientesList(Resource):
         payload = api.payload
         if(has_field(payload, 'id')):
             abort(400, "Campo id é de leitura apenas.")
+        if(has_field(payload, 'telefone')):
+            if(brazilian_phone_number_validation_check(payload['telefone']) == False):
+                abort(400, "Telefone inválido.")
         try:
             cliente = Cliente(**payload)
             cliente.save()
