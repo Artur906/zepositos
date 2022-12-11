@@ -12,7 +12,7 @@ ITEM_NOT_FOUND = 'Nenhum volume encontrado'
 @api.route('/embarques/<int:id_embarque>/volumes')
 class EmbarquesOfCliente(Resource):
     @api.doc('get_volumes_of_embarque')
-    @api.marshal_with(volume_model, code=200)
+    @api.marshal_list_with(volume_model, code=200, envelope="volumes")
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def get(self, id_embarque):
         query = Volume.select().where(Volume.id_embarque == id_embarque)

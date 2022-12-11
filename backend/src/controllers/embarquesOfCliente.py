@@ -13,7 +13,7 @@ ITEM_NOT_FOUND = 'Nenhum embarque encontrado'
 class EmbarquesOfCliente(Resource):
 
     @api.doc('get_embarques_of_cliente')
-    @api.marshal_with(embarque_model, code=200)
+    @api.marshal_list_with(embarque_model, code=200, envelope="embarques")
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def get(self, id_cliente):
 
