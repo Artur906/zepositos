@@ -91,7 +91,7 @@ form.addEventListener('submit', function (e) {
         </div>`
 
     const data = {
-        id_cliente: formData.get('cliente'),
+        id_cliente: parseInt(formData.get('cliente')),
         descricao: formData.get('descricao'),
         data_chegada: formData.get('data'),
         com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true
@@ -104,18 +104,28 @@ form.addEventListener('submit', function (e) {
         .then(res => {
             const volumes = []
             let elemento = 1
+
             do {
                 volumes.push({
-                    largura: formData.get(`larg${elemento}`),
-                    comprimento: formData.get(`comp${elemento}`),
-                    altura: formData.get(`alt${elemento}`),
-                    peso: formData.get(`peso${elemento}`)
+                    id_embarque: res.data.id,
+                    largura: parseInt(formData.get(`larg${elemento}`)),
+                    comprimento: parseInt(formData.get(`comp${elemento}`)),
+                    altura: parseInt(formData.get(`alt${elemento}`)),
+                    peso: parseFloat(formData.get(`peso${elemento}`))
                 })
                 elemento++
             } while (formData.get(`comp${elemento}`))
 
             volumes.forEach(volume => {
-                axios.post(`${BASE_URL_API}/embarques/${res.data.id}/volumes`, volume)
+                axios.post(`${BASE_URL_API}/volumes`, volume)
+                .catch(err => {
+                    document.querySelector('#status').innerHTML =
+                        `<div class="alert alert-danger" role="alert">
+                            Não foi possível cadastrar o embarque (erro no volume)!
+                        </div>`
+                    console.log(err.response.data)
+                    return
+                })
             })
 
             document.querySelector('#status').innerHTML =
@@ -128,10 +138,11 @@ form.addEventListener('submit', function (e) {
                 `<div class="alert alert-danger" role="alert">
                     Não foi possível cadastrar o embarque!
                 </div>`
+            console.log(err.response.data.message)
         })
-        .then(res => {
+        /*.then(res => {
             setTimeout(() => window.location.href = './cadastro-embarque.html', 5000)
-        })
+        })*/
 
 })
 
