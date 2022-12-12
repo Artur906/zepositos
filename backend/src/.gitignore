@@ -1,6 +1,10 @@
 
-
+#ignore cache files
 **models/__pycache__**
 **controllers/__pycache__**
 **server/__pycache__**
 **tests/__pycache__**
+**settings/__pycache__**
+
+#ignore the .env file to secure your environment variables
+**settings/.env**
