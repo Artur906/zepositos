@@ -38,6 +38,21 @@ input {
     margin-bottom: 25px;
 }
 
+table {
+    position: relative;
+}
+
+table input {
+    box-shadow: none;
+    border-radius: 0%;
+    margin: 0;
+}
+
+.scroll-table {
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
 label {
     margin-bottom: 5px;
     font-weight: bolder;
