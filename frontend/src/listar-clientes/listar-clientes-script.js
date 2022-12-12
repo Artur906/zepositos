@@ -46,10 +46,11 @@ linhasTableClientes.forEach(linha => {
 async function modalEmbarques(cliente) {
     document.querySelector('.modal-title').textContent = `Embarques de ${cliente.nome}`
     const tabelaEmbarques = document.querySelector('.table-embarques')
-
+    tabelaEmbarques.innerHTML = ''
 
     const dadosEmbarques = await pegarEmbarquesCliente(cliente.id)
     console.log(dadosEmbarques)
+
 
     dadosEmbarques.embarques.forEach(embarque => {
         let table_row =
