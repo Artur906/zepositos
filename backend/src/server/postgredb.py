@@ -1,12 +1,12 @@
 from peewee import PostgresqlDatabase
 from server.esquemadb import *
-
-databaseName = 'zepositos'
-user         = 'postgres'
-password     = '123456'
+from settings.settings import DATABASE_HOST, DATABASE_PASS, DATABASE_USER, DATABASE_PORT
 
 
-db = PostgresqlDatabase(databaseName, host='localhost', port=5432, user=user, password=password)
+#assegure que uma database com o nome abaixo exista
+DATABASE_NAME = 'zepositos'
+
+db = PostgresqlDatabase(DATABASE_NAME, host=DATABASE_HOST, port=DATABASE_PORT, user=DATABASE_USER, password=DATABASE_PASS)
 
 
 tables = [Cliente, Embarque, Volume]
