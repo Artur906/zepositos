@@ -13,7 +13,7 @@ axios.get(`${BASE_URL_API}/clientes`).then(res => {
         let option = `
         <option value=${cliente.id}>${cliente.nome}</option>
         `
-        if(JSON.parse(localStorage.getItem('cliente-selecionado')) === cliente.id){
+        if (JSON.parse(localStorage.getItem('cliente-selecionado')) === cliente.id) {
             option = `
             <option value=${cliente.id} selected>${cliente.nome}</option>
             `
@@ -39,44 +39,78 @@ document.getElementById('data').value = today;
 
 // Adicionando elementos na tabela
 const tabela = document.querySelector('.table-body')
-let numeroElemento = 1
+let numeroElemento = 0
 
-document.querySelector('.add-row').addEventListener('click', e => {
-    e.preventDefault()
+
+const adicionandoElementoNaTabela = () => {
     numeroElemento++
+    const elementoPai = tabela
 
-    const novaLinha =
+    const linha =
         `
-        <td>
-            <input class="form-control" type="text" name="comp${numeroElemento}"  placeholder="Cm" required>
-        </td>
-        <td>
-            <input type="text" class="form-control" name="alt${numeroElemento}" placeholder="Cm" required>
-        </td>
-        <td>
-            <input type="text" class="form-control" name="larg${numeroElemento}"  placeholder="Cm" required>
-        </td>
-        <td>
-            <input type="text" class="form-control" name="peso${numeroElemento}"  placeholder="Kg" required>
-        </td>       
+    <td> 
+        ${numeroElemento}
+    </td> 
+    <td>
+        <input class="form-control" type="text" name="comp${numeroElemento}"  placeholder="Cm" required>
+    </td>
+    <td>
+        <input type="text" class="form-control" name="alt${numeroElemento}" placeholder="Cm" required>
+    </td>
+    <td>
+        <input type="text" class="form-control" name="larg${numeroElemento}"  placeholder="Cm" required>
+    </td>
+    <td>
+        <input type="text" class="form-control" name="peso${numeroElemento}"  placeholder="Kg" required>
+    </td>
+    <td>
+        <input 
+                type="button"
+                class="btn btn-primary add-row" 
+                value="   "
+            />
+    </td>
+`
     
-    `
-    const novoElemento = document.createElement('tr')
-    novoElemento.className = 'linha'
-    novoElemento.innerHTML = novaLinha
-
-    tabela.append(novoElemento)
-
-
+    const novaLinha = document.createElement('tr')
+    novaLinha.className = 'linha'
+    novaLinha.innerHTML = linha
     
-})
+    elementoPai.insertBefore(novaLinha, elementoPai.firstChild)
+
+    //mudar o botão dos elementos anteriores para o de remover 
+    const botoes = document.querySelectorAll('.add-row') 
+    return mudarBotoes(botoes)
+
+}
+
+
+function mudarBotoes(botoes) {
+    botoes.forEach((botao, index) => {
+        if(index > 0) {
+            botao.className = 'btn btn-danger rm-row'
+            botao.value = '   '
+
+            botao.removeEventListener('click', adicionandoElementoNaTabela)
+            botao.addEventListener('click', e => {
+                removerElementoDaTela(botao.parentElement.parentElement)
+            })
+        } else {
+            botao.addEventListener('click', adicionandoElementoNaTabela)
+        }
+    })
+}
+
+const removerElementoDaTela = (elemento) => {
+    tabela.removeChild(elemento)
+}
+
+adicionandoElementoNaTabela()
+
 
 form.addEventListener('reset', function (e) {
     window.location.href = "../listar-clientes/listar-clientes.html"
 })
-
-
-
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -98,7 +132,9 @@ form.addEventListener('submit', function (e) {
     }
 
     // armazenando o id do cliente para selecioná-lo automáticamente quando a página recarregar
-    localStorage.setItem('cliente-selecionado', data.id_cliente)
+    if (data.id_cliente) {
+        localStorage.setItem('cliente-selecionado', data.id_cliente)
+    }
 
     axios.post(`${BASE_URL_API}/embarques`, data)
         .then(res => {
@@ -118,14 +154,14 @@ form.addEventListener('submit', function (e) {
 
             volumes.forEach(volume => {
                 axios.post(`${BASE_URL_API}/volumes`, volume)
-                .catch(err => {
-                    document.querySelector('#status').innerHTML =
-                        `<div class="alert alert-danger" role="alert">
+                    .catch(err => {
+                        document.querySelector('#status').innerHTML =
+                            `<div class="alert alert-danger" role="alert">
                             Não foi possível cadastrar o embarque (erro no volume)!
                         </div>`
-                    console.log(err.response.data)
-                    return
-                })
+                        console.log(err.response.data)
+                        return
+                    })
             })
 
             document.querySelector('#status').innerHTML =
@@ -140,9 +176,9 @@ form.addEventListener('submit', function (e) {
                 </div>`
             console.log(err.response.data.message)
         })
-        /*.then(res => {
-            setTimeout(() => window.location.href = './cadastro-embarque.html', 5000)
-        })*/
+    /*.then(res => {
+        setTimeout(() => window.location.href = './cadastro-embarque.html', 5000)
+    })*/
 
 })
 
