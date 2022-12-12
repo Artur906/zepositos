@@ -8,7 +8,7 @@
 
 
 ### 1. Instalando dependencias:
-Baixe este repositório e salve em alguma pasta no seu computador.<br>
+Clone este repositório em alguma pasta no seu computador.<br>
 Por meio do terminal, crie um ambiente virtual python na pasta 'zepositos/backend/venv'. [Como criar ambiente virtual python?](https://www.youtube.com/watch?v=hA2l0TgaZhM)<br>
 Entre no ambiente virtual.<br>
 Nele, serão instaladas as seguintes dependencias:
@@ -51,5 +51,5 @@ Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máq
 
 Primeiro certifique-se que no seu Postgres há uma database chamada de 'zepositosTEST'.<br>
 Agora rode o arquivo _runTests.py_, localizado em src/tests.<br>
-Se todos os testes passarem, será mostrado no terminal uma mensagem de _OK_
+Se todos os testes passarem, será mostrado no terminal uma mensagem de _OK_.
 
