@@ -19,16 +19,25 @@ Nele, serão instaladas as seguintes dependencias:
   - Flask_restx (para documentação Swagger)
   - Werkzeug (WSGI)
   - Unittest (para Testes Unitarios)
+  - dotenv (para configuração de variaveis de ambiente)
   
 Para instalar-las, execute o comando `pip install -r requirements.txt`.
 
 
-### 2. Configurando os arquivos:
-Abra a pasta 'zepositos/backend' no seu VSCode.<br>
-Insira no arquivo `postgredb.py` (localizado em src/server) as informações do postgres rodando na sua máquina (seu usuário e senha).<br>
+### 2. Configurando variaveis de ambiente:
+Dentro da pasta 'src/settings', crie o arquivo `.env`<br>
+Abra-o com um editor de texto.<br>
+Nele, insira informações relativas ao PostgreSQL da sua máquina, seguindo o modelo de exemplo a seguir:<br>
+```env
+DATABASE_USER="postgres"
+DATABASE_PASS="1234"
+DATABASE_HOST="localhost"
+DATABASE_PORT=5432
+```
+Salve o arquivo.
 
 ### 3. Rodando a API:
-Rode o arquivo `main.py` (localizado em src) <br>
+Rode o arquivo `main.py` (localizado na pasta src) <br>
 Após isso, sua API está rodando! Observe no terminal se de fato tudo ocorreu bem. 
 
 ### 4. Documentação SWAGGER: Como consumir a API?
