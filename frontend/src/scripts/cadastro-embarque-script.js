@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { statusFunctions } from './utils.js'
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 const form = document.querySelector('#form')
@@ -71,24 +72,24 @@ const adicionandoElementoNaTabela = () => {
             />
     </td>
 `
-    
+
     const novaLinha = document.createElement('tr')
     novaLinha.className = 'linha'
     novaLinha.innerHTML = linha
-    
     elementoPai.insertBefore(novaLinha, elementoPai.firstChild)
 
     //mudar o botão dos elementos anteriores para o de remover 
-    const botoes = document.querySelectorAll('.add-row') 
+    const botoes = document.querySelectorAll('.add-row')
     return mudarBotoes(botoes)
+
 
 }
 
 
 function mudarBotoes(botoes) {
     botoes.forEach((botao, index) => {
-        if(index > 0) {
-            botao.className = 'btn btn-danger rm-row'
+        if (index > 0) {
+            botao.className = 'btn btn-danger rmv-row'
             botao.value = '   '
 
             botao.removeEventListener('click', adicionandoElementoNaTabela)
@@ -109,7 +110,7 @@ adicionandoElementoNaTabela()
 
 
 form.addEventListener('reset', function (e) {
-    window.location.href = "../listar-clientes/listar-clientes.html"
+    window.location.href = "./listar-clientes.html"
 })
 
 form.addEventListener('submit', function (e) {
@@ -155,30 +156,21 @@ form.addEventListener('submit', function (e) {
             volumes.forEach(volume => {
                 axios.post(`${BASE_URL_API}/volumes`, volume)
                     .catch(err => {
-                        document.querySelector('#status').innerHTML =
-                            `<div class="alert alert-danger" role="alert">
-                            Não foi possível cadastrar o embarque (erro no volume)!
-                        </div>`
+                        statusFunctions.failedStatus("Não foi possível cadastrar o embarque (erro no volume)!")
                         console.log(err.response.data)
                         return
                     })
             })
 
-            document.querySelector('#status').innerHTML =
-                `<div class="alert alert-success" role="alert">
-                    Embarque cadastrado com sucesso!
-                </div>`
+            statusFunctions.sucessStatus("Embarque cadastrado com sucesso!")
         })
         .catch(err => {
-            document.querySelector('#status').innerHTML =
-                `<div class="alert alert-danger" role="alert">
-                    Não foi possível cadastrar o embarque!
-                </div>`
+            statusFunctions.failedStatus("Não foi possível cadastrar o embarque!")
             console.log(err.response.data.message)
         })
-    /*.then(res => {
-        setTimeout(() => window.location.href = './cadastro-embarque.html', 5000)
-    })*/
+        .then(res => {
+            setTimeout(() => window.location.href = './cadastro-embarque.html', 5000)
+        })
 
 })
 
