@@ -91,9 +91,21 @@ class Clientes(Resource):
             return updatedCliente.serialize, 200
         except Exception as e:
             abort(400, e)
-            
-    
 
+    @api.doc('delete_cliente')
+    @api.doc(responses={404: ITEM_NOT_FOUND})
+    def delete(self, id):
+        if(Cliente.select().where(Cliente.id == id).exists()):
+            cliente = Cliente.get_by_id(id)
+            try: 
+                cliente.delete_instance()
+                return "Deletado!", 200
+            except Exception as e:
+               abort(400, e) 
+        else:
+            abort(404, ITEM_NOT_FOUND)
+
+        
     '''
     @api.doc('create_or_replace_cliente')
     @api.marshal_with(cliente_model)

@@ -83,4 +83,17 @@ class Volumes(Resource):
         except Exception as e:
             abort(400, e)
             
+    @api.doc('delete_volume')
+    @api.doc(responses={404: ITEM_NOT_FOUND})
+    def delete(self, id):
+        if(Volume.select().where(Volume.id == id).exists()):
+            volume = Volume.get_by_id(id)
+            try: 
+                volume.delete_instance()
+                return "Deletado!", 200
+            except Exception as e:
+               abort(400, e) 
+        else:
+            abort(404, ITEM_NOT_FOUND)
 
+       

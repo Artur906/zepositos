@@ -80,3 +80,16 @@ class Embarques(Resource):
             return updatedEmbarque.serialize, 200
         except Exception as e:
             abort(400, e)
+
+    @api.doc('delete_embarque')
+    @api.doc(responses={404: ITEM_NOT_FOUND})
+    def delete(self, id):
+        if(Embarque.select().where(Embarque.id == id).exists()):
+            embarque = Embarque.get_by_id(id)
+            try: 
+                embarque.delete_instance()
+                return "Deletado!", 200
+            except Exception as e:
+               abort(400, e) 
+        else:
+            abort(404, ITEM_NOT_FOUND)
