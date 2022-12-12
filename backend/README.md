@@ -50,6 +50,6 @@ Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máq
 ### 5. (opcional) Testes Unitários: Como rodar?
 
 Primeiro certifique-se que no seu Postgres há uma database chamada de 'zepositosTEST'.<br>
-Agora rode o arquivo _runTests.py_, localizado em src/tests.<br>
+Agora rode o arquivo _runTests.py_, localizado na pasta src.<br>
 Se todos os testes passarem, será mostrado no terminal uma mensagem de _OK_.
 
