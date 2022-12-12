@@ -2,7 +2,7 @@ from flask_restx import Resource, abort
 
 from server.postgredb import *
 from server.instance import server
-from models.volumes import volume_model
+from models.volumes import volume_model, volume_model_patch
 from controllers.handyFunctions import has_field
 
 app, api = server.app, server.api
@@ -64,8 +64,8 @@ class Volumes(Resource):
 
 
     @api.doc('update_volume')
-    @api.marshal_with(volume_model, code=200)
-    @api.expect(volume_model)
+    @api.marshal_with(volume_model_patch, code=200)
+    @api.expect(volume_model_patch, validate=True)
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def patch(self, id):
         payload = api.payload

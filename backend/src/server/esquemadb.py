@@ -17,8 +17,8 @@ class BaseModel(Model):
    
 
 class Cliente(BaseModel):
-    nome     = CharField(max_length=150)
-    telefone = CharField(max_length=13, unique=True, null=True)# ex: 83 92646 2141 or 83 0800 2141
+    nome     = CharField(max_length=100)
+    telefone = CharField(max_length=13, unique=True, null=True)# ex: 83 92646 2141 or 83 0800 2141 (telefone fixo)
 
     @property
     def serialize(self):

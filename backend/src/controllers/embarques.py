@@ -2,7 +2,7 @@ from flask_restx import Resource, abort
 
 from server.postgredb import *
 from server.instance import server
-from models.embarques import embarque_model
+from models.embarques import embarque_model, embarque_model_patch
 from controllers.handyFunctions import has_field
 app, api = server.app, server.api
 
@@ -49,7 +49,7 @@ class EmbarquesList(Resource):
 @api.route('/embarques/<int:id>')
 class Embarques(Resource):
 
-    @api.doc('get_embarques')
+    @api.doc('get_embarque')
     @api.marshal_with(embarque_model, code=200)
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def get(self, id):
@@ -62,8 +62,8 @@ class Embarques(Resource):
             
 
     @api.doc('update_embarque')
-    @api.marshal_with(embarque_model, code=200)
-    @api.expect(embarque_model)
+    @api.marshal_with(embarque_model_patch, code=200)
+    @api.expect(embarque_model_patch, validate=True)
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def patch(self, id):
         payload = api.payload
