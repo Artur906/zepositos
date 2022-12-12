@@ -20,3 +20,6 @@ embarque_model = server.api.model('Embarque', {
     'embarcado':        fields.Boolean(default=False, description="Embarcado para chegar ao seu destino ou ainda está no depósito.")
 })
 
+embarque_model_patch = server.api.clone('PatchEmbarque', embarque_model,{
+    'descricao': fields.String(required=False, max_length=200, description='A descricao do embarque.', example="Caixas pretas grandes, entrega em domicílio."),
+})
