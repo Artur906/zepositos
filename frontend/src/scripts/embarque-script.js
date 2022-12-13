@@ -13,9 +13,6 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 async function pegarEmbarque(id) {
     return (await axios.get(`${BASE_URL_API}/embarques/${id_embarque}`)).data
 }
-async function pegarVolumesEmbarque(id_embarque) {
-    return (await axios.get(`${BASE_URL_API}/embarques/${id_embarque}/volumes`)).data
-}
 async function pegarClienteDonoDoEmbarque(id_cliente) {
     if(id_cliente) {
         return (await axios.get(`${BASE_URL_API}/clientes/${id_cliente}`)).data
@@ -36,7 +33,6 @@ console.log(id_embarque)
 
 
 let embarque = await pegarEmbarque(id_embarque)
-let volumes_embarque = await pegarVolumesEmbarque(id_embarque)
 let cliente = await pegarClienteDonoDoEmbarque(embarque.id_cliente)
 
 const clienteSelecionado = document.querySelector('#clientes-disponiveis')
@@ -67,7 +63,7 @@ updateNotaFiscalCheckBox(embarque.com_nota_fiscal)
 document.getElementById("descricao").value = embarque.descricao
 document.getElementById("data").value = embarque.data_chegada
 
-volumes_embarque.volumes.forEach((volume, index) => {
+embarque.volumes.forEach((volume, index) => {
     const novaLinha = criarLinha(index + 1)
 
     //acessando cada um dos elementos da linha
