@@ -14,3 +14,4 @@ rodando o projeto
 ```bash 
    npm run dev
 ```
+Para que o zepositos funcione em sua completude, voce deve tabém rodar o backend!
