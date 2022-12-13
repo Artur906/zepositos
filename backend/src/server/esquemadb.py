@@ -1,6 +1,6 @@
 from peewee import Model, TextField,ForeignKeyField, BooleanField, DateField, DecimalField, IntegerField, CharField
 from datetime import datetime
-
+from playhouse.postgres_ext import JSONField
 '''
 CLIENTE(id, nome, telefone)
 
@@ -49,7 +49,7 @@ class Embarque(BaseModel):
     pago            = BooleanField(default = False)
     urgente         = BooleanField(default = False)
     embarcado       = BooleanField(default = False)
-
+    volumes         = JSONField()
 
     @property
     def serialize(self):
@@ -64,6 +64,7 @@ class Embarque(BaseModel):
             'descricao': self.descricao,
             'data_chegada': self.data_chegada,
             'quant_volumes': self.quant_volumes,
+            'volumes': self.volumes,
             'peso_total': self.peso_total,
             'com_nota_fiscal': self.com_nota_fiscal,
             'registrado': self.registrado,
@@ -73,53 +74,14 @@ class Embarque(BaseModel):
         }
         return data
     
+    # TO-DO
     @property
     def quant_volumes(self):
-        q = (
-            Volume
-            .select()
-            .where(Volume.id_embarque == self.id)
-            .count()
-        )
-        return q
+        return 0
 
+    # TO-DO
     @property
     def peso_total(self):
-        q = (
-            Volume
-            .select(Volume.peso)
-            .where(Volume.id_embarque == self.id)
-        )
-        total = 0
-        for row in q:
-            total += row.peso
-        return total
+        return 0
     
     
-
-class Volume(BaseModel):
-    id_embarque = ForeignKeyField(Embarque, backref='volume', on_delete='CASCADE')
-    largura     = IntegerField(null=False)#centimetros
-    comprimento = IntegerField(null=False)#centimetros
-    altura      = IntegerField(null=False)#centimetros
-    peso        = DecimalField(null=False)#quilogramas
-
-    @property
-    def serialize(self):
-        try:
-            #gambiarra para nao retornar o tipo <Model>
-            int_id_embarque = (Embarque.select().where(Embarque.id == self.id_embarque).get()).id
-        except:
-            int_id_embarque = None
-
-        data = {
-            'id': self.id,
-            'id_embarque': int_id_embarque,
-            'largura': self.largura,
-            'comprimento': self.comprimento,
-            'altura': self.altura,
-            'peso': self.peso
-        }
-        return data
-    
-
