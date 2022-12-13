@@ -9,7 +9,7 @@ DATABASE_NAME = 'zepositos'
 db = PostgresqlDatabase(DATABASE_NAME, host=DATABASE_HOST, port=DATABASE_PORT, user=DATABASE_USER, password=DATABASE_PASS)
 
 
-tables = [Cliente, Embarque, Volume]
+tables = [Cliente, Embarque]
 db.bind(tables)
 db.connect()
 db.create_tables(tables)

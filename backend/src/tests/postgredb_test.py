@@ -11,7 +11,7 @@ test_database = PostgresqlDatabase(DATABASE_NAME, host=DATABASE_HOST, port=DATAB
 
 
 
-tables = [Cliente, Embarque, Volume]
+tables = [Cliente, Embarque]
 test_database.bind(tables)
 test_database.connect()
 test_database.create_tables(tables)
