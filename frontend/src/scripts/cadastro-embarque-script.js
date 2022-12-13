@@ -80,11 +80,8 @@ const adicionandoElementoNaTabela = () => {
 
     //mudar o botão dos elementos anteriores para o de remover 
     const botoes = document.querySelectorAll('.add-row')
-    return mudarBotoes(botoes)
-
-
+    mudarBotoes(botoes)
 }
-
 
 function mudarBotoes(botoes) {
     botoes.forEach((botao, index) => {
@@ -94,7 +91,9 @@ function mudarBotoes(botoes) {
 
             botao.removeEventListener('click', adicionandoElementoNaTabela)
             botao.addEventListener('click', e => {
+                // o parentElement é o elemento pai, o botão está dentro de um td, que está dentro de um tr
                 removerElementoDaTela(botao.parentElement.parentElement)
+                reorganizarContagemDeLinhas()
             })
         } else {
             botao.addEventListener('click', adicionandoElementoNaTabela)
@@ -106,6 +105,25 @@ const removerElementoDaTela = (elemento) => {
     tabela.removeChild(elemento)
 }
 
+const reorganizarContagemDeLinhas = () => {
+    numeroElemento--
+    const linhas = document.querySelectorAll('.linha')
+    linhas.forEach((linha, index) => {
+        const indexInvertido = linhas.length - index - 1
+        //acessando cada um dos elementos da linha
+        //contador
+        linha.children[0].innerHTML = indexInvertido + 1
+        //comp 
+        linha.children[1].firstElementChild.setAttribute('name', `comp${indexInvertido + 1}`) 
+        //alt 
+        linha.children[2].firstElementChild.setAttribute('name', `alt${indexInvertido + 1}`) 
+        //larg 
+        linha.children[3].firstElementChild.setAttribute('name', `larg${indexInvertido + 1}`) 
+        //peso 
+        linha.children[4].firstElementChild.setAttribute('name', `peso${indexInvertido + 1}`) 
+    })
+}
+
 adicionandoElementoNaTabela()
 
 
@@ -115,16 +133,10 @@ form.addEventListener('reset', function (e) {
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-
-    const formData = new FormData(form)
-
+    statusFunctions.loadingStatus()
     document.querySelector('.btn-salvar').disabled = true
-
-    document.querySelector('#status').innerHTML =
-        `<div class="spinner-border" role="status">
-            <span class="sr-only"></span>
-        </div>`
-
+    
+    const formData = new FormData(form)
     const data = {
         id_cliente: parseInt(formData.get('cliente')),
         descricao: formData.get('descricao'),
