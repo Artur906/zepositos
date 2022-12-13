@@ -1,13 +1,8 @@
+from decimal import Decimal
 from peewee import Model, TextField,ForeignKeyField, BooleanField, DateField, DecimalField, IntegerField, CharField
 from datetime import datetime
 from playhouse.postgres_ext import JSONField
-'''
-CLIENTE(id, nome, telefone)
 
-EMBARQUE(id, id_cliente, data_chegada, com_nota_fiscal, registrado, pago, embarcado)
-
-VOLUME(id, id_embarque, largura, comprimento, altura, peso)
-'''
 
 class BaseModel(Model):
     @property
@@ -49,7 +44,7 @@ class Embarque(BaseModel):
     pago            = BooleanField(default = False)
     urgente         = BooleanField(default = False)
     embarcado       = BooleanField(default = False)
-    volumes         = JSONField()
+    volumes         = JSONField(default = [])
 
     @property
     def serialize(self):
@@ -77,11 +72,17 @@ class Embarque(BaseModel):
     # TO-DO
     @property
     def quant_volumes(self):
-        return 0
+        quant = 0
+        for i in self.volumes:
+            quant += 1
+        return quant
 
     # TO-DO
     @property
     def peso_total(self):
-        return 0
+        peso = 0
+        for i in self.volumes:
+            peso += Decimal(i['peso'])
+        return peso
     
     
