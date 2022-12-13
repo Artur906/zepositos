@@ -16,6 +16,12 @@ async function pegarEmbarque(id) {
 async function pegarVolumesEmbarque(id_embarque) {
     return (await axios.get(`${BASE_URL_API}/embarques/${id_embarque}/volumes`)).data
 }
+async function pegarClienteDonoDoEmbarque(id_cliente) {
+    if(id_cliente) {
+        return (await axios.get(`${BASE_URL_API}/clientes/${id_cliente}`)).data
+    }
+    return null
+}
 
 
 const updateNotaFiscalCheckBox = (bool) => {
@@ -25,20 +31,34 @@ const updateNotaFiscalCheckBox = (bool) => {
 }
 
 
-
-
-
-
-
 const id_embarque = params.id
 console.log(id_embarque)
 
 
 let embarque = await pegarEmbarque(id_embarque)
 let volumes_embarque = await pegarVolumesEmbarque(id_embarque)
+let cliente = await pegarClienteDonoDoEmbarque(embarque.id_cliente)
 
-console.log(embarque)
-console.log(volumes_embarque)
+const clienteSelecionado = document.querySelector('#clientes-disponiveis')
+
+if (cliente) {
+    let option = `
+    <option value=${cliente.id} selected>${cliente.nome}</option>
+    `
+    clienteSelecionado.innerHTML = option
+} else {
+
+    axios.get(`${BASE_URL_API}/clientes`).then(res => {
+        // adicionando clientes
+        res.data.clientes.forEach(cliente => {
+            let option = `
+            <option value=${cliente.id}>${cliente.nome}</option>
+            `
+            clienteSelecionado.innerHTML += option
+        })
+    })
+}
+
 
 
 const form = document.querySelector('#form')
@@ -73,6 +93,7 @@ form.addEventListener('submit', function (e) {
 
     const formData = new FormData(form)
     const data = {
+        id_cliente: formData.get('cliente'), 
         descricao: formData.get('descricao'),
         data_chegada: formData.get('data'),
         com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true
@@ -81,7 +102,8 @@ form.addEventListener('submit', function (e) {
         .then(res => {
             statusFunctions.sucessStatus("Embarque Atualizado com sucesso!")
         })
-        .except(err => {
+        .catch(err => {
+            console.log(err)
             statusFunctions.failedStatus("Não foi possível atualizar o embarque!")
         })
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { statusFunctions } from './utils.js'
+import { statusFunctions, criarLinha } from './utils.js'
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 const form = document.querySelector('#form')
@@ -47,35 +47,8 @@ const adicionandoElementoNaTabela = () => {
     numeroElemento++
     const elementoPai = tabela
 
-    const linha =
-        `
-    <td> 
-        ${numeroElemento}
-    </td> 
-    <td>
-        <input class="form-control" type="text" name="comp${numeroElemento}"  placeholder="Cm" required>
-    </td>
-    <td>
-        <input type="text" class="form-control" name="alt${numeroElemento}" placeholder="Cm" required>
-    </td>
-    <td>
-        <input type="text" class="form-control" name="larg${numeroElemento}"  placeholder="Cm" required>
-    </td>
-    <td>
-        <input type="text" class="form-control" name="peso${numeroElemento}"  placeholder="Kg" required>
-    </td>
-    <td>
-        <input 
-                type="button"
-                class="btn btn-primary add-row" 
-                value="   "
-            />
-    </td>
-`
-
-    const novaLinha = document.createElement('tr')
-    novaLinha.className = 'linha'
-    novaLinha.innerHTML = linha
+    const novaLinha = criarLinha(numeroElemento)
+   
     elementoPai.insertBefore(novaLinha, elementoPai.firstChild)
 
     //mudar o botão dos elementos anteriores para o de remover 
