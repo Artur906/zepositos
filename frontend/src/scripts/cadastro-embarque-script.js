@@ -80,7 +80,7 @@ const adicionandoElementoNaTabela = () => {
 
     //mudar o botão dos elementos anteriores para o de remover 
     const botoes = document.querySelectorAll('.add-row')
-    return mudarBotoes(botoes)
+    mudarBotoes(botoes)
 }
 
 function mudarBotoes(botoes) {
