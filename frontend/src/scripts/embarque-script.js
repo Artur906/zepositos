@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { statusFunctions } from './utils.js'
+import { statusFunctions, criarLinha } from './utils.js'
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 
@@ -18,11 +18,11 @@ async function pegarVolumesEmbarque(id_embarque) {
 }
 
 
-const updateNotaFiscalCheckBox = (bool) =>{
+const updateNotaFiscalCheckBox = (bool) => {
     document.getElementById('flexCheckDefault').checked = bool
     const formData = new FormData(form)
     formData.set('nota-fiscal', bool)
-}   
+}
 
 
 
@@ -42,17 +42,35 @@ console.log(volumes_embarque)
 
 
 const form = document.querySelector('#form')
+const tabela = document.querySelector(".table-body")
 updateNotaFiscalCheckBox(embarque.com_nota_fiscal)
 document.getElementById("descricao").value = embarque.descricao
 document.getElementById("data").value = embarque.data_chegada
 
+volumes_embarque.volumes.forEach((volume, index) => {
+    const novaLinha = criarLinha(index + 1)
+
+    //acessando cada um dos elementos da linha
+    //contador
+    novaLinha.children[0].value = index + 1
+    //comp 
+    novaLinha.children[1].firstElementChild.value = volume.comprimento
+    //alt 
+    novaLinha.children[2].firstElementChild.value = volume.altura
+    //larg 
+    novaLinha.children[3].firstElementChild.value = volume.largura
+    //peso 
+    novaLinha.children[4].firstElementChild.value = volume.peso
+
+    tabela.append(novaLinha)
+})
 
 // quando o botao salvar é clicado:
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     statusFunctions.loadingStatus()
     document.querySelector('.btn-salvar').disabled = true
-    
+
     const formData = new FormData(form)
     const data = {
         descricao: formData.get('descricao'),
@@ -60,11 +78,14 @@ form.addEventListener('submit', function (e) {
         com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true
     }
     axios.patch(`${BASE_URL_API}/embarques/${id_embarque}`, data)
-        .then(res=>{
+        .then(res => {
             statusFunctions.sucessStatus("Embarque Atualizado com sucesso!")
         })
-        .except(err=>{
+        .except(err => {
             statusFunctions.failedStatus("Não foi possível atualizar o embarque!")
         })
-    
+
 })
+
+
+
