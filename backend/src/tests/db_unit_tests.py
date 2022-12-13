@@ -1,5 +1,5 @@
 import unittest
-from tests.postgredb_test import *
+from src.tests.postgredb_test import *
 from decimal import Decimal
 
 

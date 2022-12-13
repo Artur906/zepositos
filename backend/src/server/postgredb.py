@@ -1,6 +1,6 @@
 from peewee import PostgresqlDatabase
-from server.esquemadb import *
-from settings.settings import DATABASE_HOST, DATABASE_PASS, DATABASE_USER, DATABASE_PORT
+from src.server.esquemadb import *
+from src.settings.settings import DATABASE_HOST, DATABASE_PASS, DATABASE_USER, DATABASE_PORT
 
 
 #assegure que uma database com o nome abaixo exista

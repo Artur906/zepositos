@@ -1,5 +1,5 @@
 from flask_restx import fields
-from server.instance import server
+from src.server.instance import server
 
 volume_model = server.api.model('Volume', {
     'id':          fields.Integer(readonly=True, description='O identificador do volume.', example=1),

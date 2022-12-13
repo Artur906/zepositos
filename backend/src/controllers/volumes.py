@@ -1,9 +1,9 @@
 from flask_restx import Resource, abort
 
-from server.postgredb import *
-from server.instance import server
-from models.volumes import volume_model, volume_model_patch
-from controllers.handyFunctions import has_field
+from src.server.postgredb import *
+from src.server.instance import server
+from src.models.volumes import volume_model, volume_model_patch
+from src.controllers.handyFunctions import has_field
 
 app, api = server.app, server.api
 

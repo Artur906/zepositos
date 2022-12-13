@@ -1,9 +1,9 @@
 from flask_restx import Resource, abort
 
-from server.postgredb import *
-from server.instance import server
-from models.clientes import cliente_model, cliente_model_patch  
-from controllers.handyFunctions import has_field, brazilian_phone_number_validation_check
+from src.server.postgredb import *
+from src.server.instance import server
+from src.models.clientes import cliente_model, cliente_model_patch  
+from src.controllers.handyFunctions import has_field, brazilian_phone_number_validation_check
 
 app, api = server.app, server.api
 

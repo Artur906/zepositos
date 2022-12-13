@@ -1,5 +1,6 @@
 # Zé Pósitos: API REST em Python com banco PostgreSQL
-
+## Como rodar o backend?
+Voce pode seguir os passos descritos abaixo, ou ver este [video](https://youtu.be/x9d15Am9EMI) tutorial de 3 minutos.
 ### 0. Pré-requisitos:
 * Python instalado na máquina;
 * PostgreSQL rodando na máquina;
@@ -9,8 +10,8 @@
 
 ### 1. Instalando dependencias:
 Clone este repositório em alguma pasta no seu computador.<br>
-Por meio do terminal, crie um ambiente virtual python na pasta 'zepositos/backend/venv'. [Como criar ambiente virtual python?](https://www.youtube.com/watch?v=hA2l0TgaZhM)<br>
-Entre no ambiente virtual.<br>
+Por meio do terminal, crie um ambiente virtual python na pasta do backend. <br> (ex: `python -m venv venv`) [Como criar ambiente virtual python?](https://www.youtube.com/watch?v=hA2l0TgaZhM)<br>
+Ative o ambiente virtual (`./Scripts/activate`).<br>
 Nele, serão instaladas as seguintes dependencias:
   - Peewee (ORM)
   - Psycopg2 (Adaptador Postgres)
@@ -21,7 +22,7 @@ Nele, serão instaladas as seguintes dependencias:
   - Unittest (para Testes Unitarios)
   - dotenv (para configuração de variaveis de ambiente)
   
-Para instalar-las, execute o comando `pip install -r requirements.txt`.
+Para instalar-las, entre na pasta do backend e execute o comando `pip install -r requirements.txt`.
 
 
 ### 2. Configurando variaveis de ambiente:
@@ -37,19 +38,28 @@ DATABASE_PORT=5432
 Salve o arquivo.
 
 ### 3. Rodando a API:
-Rode o arquivo `main.py` (localizado na pasta src) <br>
+Por meio do terminal, ative o ambiente virtual do zepositos.<br>
+Dentro da pasta do backend, execute o comando `python main.py` <br>
 Após isso, sua API está rodando! Observe no terminal se de fato tudo ocorreu bem. 
 
-### 4. (opcional) Documentação SWAGGER: Como consumir a API?
+#### 3.1 (Opcional) Como rodar pelo VsCode?
+Abra a pasta do zepositos no seu vscode.<br>
+Certifique-se que tem a [extensão do python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) instalada no vscode.<br>
+Ctrl+Shift+P e Pesquise "Selecionar Interpretador (Python)"<br>
+Escolha a opção "Insira o caminho do interpretador"->"Localizar".<br>
+Isso abrirá o seu explorador de arquivos. Selecione o executavel python localizado no seu ambiente virtual (ex: venv/Scripts/python.exe).<br>
+Pronto, agora no VsCode é só rodar o arquivo main.py .
+
+### 4. (Opcional) Documentação SWAGGER: Como consumir a API?
 Com a API rodando com sucesso, no terminal voce verá que fora _'printado'_ uma URI de acesso a API, que provavelmente se parecerá com `http://127.0.0.1:5000`. <br>
 Voce pode acessar-la por meio de um navegador de internet, e será redirecionado a documentação Swagger da API.<br>
 Lá são especificadas todas as rotas da API, quais métodos HTTP que podem ser usados e como, além dos modelos de dados.<br>
 Esta página, além de servir de documentação, pode ser usada para testar a API, sem necessidade de ferramentas externas como o Postman.<br>
 Tenha em mente que a API só pode ser consumida localmente, ou seja, na sua máquina.
 
-### 5. (opcional) Testes Unitários: Como rodar?
+### 5. (Opcional) Testes Unitários: Como rodar?
 
 Primeiro certifique-se que no seu Postgres há uma database chamada de 'zepositosTEST'.<br>
-Agora rode o arquivo _runTests.py_, localizado na pasta src.<br>
+Agora rode o arquivo _runTests.py_.<br>
 Se todos os testes passarem, será mostrado no terminal uma mensagem de _OK_.
 

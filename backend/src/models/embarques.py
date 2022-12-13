@@ -1,6 +1,6 @@
 from datetime import date
 from flask_restx import fields
-from server.instance import server
+from src.server.instance import server
 
 class NullableInteger(fields.Integer):
     __schema_type__ = ['integer', 'null']
