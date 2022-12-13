@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embarque</title>
+
+    <link rel="stylesheet" href="../styles/global.css">
+    <script type="module" src="../scripts/embarque-script.js" ></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" id="header">
+            <a href="/index.html" class="logo-link"></a>
+        </div>
+
+        <div class="row justify-content-center" id="titulo">
+            <h1>Embarque</h1>
+        </div>
+
+        <div class="row justify-content-sm-center ">
+
+            <div class="col-sm-6 " id="formulario">
+                <form id="form">
+
+                    <div class="form-group col-11">
+                        <label for="clientes-disponiveis">Cliente</label>
+                        <select class="custom-select form-control" id="clientes-disponiveis" name="cliente">
+                            <option value="null" selected>Sem cliente</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="flexCheckDefault">Nota Fiscal</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault"
+                                    name="nota-fiscal">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Possui nota fiscal
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-3 offset-md-2">
+                            <label for="data">Data e Hora</label>
+                            <input type="date" class="form-control" id="data" name="data">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-11">
+                        <label for="descricao">Descrição:</label>
+                        <input class="form-control" type="text" name="descricao" id="descricao"
+                            placeholder="Digite a descrição..." required>
+                    </div>
+
+                    <div class="col position-relative">
+                        <label>Adicionar volume</label>
+                        <div class="scroll-table">
+
+                            <table data-toggle="table" data-sort-stable="true" class="table table-light">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>comprimento</th>
+                                        <th>altura</th>
+                                        <th>largura</th>
+                                        <th>peso</th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group col-md-6 offset-md-8" id="botoes">
+                        <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+                        <button type="reset" class="btn btn-primary">Cancelar</button>
+                    </div>
+                </form>
+
+                <div id="status" class="col-6"></div>
+
+            </div>
+        </div>
+</body>
+</html>
