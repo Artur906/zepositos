@@ -9,8 +9,14 @@ body{
     padding: 25px;
     height: 100%;
     border-radius: 11px;
-
 }
+
+#container-clientes{
+   margin-top: 50px;
+   min-height: 200px;
+   background-color: white;
+}
+
 
 .form-control {
     border-radius: 11px;
@@ -38,8 +44,8 @@ input {
     margin-bottom: 25px;
 }
 
-table {
-    position: relative;
+.table {
+    margin: 0;
 }
 
 table input {
@@ -49,8 +55,10 @@ table input {
 }
 
 .scroll-table {
+    height: fit-content;
     max-height: 250px;
     overflow-y: scroll;
+    margin-bottom: 1rem;
 }
 
 label {

@@ -1,31 +1,9 @@
 import axios from 'axios' //node
+import { statusFunctions } from './utils.js'
 import { textMarshal } from 'text-marshal' // node
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 const form = document.querySelector('#form')
-
-//objeto que possui funções que atualizam a DOM do status
-const statusFunctions = {
-    elementoStatus: document.querySelector('#status'), 
-    loadingStatus: () => {
-        statusFunctions.elementoStatus.innerHTML =
-            `<div class="spinner-border" role="status">
-             <span class="sr-only"></span>
-            </div>`
-    },
-    sucessStatus: text => {
-        statusFunctions.elementoStatus.innerHTML =
-            `<div class="alert alert-success" role="alert">
-                ${text ? text : "Cliente Cadastrado!"}
-            </div>`
-    }, 
-    failedStatus: text => {
-        statusFunctions.elementoStatus.innerHTML =
-            `<div class="alert alert-danger" role="alert">
-                ${text ? text : "Não foi possível cadastrar o cliente!"}
-            </div>`
-    }
-}
 
 form.addEventListener('submit', function (e) {
     e.preventDefault()
@@ -51,7 +29,7 @@ form.addEventListener('submit', function (e) {
 })
 
 form.addEventListener('reset', function (e) {
-    window.location.href = "../listar-clientes/listar-clientes.html"
+    window.location.href = "./listar-clientes.html"
 })
 
 //usando regex para padronizar o telefone
