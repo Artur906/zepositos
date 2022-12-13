@@ -1,9 +1,9 @@
 from flask_restx import Resource, abort
 
-from server.postgredb import *
-from server.instance import server
-from models.embarques import embarque_model, embarque_model_patch
-from controllers.handyFunctions import has_field
+from src.server.postgredb import *
+from src.server.instance import server
+from src.models.embarques import embarque_model, embarque_model_patch
+from src.controllers.handyFunctions import has_field
 app, api = server.app, server.api
 
 
