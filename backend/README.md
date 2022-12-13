@@ -1,6 +1,6 @@
 # Zé Pósitos: API REST em Python com banco PostgreSQL
-
-
+## Como rodar o backend?
+Voce pode seguir os passos descritos abaixo, ou ver este [video](https://youtu.be/x9d15Am9EMI) tutorial de 3 minutos.
 ### 0. Pré-requisitos:
 * Python instalado na máquina;
 * PostgreSQL rodando na máquina;
