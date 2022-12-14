@@ -20,3 +20,38 @@ export const statusFunctions = {
            </div>`
    }
 }
+
+export const criarLinha = (numeroElemento) => {
+
+    const linha =
+        `
+    <td> 
+    ${numeroElemento}
+    </td> 
+    <td>
+    <input class="form-control" type="text" name="comp${numeroElemento}"  placeholder="Cm" required>
+    </td>
+    <td>
+    <input type="text" class="form-control" name="alt${numeroElemento}" placeholder="Cm" required>
+    </td>
+    <td>
+    <input type="text" class="form-control" name="larg${numeroElemento}"  placeholder="Cm" required>
+    </td>
+    <td>
+    <input type="text" class="form-control" name="peso${numeroElemento}"  placeholder="Kg" required>
+    </td>
+    <td>
+    <input 
+            type="button"
+            class="btn btn-primary add-row" 
+            value="   "
+        />
+    </td>
+    `
+
+    const novaLinha = document.createElement('tr')
+    novaLinha.className = 'linha'
+    novaLinha.innerHTML = linha
+
+    return novaLinha
+}
