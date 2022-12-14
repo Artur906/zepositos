@@ -2,11 +2,9 @@ import unittest
 from src.tests.postgredb_test import *
 from decimal import Decimal
 
-#OS TESTES PRECISAM DE REVISÃO, POIS A TABELA VOLUMES FOI EXCLUIDA
 
-'''
+
 def clear_test_data():
-    Volume.delete().execute()
     Embarque.delete().execute()
     Cliente.delete().execute()
 
@@ -21,17 +19,27 @@ class TestEmbarquesMethods(unittest.TestCase):
         ]
         Embarque.insert_many(embarques).execute()
 
+
         volumesEmb1 = [
-            {'id_embarque': '1', 'peso': '3.123', 'largura': '1', 'altura': '1', 'comprimento': '1', 'id': '1'},
-            {'id_embarque': '1', 'peso': '1.245', 'largura': '1', 'altura': '1', 'comprimento': '1', 'id': '2'},
-            {'id_embarque': '1', 'peso': '2.321', 'largura': '1', 'altura': '1', 'comprimento': '1', 'id': '3'},
+            {'peso': '3.123', 'largura': '1', 'altura': '1', 'comprimento': '1'},
+            {'peso': '1.245', 'largura': '1', 'altura': '1', 'comprimento': '1'},
+            {'peso': '2.321', 'largura': '1', 'altura': '1', 'comprimento': '1'},
         ]
-        Volume.insert_many(volumesEmb1).execute()
-        
+
+
+        emb1 = Embarque.get_by_id(1)
+        emb1.volumes = volumesEmb1
+        emb1.save()
+
+
         volumesEmb2 = [
-            {'id_embarque': '2', 'peso': '0.5', 'largura': '1', 'altura': '1', 'comprimento': '1', 'id': '4'},
+            {'peso': '0.5', 'largura': '1', 'altura': '1', 'comprimento': '1'},
         ]
-        Volume.insert_many(volumesEmb2).execute()
+        emb2 = Embarque.get_by_id(2)
+        emb2.volumes = volumesEmb2
+        emb2.save()
+
+
 
         
     #testa se o calculo de peso total funciona corretamente
@@ -51,7 +59,7 @@ class TestEmbarquesMethods(unittest.TestCase):
             clear_test_data()
         
     
-
+    
     #testa se a contagem de volumes de um embarque funciona corretamente
     def test_quant_volumes(self):
         
@@ -70,6 +78,10 @@ class TestEmbarquesMethods(unittest.TestCase):
             clear_test_data()
         
     
+
+
+
+
 class TestClienteMethods(unittest.TestCase):
     def create_test_data(self):
         clear_test_data()
@@ -93,7 +105,7 @@ class TestClienteMethods(unittest.TestCase):
         Embarque.insert_many(embarquesC2).execute()
 
 
-
+    
     def test_quant_embarques(self):
 
         self.create_test_data()
@@ -108,5 +120,4 @@ class TestClienteMethods(unittest.TestCase):
             raise
         finally:
             clear_test_data()
-
-'''
+    
