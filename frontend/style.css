@@ -20,16 +20,15 @@
 :root {
     --body-bg-color: #121214;
     --text-color: #E1E1E6;
-    --title-color: #04D361;
+    --title-color: aliceblue;
     --form-color: #A8A8A8;
     --bg-button-color: #8257e5;
 }
 
 body{
 
-    font-family: 'League Spartan', sans-serif;
     
-    background-color: var(--body-bg-color);
+    background-image: linear-gradient(45deg, #121214, #09094b);
     height: 100vh;
 }
 
