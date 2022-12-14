@@ -19,20 +19,20 @@
             <h1>Embarque</h1>
         </div>
 
-        <div class="row justify-content-sm-center ">
+        <div class="row justify-content-sm-center d-flex gap-2">
 
-            <div class="col-sm-6 " id="formulario">
-                <form id="form">
+            <div class="col-sm-5" id="formulario">
+                <form id="form" class="d-flex flex-column">
 
-                    <div class="form-group col-11">
+                    <div class="form-group">
                         <label for="clientes-disponiveis">Cliente</label>
                         <select class="custom-select form-control" id="clientes-disponiveis" name="cliente">
                             <option value="null" selected>Sem cliente</option>
                         </select>
                     </div>
 
-                    <div class="row">
-                        <div class="col-6">
+                    <div class="d-flex justify-content-between">
+                        <div class="form-group">
                             <label for="flexCheckDefault">Nota Fiscal</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault"
@@ -42,13 +42,13 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-3 offset-md-2">
+                        <div class="form-group">
                             <label for="data">Data e Hora</label>
                             <input type="date" class="form-control" id="data" name="data">
                         </div>
                     </div>
 
-                    <div class="form-group col-11">
+                    <div class="form-group">
                         <label for="descricao">Descrição:</label>
                         <input class="form-control" type="text" name="descricao" id="descricao"
                             placeholder="Digite a descrição..." required>
@@ -67,6 +67,7 @@
                                         <th>largura</th>
                                         <th>peso</th>
                                         <th></th>
+
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -78,14 +79,13 @@
 
                     </div>
 
-                    <div class="form-group col-md-6 offset-md-8" id="botoes">
+                    <div class="form-group d-flex justify-content-end gap-2" id="botoes">
                         <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
-                        <button type="reset" class="btn btn-primary">Cancelar</button>
+                        <button type="reset" class="btn btn-danger">Cancelar</button>
                     </div>
                 </form>
 
                 <div id="status" class="col-6"></div>
-
             </div>
         </div>
 </body>
