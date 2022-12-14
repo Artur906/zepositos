@@ -36,7 +36,7 @@ dadosClientes.clientes.forEach(cliente => {
         ` 
             <tr id_cliente="${cliente.id}" data-toggle="modal" data-target="#exampleModalCenter">
                 <td>${cliente.nome}</td>
-                <td>${cliente.quant_embarques}</td>
+                <td>${cliente.quant_embarques_ativos}</td>
             </tr> 
         `
     tabelaClientes.innerHTML += table_row;
