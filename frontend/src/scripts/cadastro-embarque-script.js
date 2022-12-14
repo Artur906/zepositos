@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { statusFunctions, criarLinha } from './utils.js'
+import { statusFunctions, criarLinha, logRequestError } from './utils.js'
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 const form = document.querySelector('#form')
@@ -141,8 +141,8 @@ form.addEventListener('submit', function (e) {
             statusFunctions.sucessStatus("Embarque cadastrado com sucesso!")
         })
         .catch(err => {
+            logRequestError(err)
             statusFunctions.failedStatus("Não foi possível cadastrar o embarque!")
-            console.log(err.response.data.message)
         })
         .then(res => {
             setTimeout(() => window.location.href = './cadastro-embarque.html', 5000)

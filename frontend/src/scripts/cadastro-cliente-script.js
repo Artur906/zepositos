@@ -1,5 +1,5 @@
 import axios from 'axios' //node
-import { statusFunctions } from './utils.js'
+import { statusFunctions, logRequestError } from './utils.js'
 import { textMarshal } from 'text-marshal' // node
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
@@ -21,6 +21,7 @@ form.addEventListener('submit', function (e) {
             statusFunctions.sucessStatus()
         })
         .catch(err => {
+            logRequestError(err)
             statusFunctions.failedStatus()
         })
         .then(res => {

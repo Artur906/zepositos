@@ -55,3 +55,8 @@ export const criarLinha = (numeroElemento) => {
 
     return novaLinha
 }
+
+export const logRequestError = (err) => {
+    console.log(err.response.data.errors)
+    console.log(err.response.data.message)
+}

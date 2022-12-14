@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { statusFunctions, criarLinha } from './utils.js'
+import { statusFunctions, criarLinha, logRequestError } from './utils.js'
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 
@@ -11,7 +11,7 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 
 //requisições
 async function pegarEmbarque(id) {
-    return (await axios.get(`${BASE_URL_API}/embarques/${id_embarque}`)).data
+    return (await axios.get(`${BASE_URL_API}/embarques/${id}`)).data
 }
 async function pegarClienteDonoDoEmbarque(id_cliente) {
     if(id_cliente) {
@@ -116,7 +116,7 @@ form.addEventListener('submit', function (e) {
             statusFunctions.sucessStatus("Embarque Atualizado com sucesso!")
         })
         .catch(err => {
-            console.log(err.response)
+            logRequestError(err)
             statusFunctions.failedStatus("Não foi possível atualizar o embarque!")
         })
 
