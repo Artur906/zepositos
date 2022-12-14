@@ -75,6 +75,24 @@ table input {
     margin-bottom: 1rem;
 }
 
+.add-row {
+    background-image: url(/assets/add-icon.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.add-row:hover {
+    background-image: url(/assets/add-icon-hover.svg);
+}
+
+.rmv-row {
+    background-image: url(/assets/trash.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.rmv-row:hover {
+    background-image: url(/assets/trash-hover.svg);
+}
+
 label {
     margin-bottom: 5px;
     font-weight: bolder;
