@@ -13,8 +13,19 @@ async function pegarClientes() {
 
 async function pegarEmbarquesCliente(idCliente) {
     const embarques = (await axios.get(`${BASE_URL_API}/clientes/${idCliente}/embarques`)).data
-
     return embarques
+}
+
+async function pegarEmbarquesAtivosCliente(idCliente) {
+
+    const response =  (await axios.get(`${BASE_URL_API}/clientes/${idCliente}/embarques`)).data
+    let embarquesAtivos = []
+    response.embarques.forEach(emb => {
+        if(!(emb["embarcado"])){
+            embarquesAtivos.push(emb)
+        }
+    })
+    return embarquesAtivos
 }
 
 
@@ -48,11 +59,11 @@ async function modalEmbarques(cliente) {
     const tabelaEmbarques = document.querySelector('.table-embarques')
     tabelaEmbarques.innerHTML = ''
 
-    const dadosEmbarques = await pegarEmbarquesCliente(cliente.id)
-    console.log(dadosEmbarques)
+    const embarquesAtivos = await pegarEmbarquesAtivosCliente(cliente.id)
+    
 
     
-    dadosEmbarques.embarques.forEach(embarque => {
+    embarquesAtivos.forEach(embarque => {
         console.log(embarque.id)
         let table_row =
             ` 
