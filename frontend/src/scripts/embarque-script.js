@@ -21,9 +21,9 @@ async function pegarClienteDonoDoEmbarque(id_cliente) {
 }
 
 
-const updateNotaFiscalCheckBox = (bool) => {
+function updateNotaFiscalCheckBox(bool){
     document.getElementById('flexCheckDefault').checked = bool
-    const formData = new FormData(form)
+    let formData = new FormData(form)
     formData.set('nota-fiscal', bool)
 }
 
@@ -87,12 +87,29 @@ form.addEventListener('submit', function (e) {
     statusFunctions.loadingStatus()
     document.querySelector('.btn-salvar').disabled = true
 
+
     const formData = new FormData(form)
+    const listaVolumes = []
+    let elemento = 1
+
+    do {
+        listaVolumes.push({
+            largura: parseInt(formData.get(`larg${elemento}`)),
+            comprimento: parseInt(formData.get(`comp${elemento}`)),
+            altura: parseInt(formData.get(`alt${elemento}`)),
+            peso: parseFloat(formData.get(`peso${elemento}`))
+        })
+        elemento++
+    } while (formData.get(`comp${elemento}`))
+
+
+
     const data = {
         id_cliente: parseInt(formData.get('cliente')), 
         descricao: formData.get('descricao'),
         data_chegada: formData.get('data'),
-        com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true
+        com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true,
+        volumes: listaVolumes
     }
     axios.patch(`${BASE_URL_API}/embarques/${id_embarque}`, data)
         .then(res => {
