@@ -55,7 +55,7 @@ class Embarque(BaseModel):
     pago            = BooleanField(default = False)
     urgente         = BooleanField(default = False)
     embarcado       = BooleanField(default = False)
-    volumes         = JSONField(default = [])
+    volumes         = JSONField()
 
     @property
     def serialize(self):
