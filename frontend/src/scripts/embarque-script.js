@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { statusFunctions, criarLinha, logRequestError } from './utils.js'
+import { statusFunctions, criarLinha, logRequestError} from './utils.js'
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 
@@ -55,15 +55,79 @@ if (cliente) {
     })
 }
 
-
-
 const form = document.querySelector('#form')
 const tabela = document.querySelector(".table-body")
 updateNotaFiscalCheckBox(embarque.com_nota_fiscal)
 document.getElementById("descricao").value = embarque.descricao
 document.getElementById("data").value = embarque.data_chegada
 
+/*
+ FUNÇÕES NESCESSÁRIAS PARA EDIÇÃO DE VOLUMES 
+ ------------ ---------- ------------- -------  
+ porque elas estão aqui? 
+ porque eu tive dificuldade em fazer elas funciorem por meio de importação 
+ elas acessam a variável numero elemento para fazer a organização dos volumes 
+ */
+let numeroElemento = 0
+
+const adicionandoElementoNaTabela = () => {
+    numeroElemento++
+    const elementoPai = tabela
+
+    const novaLinha = criarLinha(numeroElemento)
+   
+    elementoPai.insertBefore(novaLinha, elementoPai.firstChild)
+
+    //mudar o botão dos elementos anteriores para o de remover 
+    const botoes = document.querySelectorAll('.add-row')
+    mudarBotoes(botoes)
+}
+
+function mudarBotoes(botoes) {
+    botoes.forEach((botao, index) => {
+        if (index > 0) {
+            botao.className = 'btn btn-danger rmv-row'
+            botao.value = '   '
+
+            botao.removeEventListener('click', adicionandoElementoNaTabela)
+            botao.addEventListener('click', e => {
+                // o parentElement é o elemento pai, o botão está dentro de um td, que está dentro de um tr
+                removerElementoDaTela(botao.parentElement.parentElement)
+                reorganizarContagemDeLinhas()
+            })
+        } else {
+            botao.addEventListener('click', adicionandoElementoNaTabela)
+        }
+    })
+}
+
+const removerElementoDaTela = (elemento) => {
+    tabela.removeChild(elemento)
+}
+
+const reorganizarContagemDeLinhas = () => {
+    numeroElemento--
+    const linhas = document.querySelectorAll('.linha')
+    linhas.forEach((linha, index) => {
+        const indexInvertido = linhas.length - index - 1
+        //acessando cada um dos elementos da linha
+        //contador
+        linha.children[0].innerHTML = indexInvertido + 1
+        //comp 
+        linha.children[1].firstElementChild.setAttribute('name', `comp${indexInvertido + 1}`) 
+        //alt 
+        linha.children[2].firstElementChild.setAttribute('name', `alt${indexInvertido + 1}`) 
+        //larg 
+        linha.children[3].firstElementChild.setAttribute('name', `larg${indexInvertido + 1}`) 
+        //peso 
+        linha.children[4].firstElementChild.setAttribute('name', `peso${indexInvertido + 1}`) 
+    })
+}
+//fim funções nescessárias para edição de volumes
+
+
 embarque.volumes.forEach((volume, index) => {
+    numeroElemento++
     const novaLinha = criarLinha(index + 1)
 
     //acessando cada um dos elementos da linha
@@ -78,7 +142,11 @@ embarque.volumes.forEach((volume, index) => {
     //peso 
     novaLinha.children[4].firstElementChild.value = volume.peso
 
-    tabela.append(novaLinha)
+    tabela.insertBefore(novaLinha, tabela.firstChild)
+
+    //mudar o botão dos elementos anteriores para o de remover 
+    const botoes = document.querySelectorAll('.add-row')
+    mudarBotoes(botoes)
 })
 
 // quando o botao salvar é clicado:
@@ -121,6 +189,4 @@ form.addEventListener('submit', function (e) {
         })
 
 })
-
-
 
