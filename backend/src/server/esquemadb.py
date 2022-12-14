@@ -21,7 +21,8 @@ class Cliente(BaseModel):
             'id': self.id,
             'nome': self.nome,
             'telefone': self.telefone,
-            'quant_embarques': self.quant_embarques
+            'quant_embarques': self.quant_embarques,
+            'quant_embarques_ativos': self.quant_embarques_ativos
         }
         return data
     
@@ -31,6 +32,16 @@ class Cliente(BaseModel):
             Embarque
             .select()
             .where(Embarque.id_cliente == self.id)
+            .count()
+        )
+        return q
+    
+    @property
+    def quant_embarques_ativos(self):
+        q = (
+            Embarque
+            .select()
+            .where(Embarque.id_cliente == self.id, Embarque.embarcado == False)
             .count()
         )
         return q

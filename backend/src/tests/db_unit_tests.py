@@ -93,14 +93,14 @@ class TestClienteMethods(unittest.TestCase):
         Cliente.insert_many(clientes).execute()
 
         embarquesC1 = [
-            {'id': '1', 'id_cliente':'1', 'descricao': 'embarque-1'},
-            {'id': '2', 'id_cliente':'1', 'descricao': 'embarque-2'},
-            {'id': '3', 'id_cliente':'1', 'descricao': 'embarque-3'}
+            {'id': '1', 'id_cliente':'1', 'descricao': 'embarque-1', 'embarcado': False},
+            {'id': '2', 'id_cliente':'1', 'descricao': 'embarque-2', 'embarcado': True},
+            {'id': '3', 'id_cliente':'1', 'descricao': 'embarque-3', 'embarcado': False}
         ]
         Embarque.insert_many(embarquesC1).execute()
 
         embarquesC2 = [
-            {'id': '4', 'id_cliente':'2', 'descricao': 'embarque-4'}
+            {'id': '4', 'id_cliente':'2', 'descricao': 'embarque-4', 'embarcado': True}
         ]
         Embarque.insert_many(embarquesC2).execute()
 
@@ -121,3 +121,16 @@ class TestClienteMethods(unittest.TestCase):
         finally:
             clear_test_data()
     
+    def test_quant_embarques_ativos(self):
+        self.create_test_data()
+        c1 = Cliente.get_by_id(1)
+        c2 = Cliente.get_by_id(2)
+        c3 = Cliente.get_by_id(3)
+        try:
+            self.assertEqual(c1.quant_embarques_ativos, 2)
+            self.assertEqual(c2.quant_embarques_ativos, 0)
+            self.assertEqual(c3.quant_embarques_ativos, 0)
+        except AssertionError:
+            raise
+        finally:
+            clear_test_data()
