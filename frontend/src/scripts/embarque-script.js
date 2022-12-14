@@ -89,7 +89,7 @@ form.addEventListener('submit', function (e) {
 
     const formData = new FormData(form)
     const data = {
-        id_cliente: formData.get('cliente'), 
+        id_cliente: parseInt(formData.get('cliente')), 
         descricao: formData.get('descricao'),
         data_chegada: formData.get('data'),
         com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true
@@ -99,7 +99,7 @@ form.addEventListener('submit', function (e) {
             statusFunctions.sucessStatus("Embarque Atualizado com sucesso!")
         })
         .catch(err => {
-            console.log(err)
+            console.log(err.response)
             statusFunctions.failedStatus("Não foi possível atualizar o embarque!")
         })
 
