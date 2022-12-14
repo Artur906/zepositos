@@ -20,11 +20,15 @@ async function pegarClienteDonoDoEmbarque(id_cliente) {
     return null
 }
 
-
-function updateNotaFiscalCheckBox(bool){
-    document.getElementById('flexCheckDefault').checked = bool
+/*
+function updateCheckBoxElement(bool, elementId){
+    document.getElementById('elementId').checked = bool
     let formData = new FormData(form)
-    formData.set('nota-fiscal', bool)
+    formData.set('registrado', bool)
+}*/
+
+function updateRegistradoCheckBox(bool){
+    document.getElementById('registradoCheckBox').checked = bool
 }
 
 
@@ -57,7 +61,13 @@ if (cliente) {
 
 const form = document.querySelector('#form')
 const tabela = document.querySelector(".table-body")
-updateNotaFiscalCheckBox(embarque.com_nota_fiscal)
+
+document.getElementById('notaFiscalCheckBox').checked = embarque.com_nota_fiscal
+document.getElementById('registradoCheckBox').checked = embarque.registrado
+document.getElementById('pagoCheckBox').checked = embarque.pago
+document.getElementById('embarcadoCheckBox').checked = embarque.embarcado
+document.getElementById('urgenteCheckBox').checked = embarque.urgente
+
 document.getElementById("descricao").value = embarque.descricao
 document.getElementById("data").value = embarque.data_chegada
 
@@ -177,6 +187,10 @@ form.addEventListener('submit', function (e) {
         descricao: formData.get('descricao'),
         data_chegada: formData.get('data'),
         com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true,
+        registrado: formData.get('registrado') == null ? false : true,
+        pago: formData.get('pago') == null ? false : true,
+        embarcado: formData.get('embarcado') == null ? false : true,
+        urgente: formData.get('urgente') == null ? false : true,
         volumes: listaVolumes
     }
     axios.patch(`${BASE_URL_API}/embarques/${id_embarque}`, data)
