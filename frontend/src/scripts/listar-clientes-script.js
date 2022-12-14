@@ -51,11 +51,12 @@ async function modalEmbarques(cliente) {
     const dadosEmbarques = await pegarEmbarquesCliente(cliente.id)
     console.log(dadosEmbarques)
 
-
+    
     dadosEmbarques.embarques.forEach(embarque => {
+        console.log(embarque.id)
         let table_row =
             ` 
-                <tr embarque_id = "${embarque.id}">
+                <tr embarque_id = "${embarque.id}" onclick='location.href="embarque.html?id=${embarque.id}"' >
                     <td>${embarque.descricao}</td>
                     <td>${embarque.quant_volumes}</td>
                     <td>${embarque.peso_total}</td>
@@ -63,6 +64,7 @@ async function modalEmbarques(cliente) {
                     <td>${embarque.data_chegada}</td>
                 </tr>
             `
+            
         tabelaEmbarques.innerHTML += table_row;
     });
 
