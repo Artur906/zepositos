@@ -80,7 +80,7 @@ table input {
     background-repeat: no-repeat;
     background-position: center center;
 }
-.add-row:hover {
+.add-row:hover, .add-row:focus {
     background-image: url(/assets/add-icon-hover.svg);
 }
 
@@ -89,7 +89,7 @@ table input {
     background-repeat: no-repeat;
     background-position: center center;
 }
-.rmv-row:hover {
+.rmv-row:hover, .rmv-row:focus {
     background-image: url(/assets/trash-hover.svg);
 }
 
