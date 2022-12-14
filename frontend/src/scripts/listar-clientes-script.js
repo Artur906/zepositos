@@ -55,7 +55,7 @@ linhasTableClientes.forEach(linha => {
 
 // vai colocar os elementos na modal
 async function modalEmbarques(cliente) {
-    document.querySelector('.modal-title').textContent = `Embarques de ${cliente.nome}`
+    document.querySelector('.modal-title').textContent = `Embarques Ativos de ${cliente.nome}`
     const tabelaEmbarques = document.querySelector('.table-embarques')
     tabelaEmbarques.innerHTML = ''
 
