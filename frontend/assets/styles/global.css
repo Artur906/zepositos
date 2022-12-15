@@ -1,4 +1,4 @@
-@import "../bootstrap/css/bootstrap.min.css";
+@import "bootstrap/bootstrap.min.css";
 
 body{
     background-image: linear-gradient(45deg, #121214, #09094b);
@@ -41,7 +41,7 @@ body{
     width: 200px;   
     height: inherit;
 
-    background: url(/assets/logo.png);
+    background: url(/assets/imgs/logo.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top center;
@@ -76,21 +76,21 @@ table input {
 }
 
 .add-row {
-    background-image: url(/assets/add-icon.svg);
+    background-image: url(/assets/imgs/add-icon.svg);
     background-repeat: no-repeat;
     background-position: center center;
 }
 .add-row:hover, .add-row:focus {
-    background-image: url(/assets/add-icon-hover.svg);
+    background-image: url(/assets/imgs/add-icon-hover.svg);
 }
 
 .rmv-row {
-    background-image: url(/assets/trash.svg);
+    background-image: url(/assets/imgs/trash.svg);
     background-repeat: no-repeat;
     background-position: center center;
 }
 .rmv-row:hover {
-    background-image: url(/assets/trash-hover.svg);
+    background-image: url(/assets/imgs/trash-hover.svg);
 }
 
 label {
@@ -123,22 +123,22 @@ label {
 }
 
 .sem-status {
-    background-image: url(/assets/sem-status.svg);
+    background-image: url(/assets/imgs/sem-status.svg);
     z-index: 10000000;
 }
 .nota-fiscal {
-    background-image: url(/assets/nota-fiscal.svg);
+    background-image: url(/assets/imgs/nota-fiscal.svg);
     z-index: 10000000;
 }
 .registrado {
-    background-image: url(/assets/registrado.svg);
+    background-image: url(/assets/imgs/registrado.svg);
     z-index: 10000000;
 }
 .pago {
-    background-image: url(/assets/pago.svg);
+    background-image: url(/assets/imgs/pago.svg);
     z-index: 10000000;
 }
 .embarcado {
-    background-image: url(/assets/embarcado.svg);
+    background-image: url(/assets/imgs/embarcado.svg);
     z-index: 10000000;
 }

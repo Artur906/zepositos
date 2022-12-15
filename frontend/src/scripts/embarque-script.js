@@ -201,6 +201,9 @@ form.addEventListener('submit', function (e) {
             logRequestError(err)
             statusFunctions.failedStatus("Não foi possível atualizar o embarque!")
         })
+        .then(() => {
+            setTimeout(() => window.location.href = './listar-clientes.html', 5000)
+        })
 
 })
 
@@ -211,6 +214,10 @@ botaoEditar.addEventListener( 'click', function (e) {
     document.querySelector('.btn-salvar').disabled = false
 })
 
+const botaoCancelar = document.querySelector('#cancelar')
+botaoCancelar.addEventListener('click', () => {
+    window.location.href = './listar-clientes.html'
+})
 
 const modalBtnConfirmDeletion = document.getElementById('modal-btn-confirm-deletion')
 modalBtnConfirmDeletion.addEventListener("click", ()=>{
