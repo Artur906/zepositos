@@ -64,10 +64,27 @@ async function modalEmbarques(cliente) {
 
     
     embarquesAtivos.forEach(embarque => {
-        console.log(embarque.id)
+        console.log(embarque)
+        //nota fiscal -> registrado -> pago -> embarcado
+        const statusEmbarque = () => {
+            if(embarque.embarcado){
+                return `<td class="embarcado"></td>`
+            }
+            if(embarque.pago) {
+                return `<td class="pago"></td>`
+            }
+            if(embarque.registrado) {
+                return `<td class="registrado"></td>`
+            }
+            if(embarque.com_nota_fiscal){
+                return `<td class="nota-fiscal"></td>`
+            } 
+                return `<td class="sem-status"></td>`
+        }
         let table_row =
             ` 
                 <tr embarque_id = "${embarque.id}" onclick='location.href="embarque.html?id=${embarque.id}"' >
+                    ${statusEmbarque()}
                     <td>${embarque.descricao}</td>
                     <td>${embarque.quant_volumes}</td>
                     <td>${embarque.peso_total}</td>
