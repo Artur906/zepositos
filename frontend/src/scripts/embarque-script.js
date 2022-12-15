@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { statusFunctions, criarLinha, logRequestError} from './utils.js'
+import { statusFunctions, criarLinha, logRequestError } from './utils.js'
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 
@@ -14,13 +14,13 @@ async function pegarEmbarque(id) {
     return (await axios.get(`${BASE_URL_API}/embarques/${id}`)).data
 }
 async function pegarClienteDonoDoEmbarque(id_cliente) {
-    if(id_cliente) {
+    if (id_cliente) {
         return (await axios.get(`${BASE_URL_API}/clientes/${id_cliente}`)).data
     }
     return null
 }
 
-async function deletarEmbarque(id_embarque){
+async function deletarEmbarque(id_embarque) {
     return (await axios.delete(`${BASE_URL_API}/embarques/${id}`)).data
 }
 
@@ -31,7 +31,7 @@ function updateCheckBoxElement(bool, elementId){
     formData.set('registrado', bool)
 }*/
 
-function updateRegistradoCheckBox(bool){
+function updateRegistradoCheckBox(bool) {
     document.getElementById('registradoCheckBox').checked = bool
 }
 
@@ -87,7 +87,7 @@ const adicionandoElementoNaTabela = () => {
     const elementoPai = tabela
 
     const novaLinha = criarLinha(numeroElemento)
-   
+
     elementoPai.insertBefore(novaLinha, elementoPai.firstChild)
 
     //mudar o botão dos elementos anteriores para o de remover 
@@ -126,13 +126,13 @@ const reorganizarContagemDeLinhas = () => {
         //contador
         linha.children[0].innerHTML = indexInvertido
         //comp 
-        linha.children[1].firstElementChild.setAttribute('name', `comp${indexInvertido}`) 
+        linha.children[1].firstElementChild.setAttribute('name', `comp${indexInvertido}`)
         //alt 
-        linha.children[2].firstElementChild.setAttribute('name', `alt${indexInvertido}`) 
+        linha.children[2].firstElementChild.setAttribute('name', `alt${indexInvertido}`)
         //larg 
-        linha.children[3].firstElementChild.setAttribute('name', `larg${indexInvertido}`) 
+        linha.children[3].firstElementChild.setAttribute('name', `larg${indexInvertido}`)
         //peso 
-        linha.children[4].firstElementChild.setAttribute('name', `peso${indexInvertido}`) 
+        linha.children[4].firstElementChild.setAttribute('name', `peso${indexInvertido}`)
     })
 }
 //fim funções nescessárias para edição de volumes
@@ -183,7 +183,7 @@ form.addEventListener('submit', function (e) {
     } while (formData.get(`comp${elemento}`))
 
     const data = {
-        id_cliente: parseInt(formData.get('cliente')), 
+        id_cliente: parseInt(formData.get('cliente')),
         descricao: formData.get('descricao'),
         data_chegada: formData.get('data'),
         com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true,
@@ -207,20 +207,31 @@ form.addEventListener('submit', function (e) {
 
 })
 
+document.querySelector('.btn-salvar').style.display = "none"
+document.querySelector('#cancelar').style.display = "none"
+document.querySelector('#bttn-deletar').style.display = "none"
 // quando o botão editar é clicado
 const botaoEditar = document.querySelector('#editar')
-botaoEditar.addEventListener( 'click', function (e) {
-    document.querySelector('fieldset').disabled = false
-    document.querySelector('.btn-salvar').disabled = false
+
+botaoEditar.addEventListener('click', function (e) {
+    const fieldset = document.querySelector('fieldset')
+    const btnSalvar = document.querySelector('.btn-salvar')
+    const btnCancelar = document.querySelector('#cancelar')
+    const btnDeletar = document.querySelector('#bttn-deletar')
+
+    btnSalvar.style.display = !fieldset.disabled ? "none" : "inherit"
+    btnCancelar.style.display = !fieldset.disabled ? "none" : "inherit"
+    btnDeletar.style.display = !fieldset.disabled ? "none" : "inherit"
+    fieldset.disabled = !fieldset.disabled
 })
 
-const botaoCancelar = document.querySelector('#cancelar')
-botaoCancelar.addEventListener('click', () => {
+const botaoVoltar = document.querySelector('#voltar')
+botaoVoltar.addEventListener('click', () => {
     window.location.href = './listar-clientes.html'
 })
 
 const modalBtnConfirmDeletion = document.getElementById('modal-btn-confirm-deletion')
-modalBtnConfirmDeletion.addEventListener("click", ()=>{
+modalBtnConfirmDeletion.addEventListener("click", () => {
 
     //deletarEmbarque(id_embarque)
     axios.delete(`${BASE_URL_API}/embarques/${id_embarque}`, data)
@@ -231,6 +242,6 @@ modalBtnConfirmDeletion.addEventListener("click", ()=>{
             logRequestError(err)
             statusFunctions.failedStatus()
         })
-        
+
 })
 

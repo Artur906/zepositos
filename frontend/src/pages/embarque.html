@@ -30,6 +30,10 @@
 
             <div class="col-sm-5" id="formulario">
                 <form id="form" class="d-flex flex-column">
+                    <div class="d-flex justify-content-between botoes-topo">
+                        <button type="button" class="btn btn-secondary voltar" id="voltar"></button>
+                        <button type="button" class="btn btn-secondary editar" id="editar"></button>
+                    </div>
 
                     <fieldset id="form" class="d-flex flex-column" disabled>
                         <div class="form-group">
@@ -119,7 +123,6 @@
                     <div class="form-group d-flex justify-content-start gap-2" id="botoes">
                         <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
                         <button type="button" class="btn btn-secondary" id="cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-danger" id="editar">Editar</button>
                         <button type="button" class="btn btn-danger" id="bttn-deletar" data-toggle="modal"
                             data-target="#exampleModal">Deletar</button>
                     </div>

@@ -93,6 +93,8 @@ table input {
     background-image: url(/assets/imgs/trash-hover.svg);
 }
 
+
+
 label {
     margin-bottom: 5px;
     font-weight: bolder;
@@ -116,29 +118,35 @@ label {
 .tr-hover:hover {
     filter: contrast(0.8);
 }
+
 /* status embarque  */
-.sem-status, .nota-fiscal, .registrado, .pago, .embarcado {
+.sem-status, .nota-fiscal, .registrado, .pago, .embarcado, .editar, .voltar {
     background-repeat: no-repeat;
     background-position: center center;
 }
 
 .sem-status {
     background-image: url(/assets/imgs/sem-status.svg);
-    z-index: 10000000;
 }
 .nota-fiscal {
     background-image: url(/assets/imgs/nota-fiscal.svg);
-    z-index: 10000000;
 }
 .registrado {
     background-image: url(/assets/imgs/registrado.svg);
-    z-index: 10000000;
 }
 .pago {
     background-image: url(/assets/imgs/pago.svg);
-    z-index: 10000000;
 }
 .embarcado {
     background-image: url(/assets/imgs/embarcado.svg);
-    z-index: 10000000;
+}
+
+
+.editar {
+    background-image: url(/assets/imgs/editar.svg);
+    padding: 20px;
+}
+.voltar {
+    background-image: url(/assets/imgs/voltar.svg);
+    padding: 20px;
 }
