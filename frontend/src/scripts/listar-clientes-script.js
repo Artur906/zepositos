@@ -34,7 +34,7 @@ let dadosClientes = await pegarClientes()
 dadosClientes.clientes.forEach(cliente => {
     let table_row =
         ` 
-            <tr id_cliente="${cliente.id}" data-toggle="modal" data-target="#exampleModalCenter">
+            <tr id_cliente="${cliente.id}" data-toggle="modal" data-target="#exampleModalCenter" class="tr-hover">
                 <td>${cliente.nome}</td>
                 <td>${cliente.quant_embarques_ativos}</td>
             </tr> 
@@ -68,22 +68,22 @@ async function modalEmbarques(cliente) {
         //nota fiscal -> registrado -> pago -> embarcado
         const statusEmbarque = () => {
             if(embarque.embarcado){
-                return `<td class="embarcado"></td>`
+                return `<td class="embarcado" itle="Embarcado"></td>`
             }
             if(embarque.pago) {
-                return `<td class="pago"></td>`
+                return `<td class="pago" title="Pago"></td>`
             }
             if(embarque.registrado) {
-                return `<td class="registrado"></td>`
+                return `<td class="registrado" title="Registrado"></td>`
             }
             if(embarque.com_nota_fiscal){
-                return `<td class="nota-fiscal"></td>`
+                return `<td class="nota-fiscal" title="Possui nota fiscal"></td>`
             } 
-                return `<td class="sem-status"></td>`
+                return `<td class="sem-status" title="Não possui nota fiscal"></td>`
         }
         let table_row =
             ` 
-                <tr embarque_id = "${embarque.id}" onclick='location.href="embarque.html?id=${embarque.id}"' >
+                <tr class="${embarque.urgente ? 'table-primary bg-color-green' : ''} tr-hover" embarque_id = "${embarque.id}" onclick='location.href="embarque.html?id=${embarque.id}"' >
                     ${statusEmbarque()}
                     <td>${embarque.descricao}</td>
                     <td>${embarque.quant_volumes}</td>
