@@ -180,8 +180,6 @@ form.addEventListener('submit', function (e) {
         elemento++
     } while (formData.get(`comp${elemento}`))
 
-
-
     const data = {
         id_cliente: parseInt(formData.get('cliente')), 
         descricao: formData.get('descricao'),
@@ -203,4 +201,14 @@ form.addEventListener('submit', function (e) {
         })
 
 })
+
+// quando o botão editar é clicado
+form.addEventListener( 'click', function (e) {
+    e.preventDefault();
+    document.querySelector('fieldset').disabled = false
+    document.querySelector('.btn-salvar').disabled = false
+}
+)
+
+
 

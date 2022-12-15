@@ -24,103 +24,92 @@
             <div class="col-sm-5" id="formulario">
                 <form id="form" class="d-flex flex-column">
 
-                    <div class="form-group">
-                        <label for="clientes-disponiveis">Cliente</label>
-                        <select class="custom-select form-control" id="clientes-disponiveis" name="cliente">
-                            <option value="null" selected>Sem cliente</option>
-                        </select>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
+                    <fieldset disabled>
                         <div class="form-group">
-                            
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="true" id="notaFiscalCheckBox"
-                                    name="nota-fiscal">
-                                <label class="form-check-label" for="notaFiscalCheckBox">
-                                    Nota Fiscal
-                                </label>
-                                
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="true" id="registradoCheckBox"
-                                    name="registrado">
-                                <label class="form-check-label" for="registradoCheckBox">
-                                    Registrado
-                                </label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="true" id="pagoCheckBox"
-                                    name="pago">
-                                <label class="form-check-label" for="pagoCheckBox">
-                                    Pago
-                                </label>
-                            </div>
-                                
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="true" id="embarcadoCheckBox"
-                                    name="embarcado">
-                                <label class="form-check-label" for="embarcadoCheckBox">
-                                    Embarcado
-                                </label>
-                            </div>
-                            
-
+                            <label for="clientes-disponiveis">Cliente</label>
+                            <select class="custom-select form-control" id="clientes-disponiveis" name="cliente">
+                                <option value="null" selected>Sem cliente</option>
+                            </select>
                         </div>
-
-
+                        <div class="d-flex justify-content-between">
+                            <div class="form-group">
+                        
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="true" id="notaFiscalCheckBox"
+                                        name="nota-fiscal">
+                                    <label class="form-check-label" for="notaFiscalCheckBox">
+                                        Nota Fiscal
+                                    </label>
+                        
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="true" id="registradoCheckBox"
+                                        name="registrado">
+                                    <label class="form-check-label" for="registradoCheckBox">
+                                        Registrado
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="true" id="pagoCheckBox"
+                                        name="pago">
+                                    <label class="form-check-label" for="pagoCheckBox">
+                                        Pago
+                                    </label>
+                                </div>
+                        
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="true" id="embarcadoCheckBox"
+                                        name="embarcado">
+                                    <label class="form-check-label" for="embarcadoCheckBox">
+                                        Embarcado
+                                    </label>
+                                </div>
+                        
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="true" id="urgenteCheckBox"
+                                        name="urgente">
+                                    <label class="form-check-label" for="urgenteCheckBox">
+                                        Urgente
+                                    </label>
+                                </div>
+                        
+                            </div>
+                            <div class="form-group">
+                                <label for="data">Data e Hora</label>
+                                <input type="date" class="form-control" id="data" name="data">
+                            </div>
+                        </div>
                         <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="true" id="urgenteCheckBox"
-                                    name="urgente">
-                                <label class="form-check-label" for="urgenteCheckBox">
-                                    Urgente
-                                </label>
+                            <label for="descricao">Descrição:</label>
+                            <input class="form-control" type="text" name="descricao" id="descricao"
+                                placeholder="Digite a descrição..." required>
+                        </div>
+                        <div class="col position-relative">
+                            <label>Adicionar volume</label>
+                            <div class="scroll-table">
+                                <table data-toggle="table" data-sort-stable="true" class="table table-light">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>comprimento</th>
+                                            <th>altura</th>
+                                            <th>largura</th>
+                                            <th>peso</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-body">
+                                    </tbody>
+                                </table>
                             </div>
-                            
                         </div>
-
-                        <div class="form-group">
-                            <label for="data">Data e Hora</label>
-                            <input type="date" class="form-control" id="data" name="data">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="descricao">Descrição:</label>
-                        <input class="form-control" type="text" name="descricao" id="descricao"
-                            placeholder="Digite a descrição..." required>
-                    </div>
-
-                    <div class="col position-relative">
-                        <label>Adicionar volume</label>
-                        <div class="scroll-table">
-
-                            <table data-toggle="table" data-sort-stable="true" class="table table-light">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>comprimento</th>
-                                        <th>altura</th>
-                                        <th>largura</th>
-                                        <th>peso</th>
-                                        <th></th>
-
-                                    </tr>
-                                </thead>
-                                <tbody class="table-body">
-
-                                </tbody>
-                            </table>
-                        </div>
-
-
-                    </div>
-
+                        
+                    </fieldset>
                     <div class="form-group d-flex justify-content-end gap-2" id="botoes">
-                        <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+                        <button disabled type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+                        <button type="button" class="btn btn-danger">Editar</button>
                         <button type="reset" class="btn btn-danger">Cancelar</button>
                     </div>
                 </form>
