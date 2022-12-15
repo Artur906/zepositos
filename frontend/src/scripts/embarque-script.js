@@ -37,8 +37,6 @@ function updateRegistradoCheckBox(bool){
 
 
 const id_embarque = params.id
-console.log(id_embarque)
-
 
 let embarque = await pegarEmbarque(id_embarque)
 let cliente = await pegarClienteDonoDoEmbarque(embarque.id_cliente)
@@ -123,18 +121,18 @@ const reorganizarContagemDeLinhas = () => {
     numeroElemento--
     const linhas = document.querySelectorAll('.linha')
     linhas.forEach((linha, index) => {
-        const indexInvertido = linhas.length - index - 1
+        const indexInvertido = linhas.length - index
         //acessando cada um dos elementos da linha
         //contador
-        linha.children[0].innerHTML = indexInvertido + 1
+        linha.children[0].innerHTML = indexInvertido
         //comp 
-        linha.children[1].firstElementChild.setAttribute('name', `comp${indexInvertido + 1}`) 
+        linha.children[1].firstElementChild.setAttribute('name', `comp${indexInvertido}`) 
         //alt 
-        linha.children[2].firstElementChild.setAttribute('name', `alt${indexInvertido + 1}`) 
+        linha.children[2].firstElementChild.setAttribute('name', `alt${indexInvertido}`) 
         //larg 
-        linha.children[3].firstElementChild.setAttribute('name', `larg${indexInvertido + 1}`) 
+        linha.children[3].firstElementChild.setAttribute('name', `larg${indexInvertido}`) 
         //peso 
-        linha.children[4].firstElementChild.setAttribute('name', `peso${indexInvertido + 1}`) 
+        linha.children[4].firstElementChild.setAttribute('name', `peso${indexInvertido}`) 
     })
 }
 //fim funções nescessárias para edição de volumes
@@ -211,15 +209,13 @@ const botaoEditar = document.querySelector('#editar')
 botaoEditar.addEventListener( 'click', function (e) {
     document.querySelector('fieldset').disabled = false
     document.querySelector('.btn-salvar').disabled = false
-}
-)
+})
 
 
 const modalBtnConfirmDeletion = document.getElementById('modal-btn-confirm-deletion')
 modalBtnConfirmDeletion.addEventListener("click", ()=>{
-    console.log('oi')
-    //deletarEmbarque(id_embarque)
 
+    //deletarEmbarque(id_embarque)
     axios.delete(`${BASE_URL_API}/embarques/${id_embarque}`, data)
         .then(res => {
             setTimeout(() => window.location.href = "./listar-clientes.html", 500)

@@ -26,19 +26,19 @@ export const criarLinha = (numeroElemento) => {
     const linha =
         `
     <td> 
-    ${numeroElemento}
+        ${numeroElemento}
     </td> 
     <td>
-    <input class="form-control" type="text" name="comp${numeroElemento}"  placeholder="Cm" required>
+        <input class="form-control" type="text" name="comp${numeroElemento}"  placeholder="Cm" required>
     </td>
     <td>
-    <input type="text" class="form-control" name="alt${numeroElemento}" placeholder="Cm" required>
+        <input type="text" class="form-control" name="alt${numeroElemento}" placeholder="Cm" required>
     </td>
     <td>
-    <input type="text" class="form-control" name="larg${numeroElemento}"  placeholder="Cm" required>
+        <input type="text" class="form-control" name="larg${numeroElemento}"  placeholder="Cm" required>
     </td>
     <td>
-    <input type="text" class="form-control" name="peso${numeroElemento}"  placeholder="Kg" required>
+        <input type="text" class="form-control" name="peso${numeroElemento}"  placeholder="Kg" required>
     </td>
     <td>
     <input 

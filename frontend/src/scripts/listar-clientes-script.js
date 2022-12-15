@@ -61,11 +61,7 @@ async function modalEmbarques(cliente) {
 
     const embarquesAtivos = await pegarEmbarquesAtivosCliente(cliente.id)
     
-
-    
     embarquesAtivos.forEach(embarque => {
-        console.log(embarque)
-        //nota fiscal -> registrado -> pago -> embarcado
         const statusEmbarque = () => {
             if(embarque.embarcado){
                 return `<td class="embarcado" itle="Embarcado"></td>`
