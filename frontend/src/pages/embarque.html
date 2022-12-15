@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,13 @@
     <title>Embarque</title>
 
     <link rel="stylesheet" href="/assets/styles/global.css">
-    
+
 </head>
+
 <body>
 
 
-    
+
 
 
     <div class="container-fluid">
@@ -28,8 +30,12 @@
 
             <div class="col-sm-5" id="formulario">
                 <form id="form" class="d-flex flex-column">
+                    <div class="d-flex justify-content-between botoes-topo">
+                        <button type="button" class="btn btn-secondary voltar" id="voltar"></button>
+                        <button type="button" class="btn btn-secondary editar" id="editar"></button>
+                    </div>
 
-                    <fieldset disabled>
+                    <fieldset id="form" class="d-flex flex-column" disabled>
                         <div class="form-group">
                             <label for="clientes-disponiveis">Cliente</label>
                             <select class="custom-select form-control" id="clientes-disponiveis" name="cliente">
@@ -38,14 +44,14 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="form-group">
-                        
+
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="true" id="notaFiscalCheckBox"
                                         name="nota-fiscal">
                                     <label class="form-check-label" for="notaFiscalCheckBox">
                                         Nota Fiscal
                                     </label>
-                        
+
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="true" id="registradoCheckBox"
@@ -61,7 +67,7 @@
                                         Pago
                                     </label>
                                 </div>
-                        
+
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="true" id="embarcadoCheckBox"
                                         name="embarcado">
@@ -69,7 +75,7 @@
                                         Embarcado
                                     </label>
                                 </div>
-                        
+
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
@@ -79,7 +85,7 @@
                                         Urgente
                                     </label>
                                 </div>
-                        
+
                             </div>
                             <div class="form-group">
                                 <label for="data">Data e Hora</label>
@@ -110,59 +116,61 @@
                                 </table>
                             </div>
                         </div>
-                        
+
                     </fieldset>
-                    
-                    
+
+
                     <div class="form-group d-flex justify-content-start gap-2" id="botoes">
                         <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
                         <button type="button" class="btn btn-secondary" id="cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-danger" id="editar">Editar</button>
-                        <button type="button" class="btn btn-danger" id="bttn-deletar" data-toggle="modal" data-target="#exampleModal">Deletar</button>
+                        <button type="button" class="btn btn-danger" id="bttn-deletar" data-toggle="modal"
+                            data-target="#exampleModal">Deletar</button>
                     </div>
-          
-                    
-                    
+
+
+                    <div id="status" class="align-self-center"></div>
                 </form>
 
-                <div id="status" class="col-6"></div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Excluir Embarque?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Essa ação não pode ser desfeita!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="modal-btn-confirm-deletion">Deletar</button>
-            </div>
-            </div>
-        </div>
-        </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Excluir Embarque?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Essa ação não pode ser desfeita!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger"
+                                    id="modal-btn-confirm-deletion">Deletar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
-        
 
 
-         <!-- scripts from boostrap-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
 
-    <script type="module" src="../scripts/embarque-script.js" ></script>
+        <!-- scripts from boostrap-->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+        <script type="module" src="../scripts/embarque-script.js"></script>
 </body>
+
 </html>
