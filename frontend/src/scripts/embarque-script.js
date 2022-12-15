@@ -207,7 +207,8 @@ form.addEventListener('submit', function (e) {
 })
 
 // quando o botão editar é clicado
-form.addEventListener( 'click', function (e) {
+const botaoEditar = document.querySelector('#editar')
+botaoEditar.addEventListener( 'click', function (e) {
     document.querySelector('fieldset').disabled = false
     document.querySelector('.btn-salvar').disabled = false
 }
