@@ -1,5 +1,5 @@
 # Gerenciador de Depósito: *ZéPósitos.*
-
+![a](https://i.imgur.com/5mKlxNF.png)
 ## O que é?
 A ideia do ZePósitos nasceu por meio de Meljael Daniel, que trabalha em um depósito de transportadora e relata as dificuldades do dia a dia passadas por ele e seus colegas de trabalho, ao usar um sistema de registro de embarques com papel e caneta.<br>
 Um desses problemas é a passividade a erros, que geram prejuizos aos clientes como também a empresa.<br>
@@ -24,3 +24,9 @@ O backend é composto de uma API REST e um Banco de Dados SQL.<br>
 O front se comunica com o back por meio da API.<br>
 Assim, ambos devem rodar simultaneamente na sua máquina para que o sistema funcione em sua completude.<br>
 Para isso, existe um README em cada um que especifica as etapas a serem feitas.
+
+## Desenvolvido por:
+
+- Meljael Daniel - [@meljael](https://github.com/meljael)
+- Artur Dantas - [@Artur906](https://github.com/Artur906)
+- André Alves - [@andrealvescorreia](https://github.com/andrealvescorreia)
