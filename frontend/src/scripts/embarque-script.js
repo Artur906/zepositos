@@ -20,6 +20,10 @@ async function pegarClienteDonoDoEmbarque(id_cliente) {
     return null
 }
 
+async function deletarEmbarque(id_embarque){
+    return (await axios.delete(`${BASE_URL_API}/embarques/${id}`)).data
+}
+
 /*
 function updateCheckBoxElement(bool, elementId){
     document.getElementById('elementId').checked = bool
@@ -211,4 +215,19 @@ form.addEventListener( 'click', function (e) {
 )
 
 
+const modalBtnConfirmDeletion = document.getElementById('modal-btn-confirm-deletion')
+modalBtnConfirmDeletion.addEventListener("click", ()=>{
+    console.log('oi')
+    //deletarEmbarque(id_embarque)
+
+    axios.delete(`${BASE_URL_API}/embarques/${id_embarque}`, data)
+        .then(res => {
+            setTimeout(() => window.location.href = "./listar-clientes.html", 500)
+        })
+        .catch(err => {
+            logRequestError(err)
+            statusFunctions.failedStatus()
+        })
+        
+})
 
