@@ -108,6 +108,14 @@ label {
     margin-left: 0px;
 }
 
+
+.tr-hover {
+    cursor: pointer;
+}
+
+.tr-hover:hover {
+    filter: contrast(0.8);
+}
 /* status embarque  */
 .sem-status, .nota-fiscal, .registrado, .pago, .embarcado {
     background-repeat: no-repeat;
@@ -116,16 +124,21 @@ label {
 
 .sem-status {
     background-image: url(/assets/sem-status.svg);
+    z-index: 10000000;
 }
 .nota-fiscal {
     background-image: url(/assets/nota-fiscal.svg);
+    z-index: 10000000;
 }
 .registrado {
     background-image: url(/assets/registrado.svg);
+    z-index: 10000000;
 }
 .pago {
     background-image: url(/assets/pago.svg);
+    z-index: 10000000;
 }
 .embarcado {
     background-image: url(/assets/embarcado.svg);
+    z-index: 10000000;
 }
