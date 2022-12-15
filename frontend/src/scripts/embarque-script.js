@@ -208,7 +208,6 @@ form.addEventListener('submit', function (e) {
 
 // quando o botão editar é clicado
 form.addEventListener( 'click', function (e) {
-    e.preventDefault();
     document.querySelector('fieldset').disabled = false
     document.querySelector('.btn-salvar').disabled = false
 }
