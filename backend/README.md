@@ -22,7 +22,7 @@ Nele, serão instaladas as seguintes dependencias:
   - Unittest (para Testes Unitarios)
   - dotenv (para configuração de variaveis de ambiente)
   
-Para instalar-las, entre na pasta do backend e execute o comando `pip install -r requirements.txt`.
+Para instalar-las, na pasta do backend execute o comando `pip install -r requirements.txt`.
 
 
 ### 2. Configurando variaveis de ambiente:
