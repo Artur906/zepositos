@@ -1,6 +1,6 @@
 from flask_restx import Resource, abort
 
-from src.server.esquemadb import Cliente
+from src.server.schemadb import Cliente
 from src.server.instance import server
 from src.models.clientes import cliente_model, cliente_model_patch  
 
@@ -95,7 +95,7 @@ class Clientes(Resource):
         except Exception as e:
             abort(400, e)
 
-    
+
     @api.doc('delete_cliente')
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def delete(self, id):

@@ -1,5 +1,5 @@
 import unittest
-from src.server.esquemadb import Cliente, Embarque
+from src.server.schemadb import Cliente, Embarque
 from decimal import Decimal
 
 

@@ -1,5 +1,5 @@
 from peewee import PostgresqlDatabase
-from src.server.esquemadb import Cliente, Embarque
+from src.server.schemadb import Cliente, Embarque
 from src.settings.settings import DATABASE_HOST, DATABASE_PASS, DATABASE_USER, DATABASE_PORT
 
 
