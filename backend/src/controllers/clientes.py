@@ -1,9 +1,10 @@
 from flask_restx import Resource, abort
 
-from src.server.postgredb import *
+from src.server.esquemadb import Cliente
 from src.server.instance import server
 from src.models.clientes import cliente_model, cliente_model_patch  
-from src.controllers.handyFunctions import has_field, brazilian_phone_number_validation_check
+
+from src.utils.validators import BrazilianPhoneValidator
 
 app, api = server.app, server.api
 
@@ -37,10 +38,11 @@ class ClientesList(Resource):
     def post(self):
         payload = api.payload
         print(payload)
-        if(has_field(payload, 'id')):
+        if('id' in payload):
             abort(400, "Campo id é de leitura apenas.")
-        if(has_field(payload, 'telefone')):
-            if(brazilian_phone_number_validation_check(payload['telefone']) == False):
+        if('telefone' in payload):
+            phoneValidator = BrazilianPhoneValidator(payload['telefone'])
+            if(not phoneValidator.isBrazilianPhoneNumber()):
                 abort(400, "Telefone inválido.")
         try:
             cliente = Cliente(**payload)
@@ -73,11 +75,12 @@ class Clientes(Resource):
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def patch(self, id):
         payload = api.payload
-        if(has_field(payload, 'id')):
+        if('id' in payload):
             abort(400,"Campo id é de leitura apenas.")
 
-        if(has_field(payload, 'telefone')):
-            if(brazilian_phone_number_validation_check(payload['telefone']) == False):
+        if('telefone' in payload):
+            phoneValidator = BrazilianPhoneValidator(payload['telefone'])
+            if(not phoneValidator.isBrazilianPhoneNumber()):
                 abort(400, "Telefone inválido.")
 
         try:

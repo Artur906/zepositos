@@ -55,7 +55,7 @@ class Embarque(BaseModel):
     pago            = BooleanField(default = False)
     urgente         = BooleanField(default = False)
     embarcado       = BooleanField(default = False)
-    volumes         = JSONField()
+    volumes         = JSONField(default='[]')
 
     @property
     def serialize(self):
@@ -80,18 +80,22 @@ class Embarque(BaseModel):
         }
         return data
     
-    # TO-DO
+   
     @property
     def quant_volumes(self):
         quant = 0
+        if(self.volumes == '[]'):
+            return quant
         for i in self.volumes:
             quant += 1
         return quant
 
-    # TO-DO
+
     @property
     def peso_total(self):
         peso = 0
+        if(self.volumes == '[]'):
+            return peso
         for i in self.volumes:
             peso += Decimal(i['peso'])
         return peso

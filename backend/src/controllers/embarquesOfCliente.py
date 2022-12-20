@@ -1,6 +1,6 @@
 from flask_restx import Resource, abort
 
-from src.server.postgredb import *
+from src.server.esquemadb import Embarque
 from src.server.instance import server
 from src.models.embarques import embarque_model
 

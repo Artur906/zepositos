@@ -1,9 +1,9 @@
 from flask_restx import Resource, abort
 
-from src.server.postgredb import *
+from src.server.esquemadb import Embarque
 from src.server.instance import server
 from src.models.embarques import embarque_model, embarque_model_patch
-from src.controllers.handyFunctions import has_field
+
 app, api = server.app, server.api
 
 
@@ -35,7 +35,7 @@ class EmbarquesList(Resource):
     @api.doc(responses={400: 'Campo id é de leitura apenas.'})
     def post(self):
         payload = api.payload
-        if(has_field(payload, 'id')):
+        if('id' in payload):
             abort(400, "Campo id é de leitura apenas.")
         try:
             embarque = Embarque(**payload)
@@ -67,7 +67,7 @@ class Embarques(Resource):
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def patch(self, id):
         payload = api.payload
-        if(has_field(payload, 'id')):
+        if('id' in payload):
             abort(400,"Campo id é de leitura apenas.")
         try:
             Embarque.get_by_id(id)
