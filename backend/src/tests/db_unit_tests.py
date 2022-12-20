@@ -57,7 +57,6 @@ def create_test_data():
 class TestClienteMethods(unittest.TestCase):
     
     def test_quant_embarques(self):
-
         create_test_data()
         c1 = Cliente.get_by_id(1)
         c2 = Cliente.get_by_id(2)
@@ -71,6 +70,7 @@ class TestClienteMethods(unittest.TestCase):
         finally:
             clear_test_data()
     
+
     def test_quant_embarques_ativos(self):
         create_test_data()
         c1 = Cliente.get_by_id(1)
@@ -91,7 +91,7 @@ class TestClienteMethods(unittest.TestCase):
 
 class TestEmbarquesMethods(unittest.TestCase):
 
-    #testa se o calculo de peso total funciona corretamente
+    
     def test_peso_total(self):
         create_test_data()
         emb1 = Embarque.get_by_id(1)
@@ -109,9 +109,8 @@ class TestEmbarquesMethods(unittest.TestCase):
         
     
     
-    #testa se a contagem de volumes de um embarque funciona corretamente
+    
     def test_quant_volumes(self):
-        
         create_test_data()
         emb1 = Embarque.get_by_id(1)
         emb2 = Embarque.get_by_id(2)
@@ -125,6 +124,3 @@ class TestEmbarquesMethods(unittest.TestCase):
             raise
         finally:
             clear_test_data()
-        
-    
-

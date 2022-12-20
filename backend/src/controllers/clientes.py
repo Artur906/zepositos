@@ -95,6 +95,7 @@ class Clientes(Resource):
         except Exception as e:
             abort(400, e)
 
+    
     @api.doc('delete_cliente')
     @api.doc(responses={404: ITEM_NOT_FOUND})
     def delete(self, id):
