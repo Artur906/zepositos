@@ -3,13 +3,11 @@ from flask_restx import Resource, abort
 from src.server.schemadb import Cliente
 from src.server.instance import server
 from src.models.clientes import cliente_model, cliente_model_patch  
-
 from src.utils.validators import BrazilianPhoneValidator
 
 app, api = server.app, server.api
 
 ITEM_NOT_FOUND = 'Nenhum cliente encontrado'
-
 
 
 
@@ -109,43 +107,4 @@ class Clientes(Resource):
         else:
             abort(404, ITEM_NOT_FOUND)
 
-        
-    '''
-    @api.doc('create_or_replace_cliente')
-    @api.marshal_with(cliente_model)
-    @api.expect(cliente_model, validate=True)    
-    def put(self, id):
-        payload = api.payload
-
-        if(has_field(payload, 'telefone')):
-            if(brazilian_phone_number_validation_check(payload['telefone']) == False):
-                abort(400, "Telefone inválido.")
-
-        alreadyExists = Cliente.select().where(Cliente.id == id).exists()
-        if(alreadyExists):
-            # REPLACE!
-
-            auxC = Cliente(**payload)
-            auxC.id = id
-
-            auxC_dict = auxC.serialize
-            # get rid of readOnly fields (id and quant_embarques):
-            auxC_dict.pop('id')
-            auxC_dict.pop('quant_embarques')
-            
-            Cliente.update(**auxC_dict).where(Cliente.id == id).execute()
-
-            updatedCliente = Cliente.get_by_id(id)
-            return updatedCliente.serialize, 200
-
-        else:
-            # INSERT!
-
-            newCliente = Cliente(**payload)
-            newCliente.id = id
-            try:
-                newCliente.save()
-                return newCliente.serialize, 201
-            except Exception as e:
-                abort(400, e)
-'''
+       
