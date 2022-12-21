@@ -9,7 +9,6 @@ def clear_test_data():
     Cliente.delete().execute()
 
 
-
 def create_test_data():
     clear_test_data()
     clientes = [
@@ -55,72 +54,44 @@ def create_test_data():
 
 
 class TestClienteMethods(unittest.TestCase):
-    
-    def test_quant_embarques(self):
+    def setUp(self):
         create_test_data()
-        c1 = Cliente.get_by_id(1)
-        c2 = Cliente.get_by_id(2)
-        c3 = Cliente.get_by_id(3)
-        try:
-            self.assertEqual(c1.quant_embarques, 3)
-            self.assertEqual(c2.quant_embarques, 1)
-            self.assertEqual(c3.quant_embarques, 0)
-        except AssertionError:
-            raise
-        finally:
-            clear_test_data()
-    
+        self.c1 = Cliente.get_by_id(1)
+        self.c2 = Cliente.get_by_id(2)
+        self.c3 = Cliente.get_by_id(3)
+
+    def test_quant_embarques(self):
+        self.assertEqual(3, self.c1.quant_embarques)
+        self.assertEqual(1, self.c2.quant_embarques)
+        self.assertEqual(0, self.c3.quant_embarques)
+
 
     def test_quant_embarques_ativos(self):
-        create_test_data()
-        c1 = Cliente.get_by_id(1)
-        c2 = Cliente.get_by_id(2)
-        c3 = Cliente.get_by_id(3)
-        try:
-            self.assertEqual(c1.quant_embarques_ativos, 2)
-            self.assertEqual(c2.quant_embarques_ativos, 0)
-            self.assertEqual(c3.quant_embarques_ativos, 0)
-        except AssertionError:
-            raise
-        finally:
-            clear_test_data()
+        self.assertEqual(2, self.c1.quant_embarques_ativos)
+        self.assertEqual(0, self.c2.quant_embarques_ativos)
+        self.assertEqual(0, self.c3.quant_embarques_ativos)
 
-
+    def tearDown(self):
+        clear_test_data()
 
 
 
 class TestEmbarquesMethods(unittest.TestCase):
-
+    def setUp(self):
+        create_test_data()
+        self.emb1 = Embarque.get_by_id(1)
+        self.emb2 = Embarque.get_by_id(2)
+        self.emb3 = Embarque.get_by_id(3)
     
     def test_peso_total(self):
-        create_test_data()
-        emb1 = Embarque.get_by_id(1)
-        emb2 = Embarque.get_by_id(2)
-        emb3 = Embarque.get_by_id(3)
+        self.assertEqual(Decimal('6.689'), self.emb1.peso_total)
+        self.assertEqual(Decimal('0.5'),   self.emb2.peso_total)
+        self.assertEqual(Decimal('0'),     self.emb3.peso_total)
 
-        try:
-            self.assertEqual(emb1.peso_total, Decimal('6.689'))
-            self.assertEqual(emb2.peso_total, Decimal('0.5'))
-            self.assertEqual(emb3.peso_total, Decimal('0'))
-        except AssertionError:
-            raise
-        finally:
-            clear_test_data()
-        
-    
-    
-    
     def test_quant_volumes(self):
-        create_test_data()
-        emb1 = Embarque.get_by_id(1)
-        emb2 = Embarque.get_by_id(2)
-        emb3 = Embarque.get_by_id(3)
-
-        try:
-            self.assertEqual(emb1.quant_volumes, 3)
-            self.assertEqual(emb2.quant_volumes, 1)
-            self.assertEqual(emb3.quant_volumes, 0)
-        except AssertionError:
-            raise
-        finally:
-            clear_test_data()
+        self.assertEqual(3, self.emb1.quant_volumes)
+        self.assertEqual(1, self.emb2.quant_volumes)
+        self.assertEqual(0, self.emb3.quant_volumes)
+       
+    def tearDown(self):
+        clear_test_data()
