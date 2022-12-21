@@ -9,13 +9,10 @@ Voce pode seguir os passos descritos abaixo, ou ver este [video](https://youtu.b
 
 ### 1. Instalando dependencias:
 Clone este repositório em alguma pasta no seu computador.<br>
-Por meio do terminal, crie um ambiente virtual python na pasta do backend. 
+Por meio do terminal, crie um ambiente virtual python dentro da pasta _backend_.
+
 [(Como criar ambiente virtual python?)](https://www.youtube.com/watch?v=hA2l0TgaZhM)<br>
 Ative o ambiente virtual.<br>
-
-
-
-
 
 <details>
   <summary>Nele, serão instaladas as seguintes dependencias:</summary>
