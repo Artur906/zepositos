@@ -9,9 +9,8 @@ Voce pode seguir os passos descritos abaixo, ou ver este [video](https://youtu.b
 
 ### 1. Instalando dependencias:
 Clone este repositório em alguma pasta no seu computador.<br>
-Por meio do terminal, crie um ambiente virtual python dentro da pasta _backend_.
-
-[(Como criar ambiente virtual python?)](https://www.youtube.com/watch?v=hA2l0TgaZhM)<br>
+Abra o terminal.<br>
+Navegue até a pasta do _backend_, e nela crie um ambiente virtual python (pode ficar numa pasta _venv_).<br>
 Ative o ambiente virtual.<br>
 
 <details>
@@ -45,14 +44,11 @@ Salve o arquivo.
 ## 3. Rodando a API:
 Por meio do terminal, ative o ambiente virtual criado no primeiro passo.<br>
 Navegue para dentro da pasta _"zepositos/backend"_, e execute o comando<br> `python main.py` <br>
-Após isso, a API do ZéPósitos estará conectada com o seu banco de dados e pronta para ser consumida pelo frontend!
-<br> Observe no terminal se de fato tudo ocorreu bem.<br>
-
+Após isso, a API do ZéPósitos estará conectada com o seu banco de dados e pronta para ser consumida pelo frontend!<br> 
 
 
 ***
 Abaixo estão ações **opcionais** que não precisam ser realizadas para que o backend funcione.
-
 
 
 #### Como rodar pelo VsCode?
@@ -75,4 +71,3 @@ Tenha em mente que a API está configurada para ser acessada apenas localmente n
 Primeiro certifique-se que no seu Postgres há uma database chamada de _"zepositosTEST"_.<br>
 Agora rode o arquivo **runTests.py**<br>
 Se todos os testes passarem, será mostrado no terminal uma mensagem de _OK_.
-
