@@ -34,7 +34,7 @@ Para instalar-las, dentro da pasta do backend execute o comando <br>`pip install
 
 
 ### 2. Configurando variaveis de ambiente:
-Dentro da pasta "zepositos/backend/src/settings", crie o arquivo **.env**<br>
+Dentro da pasta _"zepositos/backend/src/settings"_, crie o arquivo **.env**<br>
 Abra-o com um editor de texto.<br>
 Nele, insira informações relativas ao seu PostgreSQL, seguindo o modelo a seguir de exemplo:<br>
 ```env
@@ -47,7 +47,7 @@ Salve o arquivo.
 
 ## 3. Rodando a API:
 Por meio do terminal, ative o ambiente virtual criado no primeiro passo.<br>
-Navega para dentro da pasta _"zepositos/backend"_, execute o comando<br> `python main.py` <br>
+Navegue para dentro da pasta _"zepositos/backend"_, e execute o comando<br> `python main.py` <br>
 Após isso, a API do ZéPósitos estará conectada com o seu banco de dados e pronta para ser consumida pelo frontend!
 <br> Observe no terminal se de fato tudo ocorreu bem.<br>
 
@@ -58,13 +58,14 @@ Abaixo estão ações **opcionais** que não precisam ser realizadas para que o 
 
 
 
-#### Como rodar pelo VsCode
+#### Como rodar pelo VsCode?
 (Certifique-se que tem a [extensão do python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) instalada)<br>
-Abra a pasta do zepositos no seu vscode;<br>
+Abra a pasta _zepositos_ no seu VsCode;<br>
 Ctrl+Shift+P e pesquise _"Selecionar Interpretador (Python)"_;<br>
 Escolha a opção _"Insira o caminho do interpretador"_->_"Localizar"_;<br>
-Isso abrirá o seu explorador de arquivos. Selecione o executavel python localizado no seu ambiente virtual<br> (ex: zepositos/backend/venv/Scripts/python.exe);<br>
-Pronto, agora no VsCode é só rodar o arquivo **main.py** 
+Isso abrirá o seu explorador de arquivos. Selecione o executavel python localizado no seu ambiente virtual<br> 
+ex: _zepositos/backend/venv/Scripts/python.exe_;<br>
+Pronto, agora no VsCode é só rodar o arquivo **main.py** localizado na pasta do _backend_. 
 
 #### Documentação SWAGGER: Como consumir a API?
 Com a API rodando com sucesso, no terminal voce verá que fora _'printado'_ uma URI de acesso local a API (`http://127.0.0.1:5000`). <br>
