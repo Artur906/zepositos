@@ -7,9 +7,10 @@ from src.utils.validators import BrazilianPhoneValidator
 
 app, api = server.app, server.api
 
-ITEM_NOT_FOUND = 'Nenhum cliente encontrado'
-
-
+ITEM_NOT_FOUND  = 'Nenhum cliente encontrado'
+ID_IS_READ_ONLY = 'Campo id é de leitura apenas'
+INVALID_PHONE   = 'Telefone inválido'
+DELETED         = "Deletado!"
 
 
 @api.route('/clientes')
@@ -32,15 +33,15 @@ class ClientesList(Resource):
     @api.doc('create_cliente')
     @api.expect(cliente_model, validate=True)
     @api.marshal_with(cliente_model, code=201)
-    @api.doc(responses={400: 'Campo id é de leitura apenas.'})
+    @api.doc(responses={400: f"{ID_IS_READ_ONLY} || {INVALID_PHONE}"})
     def post(self):
         payload = api.payload
         if('id' in payload):
-            abort(400, "Campo id é de leitura apenas.")
+            abort(400, ID_IS_READ_ONLY)
         if('telefone' in payload):
             phoneValidator = BrazilianPhoneValidator(payload['telefone'])
             if(not phoneValidator.isPhone()):
-                abort(400, "Telefone inválido.")
+                abort(400, INVALID_PHONE)
         try:
             cliente = Cliente(**payload)
             cliente.save()
@@ -69,16 +70,16 @@ class Clientes(Resource):
     @api.doc('update_cliente')
     @api.marshal_with(cliente_model_patch, code=200)
     @api.expect(cliente_model_patch, validate=True)
-    @api.doc(responses={404: ITEM_NOT_FOUND})
+    @api.doc(responses={404: ITEM_NOT_FOUND, 400: f'{ID_IS_READ_ONLY} || {INVALID_PHONE}'})
     def patch(self, id):
         payload = api.payload
         if('id' in payload):
-            abort(400,"Campo id é de leitura apenas.")
+            abort(400, ID_IS_READ_ONLY)
 
         if('telefone' in payload):
             phoneValidator = BrazilianPhoneValidator(payload['telefone'])
             if(not phoneValidator.isPhone()):
-                abort(400, "Telefone inválido.")
+                abort(400, INVALID_PHONE)
 
         try:
             Cliente.get_by_id(id)
@@ -94,13 +95,13 @@ class Clientes(Resource):
 
 
     @api.doc('delete_cliente')
-    @api.doc(responses={404: ITEM_NOT_FOUND})
+    @api.doc(responses={200: DELETED, 404: ITEM_NOT_FOUND})
     def delete(self, id):
         if(Cliente.select().where(Cliente.id == id).exists()):
             cliente = Cliente.get_by_id(id)
             try: 
                 cliente.delete_instance()
-                return "Deletado!", 200
+                return DELETED, 200
             except Exception as e:
                abort(400, e) 
         else:
