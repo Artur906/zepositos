@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { statusFunctions, criarLinha, logRequestError } from './utils.js'
+import { statusFunctions, logRequestError } from '../utils/utils.js'
+import { insertRowIntoTable } from '../utils/volumes-embarque.js'
 import { BASE_URL_API } from '../variaveisAmbiente.js'
 
 const form = document.querySelector('#form')
@@ -39,65 +40,7 @@ document.getElementById('data').value = today;
 
 
 // Adicionando elementos na tabela
-const tabela = document.querySelector('.table-body')
-let numeroElemento = 0
-
-
-const adicionandoElementoNaTabela = () => {
-    numeroElemento++
-    const elementoPai = tabela
-
-    const novaLinha = criarLinha(numeroElemento)
-   
-    elementoPai.insertBefore(novaLinha, elementoPai.firstChild)
-
-    //mudar o botão dos elementos anteriores para o de remover 
-    const botoes = document.querySelectorAll('.add-row')
-    mudarBotoes(botoes)
-}
-
-function mudarBotoes(botoes) {
-    botoes.forEach((botao, index) => {
-        if (index > 0) {
-            botao.className = 'btn btn-danger rmv-row'
-            botao.value = '   '
-
-            botao.removeEventListener('click', adicionandoElementoNaTabela)
-            botao.addEventListener('click', e => {
-                // o parentElement é o elemento pai, o botão está dentro de um td, que está dentro de um tr
-                removerElementoDaTela(botao.parentElement.parentElement)
-                reorganizarContagemDeLinhas()
-            })
-        } else {
-            botao.addEventListener('click', adicionandoElementoNaTabela)
-        }
-    })
-}
-
-const removerElementoDaTela = (elemento) => {
-    tabela.removeChild(elemento)
-}
-
-const reorganizarContagemDeLinhas = () => {
-    numeroElemento--
-    const linhas = document.querySelectorAll('.linha')
-    linhas.forEach((linha, index) => {
-        const indexInvertido = linhas.length - index
-        //acessando cada um dos elementos da linha
-        //contador
-        linha.children[0].innerHTML = indexInvertido
-        //comp 
-        linha.children[1].firstElementChild.setAttribute('name', `comp${indexInvertido}`) 
-        //alt 
-        linha.children[2].firstElementChild.setAttribute('name', `alt${indexInvertido}`) 
-        //larg 
-        linha.children[3].firstElementChild.setAttribute('name', `larg${indexInvertido}`) 
-        //peso 
-        linha.children[4].firstElementChild.setAttribute('name', `peso${indexInvertido}`) 
-    })
-}
-
-adicionandoElementoNaTabela()
+insertRowIntoTable()
 
 
 form.addEventListener('reset', function (e) {
@@ -108,7 +51,7 @@ form.addEventListener('submit', function (e) {
     e.preventDefault();
     statusFunctions.loadingStatus()
     document.querySelector('.btn-salvar').disabled = true
-    
+
     const formData = new FormData(form)
     const listaVolumes = []
     let elemento = 1
@@ -127,7 +70,7 @@ form.addEventListener('submit', function (e) {
         id_cliente: parseInt(formData.get('cliente')),
         descricao: formData.get('descricao'),
         data_chegada: formData.get('data'),
-        com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true, 
+        com_nota_fiscal: formData.get('nota-fiscal') == null ? false : true,
         volumes: listaVolumes
     }
 
