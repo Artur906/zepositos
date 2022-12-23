@@ -75,21 +75,21 @@ table input {
     margin-bottom: 1rem;
 }
 
-.add-row {
+.btn-add-row {
     background-image: url(/assets/imgs/add-icon.svg);
     background-repeat: no-repeat;
     background-position: center center;
 }
-.add-row:hover, .add-row:focus {
+.btn-add-row:hover, .btn-add-row:focus {
     background-image: url(/assets/imgs/add-icon-hover.svg);
 }
 
-.rmv-row {
+.btn-rmv-row {
     background-image: url(/assets/imgs/trash.svg);
     background-repeat: no-repeat;
     background-position: center center;
 }
-.rmv-row:hover {
+.btn-rmv-row:hover {
     background-image: url(/assets/imgs/trash-hover.svg);
 }
 

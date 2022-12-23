@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { statusFunctions, criarLinha, logRequestError } from './utils.js'
+import { statusFunctions, logRequestError } from '../utils/utils.js'
+import { insertRowIntoTable, addDataToRow } from '../utils/volumes-embarque.js';
 import { BASE_URL_API } from '../variaveisAmbiente.js'
-
 
 // pegar parametros inseridos na URL
 const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -62,7 +62,6 @@ if (cliente) {
 }
 
 const form = document.querySelector('#form')
-const tabela = document.querySelector(".table-body")
 
 document.getElementById('notaFiscalCheckBox').checked = embarque.com_nota_fiscal
 document.getElementById('registradoCheckBox').checked = embarque.registrado
@@ -73,97 +72,14 @@ document.getElementById('urgenteCheckBox').checked = embarque.urgente
 document.getElementById("descricao").value = embarque.descricao
 document.getElementById("data").value = embarque.data_chegada
 
-/*
- FUNÇÕES NESCESSÁRIAS PARA EDIÇÃO DE VOLUMES 
- ------------ ---------- ------------- -------  
- porque elas estão aqui? 
- porque eu tive dificuldade em fazer elas funciorem por meio de importação 
- elas acessam a variável numero elemento para fazer a organização dos volumes 
- */
-let numeroElemento = 0
-
-const adicionandoElementoNaTabela = () => {
-    numeroElemento++
-    const elementoPai = tabela
-
-    const novaLinha = criarLinha(numeroElemento)
-
-    elementoPai.insertBefore(novaLinha, elementoPai.firstChild)
-
-    //mudar o botão dos elementos anteriores para o de remover 
-    const botoes = document.querySelectorAll('.add-row')
-    mudarBotoes(botoes)
-}
-
-function mudarBotoes(botoes) {
-    botoes.forEach((botao, index) => {
-        if (index > 0) {
-            botao.className = 'btn btn-danger rmv-row'
-            botao.value = '   '
-
-            botao.removeEventListener('click', adicionandoElementoNaTabela)
-            botao.addEventListener('click', e => {
-                // o parentElement é o elemento pai, o botão está dentro de um td, que está dentro de um tr
-                removerElementoDaTela(botao.parentElement.parentElement)
-                reorganizarContagemDeLinhas()
-            })
-        } else {
-            botao.addEventListener('click', adicionandoElementoNaTabela)
-        }
-    })
-}
-
-const removerElementoDaTela = (elemento) => {
-    tabela.removeChild(elemento)
-}
-
-const reorganizarContagemDeLinhas = () => {
-    numeroElemento--
-    const linhas = document.querySelectorAll('.linha')
-    linhas.forEach((linha, index) => {
-        const indexInvertido = linhas.length - index
-        //acessando cada um dos elementos da linha
-        //contador
-        linha.children[0].innerHTML = indexInvertido
-        //comp 
-        linha.children[1].firstElementChild.setAttribute('name', `comp${indexInvertido}`)
-        //alt 
-        linha.children[2].firstElementChild.setAttribute('name', `alt${indexInvertido}`)
-        //larg 
-        linha.children[3].firstElementChild.setAttribute('name', `larg${indexInvertido}`)
-        //peso 
-        linha.children[4].firstElementChild.setAttribute('name', `peso${indexInvertido}`)
-    })
-}
-//fim funções nescessárias para edição de volumes
-
-
-embarque.volumes.forEach((volume, index) => {
-    numeroElemento++
-    const novaLinha = criarLinha(index + 1)
-
-    //acessando cada um dos elementos da linha
-    //contador
-    novaLinha.children[0].value = index + 1
-    //comp 
-    novaLinha.children[1].firstElementChild.value = volume.comprimento
-    //alt 
-    novaLinha.children[2].firstElementChild.value = volume.altura
-    //larg 
-    novaLinha.children[3].firstElementChild.value = volume.largura
-    //peso 
-    novaLinha.children[4].firstElementChild.value = volume.peso
-
-    tabela.insertBefore(novaLinha, tabela.firstChild)
-
-    //mudar o botão dos elementos anteriores para o de remover 
-    const botoes = document.querySelectorAll('.add-row')
-    mudarBotoes(botoes)
+// inserindo os volumes na table
+embarque.volumes.forEach((volume) => {
+    insertRowIntoTable(addDataToRow, volume)
 })
 
 // quando o botao salvar é clicado:
 form.addEventListener('submit', function (e) {
-    e.preventDefault();
+    e.preventDefault()
     statusFunctions.loadingStatus()
     document.querySelector('.btn-salvar').disabled = true
 
@@ -207,18 +123,20 @@ form.addEventListener('submit', function (e) {
 
 })
 
-document.querySelector('.btn-salvar').style.display = "none"
-document.querySelector('#cancelar').style.display = "none"
-document.querySelector('#bttn-deletar').style.display = "none"
+const fieldset = document.querySelector('fieldset')
+const btnEditar = document.querySelector('#editar')
+
+const btnSalvar = document.querySelector('.btn-salvar')
+const btnCancelar = document.querySelector('#cancelar')
+const btnDeletar = document.querySelector('#bttn-deletar')
+
+// sumindo com os botões 
+btnSalvar.style.display = "none"
+btnCancelar.style.display = "none"
+btnDeletar.style.display = "none"
+
 // quando o botão editar é clicado
-const botaoEditar = document.querySelector('#editar')
-
-botaoEditar.addEventListener('click', function (e) {
-    const fieldset = document.querySelector('fieldset')
-    const btnSalvar = document.querySelector('.btn-salvar')
-    const btnCancelar = document.querySelector('#cancelar')
-    const btnDeletar = document.querySelector('#bttn-deletar')
-
+btnEditar.addEventListener('click', function (e) {
     btnSalvar.style.display = !fieldset.disabled ? "none" : "inherit"
     btnCancelar.style.display = !fieldset.disabled ? "none" : "inherit"
     btnDeletar.style.display = !fieldset.disabled ? "none" : "inherit"
