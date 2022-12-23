@@ -9,7 +9,7 @@ class NullableInteger(fields.Integer):
 
 embarque_model = server.api.model('Embarque', {
     'id':               fields.Integer(readonly=True, description='O identificador do embarque.', example=1),
-    'id_cliente':       NullableInteger(default=None, description='O identificador do cliente dono do embarque.', example="1"),
+    'id_cliente':       NullableInteger(default=None, description='O identificador do cliente dono do embarque.', example=1),
     'descricao':        fields.String(required=True, max_length=200, description='A descricao do embarque.', example="Caixas pretas grandes, entrega em domicílio."),
     'data_chegada':     fields.Date(default=date.today(), description='Data em que o embarque chegou ao depósito.'),
     'volumes':          fields.List(fields.Nested(volume_model)),
