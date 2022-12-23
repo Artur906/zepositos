@@ -40,7 +40,7 @@ class ClientesList(Resource):
             abort(400, "Campo id é de leitura apenas.")
         if('telefone' in payload):
             phoneValidator = BrazilianPhoneValidator(payload['telefone'])
-            if(not phoneValidator.isBrazilianPhoneNumber()):
+            if(not phoneValidator.isPhone()):
                 abort(400, "Telefone inválido.")
         try:
             cliente = Cliente(**payload)
@@ -78,7 +78,7 @@ class Clientes(Resource):
 
         if('telefone' in payload):
             phoneValidator = BrazilianPhoneValidator(payload['telefone'])
-            if(not phoneValidator.isBrazilianPhoneNumber()):
+            if(not phoneValidator.isPhone()):
                 abort(400, "Telefone inválido.")
 
         try:

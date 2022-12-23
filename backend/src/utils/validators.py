@@ -10,16 +10,16 @@ class BrazilianPhoneValidator:
     def __init__(self, number):
         self.__phoneNumber = number
 
-    def isBrazilianPhoneNumber(self):
-        if (self.isBrazilianCellPhoneNumber() or self.isBrazilianLandlinePhoneNumber()):
+    def isPhone(self):
+        if (self.isCellPhone() or self.isLandlinePhone()):
             return True
         else:
             return False
 
-    def isBrazilianCellPhoneNumber(self):
+    def isCellPhone(self):
         return self.__phoneRegexMatch(self.__cellRegex)
 
-    def isBrazilianLandlinePhoneNumber(self):
+    def isLandlinePhone(self):
         return self.__phoneRegexMatch(self.__landlineRegex)
 
     def __phoneRegexMatch(self, phoneRegex):
