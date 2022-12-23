@@ -35,7 +35,6 @@ class ClientesList(Resource):
     @api.doc(responses={400: 'Campo id é de leitura apenas.'})
     def post(self):
         payload = api.payload
-        print(payload)
         if('id' in payload):
             abort(400, "Campo id é de leitura apenas.")
         if('telefone' in payload):
