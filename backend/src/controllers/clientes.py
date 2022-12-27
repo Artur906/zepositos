@@ -68,8 +68,8 @@ class ClienteRoute(Resource):
 
     
     @api.doc('update_cliente')
-    @api.marshal_with(cliente_model_patch, code=200)
     @api.expect(cliente_model_patch, validate=True)
+    @api.marshal_with(cliente_model_patch, code=200)
     @api.doc(responses={404: ITEM_NOT_FOUND, 400: f'{ID_IS_READ_ONLY} || {INVALID_PHONE}'})
     def patch(self, id):
         payload = api.payload

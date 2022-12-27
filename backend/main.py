@@ -5,7 +5,7 @@ from src.controllers.embarques import *
 from src.controllers.embarquesOfCliente import *
 
 DATABASE_NAME = 'zepositos'
-zepositosdb = ApplicationPostgresqlDatabase(DATABASE_NAME)
+zepositos_database = ApplicationPostgresqlDatabase(DATABASE_NAME)
 
-zepositosdb.start()
+zepositos_database.start()
 server.run()

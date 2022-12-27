@@ -53,8 +53,7 @@ class TestBrazilianPhoneValidator(unittest.TestCase):
     def test_validCellPhoneNumbers(self):
         for validCellPhone in self.validCellPhoneNumbers:
             phoneValidator = BrazilianPhoneValidator(validCellPhone)
-            self.assertTrue(phoneValidator.isCellPhone())
-         
+            self.assertTrue(phoneValidator.isCellPhone())    
     
     def test_invalidCellPhoneNumbers(self):
         for invalidCellPhone in self.invalidCellPhoneNumbers:
@@ -69,7 +68,6 @@ class TestBrazilianPhoneValidator(unittest.TestCase):
         for validLandlinePhone in self.validLandlinePhoneNumbers:
             phoneValidator = BrazilianPhoneValidator(validLandlinePhone)
             self.assertTrue(phoneValidator.isLandlinePhone())
-
 
     def test_invalidLandlinePhoneNumbers(self):
         for invalidLandlinePhone in self.invalidLandlinePhoneNumbers:

@@ -5,11 +5,11 @@ from src.settings.settings import DATABASE_HOST, DATABASE_PASS, DATABASE_USER, D
 
 class ApplicationPostgresqlDatabase():
     def __init__(self, database_name):
-        self.__db = PostgresqlDatabase(database_name, host=DATABASE_HOST, port=DATABASE_PORT, user=DATABASE_USER, password=DATABASE_PASS)
+        self.__database = PostgresqlDatabase(database_name, host=DATABASE_HOST, port=DATABASE_PORT, user=DATABASE_USER, password=DATABASE_PASS)
     
     def start(self):
         tables = [Cliente, Embarque]
-        self.__db.bind(tables)
-        self.__db.connect()
-        self.__db.create_tables(tables)
-        self.__db.close()
+        self.__database.bind(tables)
+        self.__database.connect()
+        self.__database.create_tables(tables)
+        self.__database.close()

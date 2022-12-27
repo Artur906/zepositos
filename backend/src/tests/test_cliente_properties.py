@@ -6,7 +6,7 @@ def create_test_data():
     clientes = [
         {'id':'1', 'nome': 'Cliente-1'},
         {'id':'2', 'nome': 'Cliente-2'},
-        {'id':'3', 'nome': 'Cliente-3'},
+        {'id':'3', 'nome': 'Cliente-3'}
     ]
     Cliente.insert_many(clientes).execute()
 

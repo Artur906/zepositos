@@ -13,10 +13,10 @@ class Server():
             description='API para o sistema de gerenciamento de embarques ZePositos',
             doc='/'
         )
-    
+
     def run(self):
         self.app.run(
             debug=True# Por enquanto esta API só é usada para desenvolvimento.
         )
-
+    
 server = Server()

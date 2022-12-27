@@ -28,23 +28,23 @@ class Cliente(BaseModel):
     
     @property
     def quant_embarques(self):
-        q = (
+        count_embarques = (
             Embarque
             .select()
             .where(Embarque.id_cliente == self.id)
             .count()
         )
-        return q
+        return count_embarques
     
     @property
     def quant_embarques_ativos(self):
-        q = (
+        count_embarques_ativos = (
             Embarque
             .select()
             .where(Embarque.id_cliente == self.id, Embarque.embarcado == False)
             .count()
         )
-        return q
+        return count_embarques_ativos
 
 class Embarque(BaseModel):
     id_cliente      = ForeignKeyField(Cliente, backref='embarque', null=True, on_delete='CASCADE')
@@ -60,7 +60,7 @@ class Embarque(BaseModel):
     @property
     def serialize(self):
         try:
-            #gambiarra para nao retornar o tipo <Model>
+            # gambiarra para pegar o id do cliente como tipo inteiro ao invez do tipo <Model>.
             int_id_cliente = (Cliente.select().where(Cliente.id == self.id_cliente).get()).id
         except:
             int_id_cliente = None
@@ -83,12 +83,12 @@ class Embarque(BaseModel):
    
     @property
     def quant_volumes(self):
-        quant = 0
+        count = 0
         if(self.volumes == '[]'):
-            return quant
+            return count
         for i in self.volumes:
-            quant += 1
-        return quant
+            count += 1
+        return count
 
 
     @property
