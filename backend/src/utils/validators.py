@@ -11,10 +11,7 @@ class BrazilianPhoneValidator:
         self.__phoneNumber = number
 
     def isPhone(self):
-        if (self.isCellPhone() or self.isLandlinePhone()):
-            return True
-        else:
-            return False
+        return (self.isCellPhone() or self.isLandlinePhone())
 
     def isCellPhone(self):
         return self.__phoneRegexMatch(self.__cellRegex)
