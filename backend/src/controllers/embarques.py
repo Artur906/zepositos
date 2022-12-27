@@ -12,7 +12,7 @@ DELETED         = "Deletado!"
 
 
 @api.route('/embarques')
-class EmbarquesList(Resource):
+class EmbarquesRoute(Resource):
 
 
     @api.doc('get_embarques')
@@ -48,7 +48,7 @@ class EmbarquesList(Resource):
 
 
 @api.route('/embarques/<int:id>')
-class Embarques(Resource):
+class EmbarqueRoute(Resource):
 
     @api.doc('get_embarque')
     @api.marshal_with(embarque_model, code=200)

@@ -14,7 +14,7 @@ DELETED         = "Deletado!"
 
 
 @api.route('/clientes')
-class ClientesList(Resource):
+class ClientesRoute(Resource):
 
     @api.doc('get_clientes')
     @api.marshal_list_with(cliente_model, envelope="clientes", code=200)
@@ -53,7 +53,7 @@ class ClientesList(Resource):
 
 
 @api.route('/clientes/<int:id>')
-class Clientes(Resource):
+class ClienteRoute(Resource):
 
     @api.doc('get_cliente')
     @api.marshal_with(cliente_model, code=200)
