@@ -83,21 +83,21 @@ class Embarque(BaseModel):
    
     @property
     def quant_volumes(self):
-        count = 0
-        if(self.volumes == '[]'):
-            return count
-        for i in self.volumes:
-            count += 1
-        return count
+        if(self.volumes == '[]'): return 0
+
+        count_volumes = 0
+        for volume in self.volumes:
+            count_volumes += 1
+        return count_volumes
 
 
     @property
     def peso_total(self):
-        peso = 0
-        if(self.volumes == '[]'):
-            return peso
-        for i in self.volumes:
-            peso += Decimal(i['peso'])
-        return peso
+        if(self.volumes == '[]'): return 0
+        
+        peso_total = 0
+        for volume in self.volumes:
+            peso_total += Decimal(volume['peso'])
+        return peso_total
     
     
