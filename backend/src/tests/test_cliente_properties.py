@@ -30,15 +30,17 @@ class TestClienteProperties(unittest.TestCase):
         self.cliente2 = Cliente.get_by_id(2)
         self.cliente3 = Cliente.get_by_id(3)
 
-    def test_quant_embarques(self):
-        self.assertEqual(3, self.cliente1.quant_embarques)
-        self.assertEqual(1, self.cliente2.quant_embarques)
+    def test_clienteComNenhumEmbarque(self):
         self.assertEqual(0, self.cliente3.quant_embarques)
-
-    def test_quant_embarques_ativos(self):
-        self.assertEqual(2, self.cliente1.quant_embarques_ativos)
-        self.assertEqual(0, self.cliente2.quant_embarques_ativos)
         self.assertEqual(0, self.cliente3.quant_embarques_ativos)
+
+    def test_clienteComDoisEmbarquesAtivosEUmEmbarcado(self):
+        self.assertEqual(3, self.cliente1.quant_embarques)
+        self.assertEqual(2, self.cliente1.quant_embarques_ativos)
+
+    def test_clienteComUmEmbarqueEmbarcado(self):
+        self.assertEqual(1, self.cliente2.quant_embarques)
+        self.assertEqual(0, self.cliente2.quant_embarques_ativos)
 
     def tearDown(self):
         clear_test_data()
