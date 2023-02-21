@@ -40,7 +40,7 @@ class ClientesRoute(Resource):
             abort(400, ID_IS_READ_ONLY)
         if('telefone' in payload):
             phoneValidator = BrazilianPhoneValidator(payload['telefone'])
-            if(not phoneValidator.isPhone()):
+            if(phoneValidator.isPhone() == False):
                 abort(400, INVALID_PHONE)
         try:
             cliente = Cliente(**payload)
@@ -78,7 +78,7 @@ class ClienteRoute(Resource):
 
         if('telefone' in payload):
             phoneValidator = BrazilianPhoneValidator(payload['telefone'])
-            if(not phoneValidator.isPhone()):
+            if(phoneValidator.isPhone() == False):
                 abort(400, INVALID_PHONE)
 
         try:
@@ -97,14 +97,21 @@ class ClienteRoute(Resource):
     @api.doc('delete_cliente')
     @api.doc(responses={200: DELETED, 404: ITEM_NOT_FOUND})
     def delete(self, id):
-        if(Cliente.select().where(Cliente.id == id).exists()):
-            cliente = Cliente.get_by_id(id)
-            try: 
-                cliente.delete_instance()
-                return DELETED, 200
-            except Exception as e:
-               abort(400, e) 
-        else:
+        def clienteDoesNotExists(id):
+            return (not Cliente.select().where(Cliente.id == id).exists())
+
+        if(clienteDoesNotExists(id)):
             abort(404, ITEM_NOT_FOUND)
+        
+        try: 
+            cliente = Cliente.get_by_id(id)
+            cliente.delete_instance()
+            return DELETED, 200
+        except Exception as e:
+            abort(400, e)
+
+        
+        
+            
 
        
